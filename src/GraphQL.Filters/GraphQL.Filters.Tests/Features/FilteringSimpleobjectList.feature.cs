@@ -148,6 +148,9 @@ testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(nu
 #line 13
 testRunner.Given("SimpleObject stringlist list", ((string)(null)), table1, "Given ");
 #line hidden
+#line 17
+testRunner.Given("GraphQl query FilterSimpleObjectDirectEquals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
             }
             this.ScenarioCleanup();
         }

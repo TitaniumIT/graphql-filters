@@ -1,0 +1,17 @@
+﻿query FilterSimpleObjectDirectEquals { 
+	simpleObjects(filter:{
+		condition:{
+			fieldName: StringMember
+			operator:  EQUAL
+			value: "String 2"
+		}
+	}) {
+		 stringMember
+	}
+}
+
+query FilterSimpleObjectVariableEquals($filter:FilterGraphTypeSimpleObject!) { 
+	simpleObjects(filter:$filter) {
+		 stringMember
+	}
+} 

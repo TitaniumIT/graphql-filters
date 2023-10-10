@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Filters.Core", "GraphQL.Filters.Core\GraphQL.Filters.Core.csproj", "{65C0909E-70F5-4773-9408-0781A01B1C9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.Filters.Core", "GraphQL.Filters.Core\GraphQL.Filters.Core.csproj", "{65C0909E-70F5-4773-9408-0781A01B1C9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Filters.Tests", "GraphQL.Filters.Tests\GraphQL.Filters.Tests.csproj", "{0EB214E0-F849-4611-AA5B-7DAF8DD980F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.Filters.Tests", "GraphQL.Filters.Tests\GraphQL.Filters.Tests.csproj", "{0EB214E0-F849-4611-AA5B-7DAF8DD980F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

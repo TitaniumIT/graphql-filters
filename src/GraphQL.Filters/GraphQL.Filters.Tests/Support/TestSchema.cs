@@ -12,7 +12,6 @@ namespace GraphQL.Filters.Tests.Support
             Query = serviceProvider.GetRequiredService(queryType) as IObjectGraphType ?? throw new NullReferenceException();
         }
     }
-
     public class QueryType : ObjectGraphType
     {
         public QueryType(List<FieldBuilder<object?,object>> _builders)

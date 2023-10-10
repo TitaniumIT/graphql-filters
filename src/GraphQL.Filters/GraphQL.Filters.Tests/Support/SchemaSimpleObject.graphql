@@ -1,0 +1,60 @@
+﻿schema{
+	query: QueryType
+}
+
+type QueryType {
+  simpleObjects(filter: FilterGraphTypeSimpleObject): [SimpleObject]
+}
+
+type SimpleObject {
+  stringMember: String!
+  intMember: Int!
+  dateTimeMember: DateTime!
+  dateOnlyMember: DateOnly!
+  timeOnlyMember: TimeOnly!
+  decimalMember: Decimal!
+}
+
+"The `DateTime` scalar type represents a date and time. `DateTime` expects timestamps to be formatted in accordance with the [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard."
+scalar DateTime
+
+"The `Date` scalar type represents a year, month and day in accordance with the [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard. Format is `yyyy-MM-dd`"
+scalar DateOnly
+
+"The `Time` scalar type represents a time in accordance with the [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard. Format is `HH:mm:ss.FFFFFFF`."
+scalar TimeOnly
+
+scalar Decimal
+
+input FilterGraphTypeSimpleObject {
+  condition: ConditionGraphTypeSimpleObject
+  and: AndGraphTypeSimpleObject
+}
+
+input ConditionGraphTypeSimpleObject {
+  fieldName: FieldEnumerationGraphTypeSimpleObject
+  operator: BinaryCompareTypes
+  value: ValueScalar
+  filter: FilterGraphTypeSimpleObject
+}
+
+enum FieldEnumerationGraphTypeSimpleObject {
+  StringMember
+  IntMember
+  DateTimeMember
+  DateOnlyMember
+  TimeOnlyMember
+  DecimalMember
+}
+
+enum BinaryCompareTypes {
+  EQUAL
+  NOT
+}
+
+scalar ValueScalar
+
+input AndGraphTypeSimpleObject {
+  left: FilterGraphTypeSimpleObject!
+  right: FilterGraphTypeSimpleObject!
+}

@@ -12,4 +12,3 @@ Then Schema contains type FilterGraphTypeSimpleObject
 Then Schema contains type AndGraphTypeSimpleObject
 Then Schema contains type ConditionGraphTypeSimpleObject
 Then Schema Enum FieldEnumerationGraphTypeSimpleObject contains StringMember
-

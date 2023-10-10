@@ -1,0 +1,12 @@
+{
+  "projects": [
+    {
+      "schema": [
+        "GraphQL.Filters.Tests/Support/*.graphql"
+      ],
+      "documents": [
+        "GraphQL.Filters.Tests/Features/*.graphql"
+      ]
+    }
+  ]
+}
