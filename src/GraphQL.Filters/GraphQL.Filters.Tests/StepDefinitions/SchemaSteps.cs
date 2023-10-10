@@ -73,6 +73,7 @@ namespace GraphQL.Filters.Tests.StepDefinitions
         }
 
         [Given("Field (.*) uses list (.*)")]
+        [Given("Field (.*) uses list (.*) and filter")]
         public void SetupListResolvers(string fieldname,string listname)
         {
             if (_queryFields != null)
@@ -104,8 +105,8 @@ namespace GraphQL.Filters.Tests.StepDefinitions
                 Assert.Fail();
             }
 
-            var provider = _driver.Services.BuildServiceProvider();
-            _schema = provider.GetRequiredService<TestSchema>();
+ 
+            _schema = _driver.Provider.GetRequiredService<TestSchema>();
             _output.WriteLine(_schema.Print());
         }
 

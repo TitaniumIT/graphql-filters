@@ -27,10 +27,19 @@ namespace GraphQL.Filters.Tests.Drivers
                 });
             });
         }
-    }
 
-    public class DataDriver
-    {
-        public Dictionary<string, IEnumerable<SimpleObject>> SimpleObjectLists = new Dictionary<string, IEnumerable<SimpleObject>>();
+        IServiceProvider? _provider;
+        public IServiceProvider Provider
+        {
+            get
+            {
+                if (_provider == null)
+                {
+                    _provider = Services.BuildServiceProvider(true);
+                }
+                return _provider;
+            }
+        }
     }
 }
+
