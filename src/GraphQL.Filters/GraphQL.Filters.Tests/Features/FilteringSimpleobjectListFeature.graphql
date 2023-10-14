@@ -34,7 +34,30 @@ query FilterSimpleObjectDirectAnd {
     }
   ) {
     intMember
-	stringMember
+    stringMember
+  }
+}
+
+
+query FilterSimpleObjectDirectOr {
+  simpleObjects(
+    filter: {
+      or: {
+        left: {
+          condition: { fieldName: IntMember, operator: equal, value: 10 }
+        }
+        right: {
+          condition: {
+            fieldName: StringMember
+            operator: equal
+            value: "String 2"
+          }
+        }
+      }
+    }
+  ) {
+    intMember
+    stringMember
   }
 }
 

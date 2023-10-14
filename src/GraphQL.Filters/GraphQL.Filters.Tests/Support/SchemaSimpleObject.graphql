@@ -29,7 +29,7 @@ scalar Decimal
 input FilterGraphTypeSimpleObject {
   condition: ConditionGraphTypeSimpleObject
   and: AndGraphTypeSimpleObject
-  or: OrGraphTypeSimpleObject
+  or: AndGraphTypeSimpleObject
 }
 
 input ConditionGraphTypeSimpleObject {
@@ -50,6 +50,10 @@ enum FieldEnumerationGraphTypeSimpleObject {
 
 enum BinaryCompareEnumTypes {
   equal
+  greater
+  greaterOrEqual
+  less
+  lessOrEqual
 }
 
 scalar ValueScalar

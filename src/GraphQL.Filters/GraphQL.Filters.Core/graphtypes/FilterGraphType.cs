@@ -12,7 +12,7 @@ namespace nl.titaniumit.graphql.filters.graphtypes
             Name = $"FilterGraphType{typeof(T).Name}";
             Field<ConditionGraphType<T>>("condition");
             Field<AndGraphType<T>>("and");
-            Field<AndGraphType<T>>("or");
+            Field<OrGraphType<T>>("or");
         }
 
         public override object ParseDictionary(IDictionary<string, object?> value)

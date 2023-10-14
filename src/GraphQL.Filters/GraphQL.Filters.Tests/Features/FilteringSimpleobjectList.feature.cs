@@ -76,15 +76,15 @@ namespace GraphQL.Filters.Tests.Features
         public virtual void FeatureBackground()
         {
 #line 4
-#line hidden
+  #line hidden
 #line 5
-testRunner.Given("A Schema with QueryType as Query", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("A Schema with QueryType as Query", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 6
-testRunner.And("Query has Field SimpleObjects as List of SimpleObjectType", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("Query has Field SimpleObjects as List of SimpleObjectType", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 7
-testRunner.And("Field SimpleObjects has filtering of SimpleObject", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("Field SimpleObjects has filtering of SimpleObject", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
         }
         
@@ -96,7 +96,7 @@ testRunner.And("Field SimpleObjects has filtering of SimpleObject", ((string)(nu
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("inline filter on equals on strings", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 10
-this.ScenarioInitialize(scenarioInfo);
+  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -106,13 +106,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 4
-this.FeatureBackground();
+  this.FeatureBackground();
 #line hidden
 #line 11
-testRunner.And("Field SimpleObjects uses SimpleObject filtered list stringlist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("Field SimpleObjects uses SimpleObject filtered list stringlist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 12
-testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "StringMember",
@@ -136,23 +136,23 @@ testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(nu
                             "02:00",
                             "2.2"});
 #line 13
-testRunner.Given("SimpleObject stringlist list", ((string)(null)), table1, "Given ");
+    testRunner.Given("SimpleObject stringlist list", ((string)(null)), table1, "Given ");
 #line hidden
 #line 17
-testRunner.Given("Query operation FilterSimpleObjectDirectEquals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("Query operation FilterSimpleObjectDirectEquals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 18
-testRunner.When("Executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.When("Executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 19
-testRunner.Then("No errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("No errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "stringMember"});
                 table2.AddRow(new string[] {
                             "String 2"});
 #line 20
-testRunner.Then("Data contains simpleObjects", ((string)(null)), table2, "Then ");
+    testRunner.Then("Data contains simpleObjects", ((string)(null)), table2, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -166,7 +166,7 @@ testRunner.Then("Data contains simpleObjects", ((string)(null)), table2, "Then "
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("inline filter with and", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 24
-this.ScenarioInitialize(scenarioInfo);
+  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -176,13 +176,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 4
-this.FeatureBackground();
+  this.FeatureBackground();
 #line hidden
 #line 25
-testRunner.And("Field SimpleObjects uses SimpleObject filtered list stringlist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("Field SimpleObjects uses SimpleObject filtered list stringlist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 26
-testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "StringMember",
@@ -200,42 +200,51 @@ testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(nu
                             "0.0"});
                 table3.AddRow(new string[] {
                             "String 2",
+                            "10",
+                            "1/2/2001 00:00",
+                            "1/2/2001",
+                            "02:00",
+                            "2.2"});
+                table3.AddRow(new string[] {
+                            "String 2",
                             "2",
                             "1/2/2001 00:00",
                             "1/2/2001",
                             "02:00",
                             "2.2"});
 #line 27
-testRunner.Given("SimpleObject stringlist list", ((string)(null)), table3, "Given ");
-#line hidden
-#line 31
-testRunner.Given("Query operation FilterSimpleObjectDirectEquals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("SimpleObject stringlist list", ((string)(null)), table3, "Given ");
 #line hidden
 #line 32
-testRunner.When("Executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.Given("Query operation FilterSimpleObjectDirectAnd", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 33
-testRunner.Then("No errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.When("Executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 34
+    testRunner.Then("No errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                            "stringMember"});
+                            "stringMember",
+                            "intMember"});
                 table4.AddRow(new string[] {
-                            "String 2"});
-#line 34
-testRunner.Then("Data contains simpleObjects", ((string)(null)), table4, "Then ");
+                            "String 2",
+                            "10"});
+#line 35
+    testRunner.Then("Data contains simpleObjects", ((string)(null)), table4, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("variable filter on equals on strings")]
-        public void VariableFilterOnEqualsOnStrings()
+        [NUnit.Framework.DescriptionAttribute("inline filter with andor")]
+        public void InlineFilterWithAndor()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("variable filter on equals on strings", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 41
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("inline filter with andor", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 39
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -246,13 +255,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 4
-this.FeatureBackground();
+  this.FeatureBackground();
 #line hidden
-#line 42
-testRunner.And("Field SimpleObjects uses SimpleObject filtered list stringlist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 40
+  testRunner.And("Field SimpleObjects uses SimpleObject filtered list stringlist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 43
-testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 41
+  testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "StringMember",
@@ -270,47 +279,55 @@ testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(nu
                             "0.0"});
                 table5.AddRow(new string[] {
                             "String 2",
+                            "10",
+                            "1/2/2001 00:00",
+                            "1/2/2001",
+                            "02:00",
+                            "2.2"});
+                table5.AddRow(new string[] {
+                            "String 2",
                             "2",
                             "1/2/2001 00:00",
                             "1/2/2001",
                             "02:00",
                             "2.2"});
-#line 44
-testRunner.Given("SimpleObject stringlist list", ((string)(null)), table5, "Given ");
+#line 42
+  testRunner.Given("SimpleObject stringlist list", ((string)(null)), table5, "Given ");
+#line hidden
+#line 47
+  testRunner.Given("Query operation FilterSimpleObjectDirectOr", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 48
-testRunner.Given("Query operation FilterSimpleObjectVariableEquals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.When("Executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 49
-testRunner.Given("Variables:", "filter: \r\n   condition:\r\n     fieldName: StringMember \r\n     operator: equal\t\r\n  " +
-                        "   value: String 2", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 57
-testRunner.When("Executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 58
-testRunner.Then("No errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("No errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-                            "stringMember"});
+                            "stringMember",
+                            "intMember"});
                 table6.AddRow(new string[] {
-                            "String 2"});
-#line 59
-testRunner.Then("Data contains simpleObjects", ((string)(null)), table6, "Then ");
+                            "String 2",
+                            "10"});
+                table6.AddRow(new string[] {
+                            "String 2",
+                            "2"});
+#line 50
+  testRunner.Then("Data contains simpleObjects", ((string)(null)), table6, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("variable filter on equals on int")]
-        public void VariableFilterOnEqualsOnInt()
+        [NUnit.Framework.DescriptionAttribute("variable filter on equals on strings")]
+        public void VariableFilterOnEqualsOnStrings()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("variable filter on equals on int", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 64
-this.ScenarioInitialize(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("variable filter on equals on strings", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 56
+  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -320,13 +337,13 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 4
-this.FeatureBackground();
+  this.FeatureBackground();
 #line hidden
-#line 65
-testRunner.And("Field SimpleObjects uses SimpleObject filtered list stringlist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 57
+    testRunner.And("Field SimpleObjects uses SimpleObject filtered list stringlist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 66
-testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 58
+    testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "StringMember",
@@ -349,31 +366,105 @@ testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(nu
                             "1/2/2001",
                             "02:00",
                             "2.2"});
-                table7.AddRow(new string[] {
+#line 59
+    testRunner.Given("SimpleObject stringlist list", ((string)(null)), table7, "Given ");
+#line hidden
+#line 63
+    testRunner.Given("Query operation FilterSimpleObjectVariableEquals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 64
+    testRunner.Given("Variables:", "filter:\r\n  condition:\r\n    fieldName: StringMember\r\n    operator: equal\r\n    valu" +
+                        "e: String 2", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 72
+    testRunner.When("Executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 73
+    testRunner.Then("No errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                            "stringMember"});
+                table8.AddRow(new string[] {
+                            "String 2"});
+#line 74
+    testRunner.Then("Data contains simpleObjects", ((string)(null)), table8, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("variable filter on equals on int")]
+        public void VariableFilterOnEqualsOnInt()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("variable filter on equals on int", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 79
+  this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 4
+  this.FeatureBackground();
+#line hidden
+#line 80
+    testRunner.And("Field SimpleObjects uses SimpleObject filtered list stringlist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 81
+    testRunner.When("Create Schema", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                            "StringMember",
+                            "IntMember",
+                            "DateTimeMember",
+                            "DateOnlyMember",
+                            "TimeOnlyMember",
+                            "DecimalMember"});
+                table9.AddRow(new string[] {
+                            "String 1",
+                            "0",
+                            "1/1/2001 00:00",
+                            "1/1/2001",
+                            "00:00",
+                            "0.0"});
+                table9.AddRow(new string[] {
+                            "String 2",
+                            "2",
+                            "1/2/2001 00:00",
+                            "1/2/2001",
+                            "02:00",
+                            "2.2"});
+                table9.AddRow(new string[] {
                             "String 2",
                             "10",
                             "1/2/2001 00:00",
                             "1/2/2001",
                             "02:00",
                             "2.2"});
-#line 67
-testRunner.Given("SimpleObject stringlist list", ((string)(null)), table7, "Given ");
+#line 82
+    testRunner.Given("SimpleObject stringlist list", ((string)(null)), table9, "Given ");
 #line hidden
-#line 72
-testRunner.Given("Query operation FilterSimpleObjectDirectIntEquals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 87
+    testRunner.Given("Query operation FilterSimpleObjectDirectIntEquals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 73
-testRunner.When("Executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 88
+    testRunner.When("Executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 74
-testRunner.Then("No errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 89
+    testRunner.Then("No errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "intMember"});
-                table8.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "10"});
-#line 75
-testRunner.Then("Data contains simpleObjects", ((string)(null)), table8, "Then ");
+#line 90
+    testRunner.Then("Data contains simpleObjects", ((string)(null)), table10, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
