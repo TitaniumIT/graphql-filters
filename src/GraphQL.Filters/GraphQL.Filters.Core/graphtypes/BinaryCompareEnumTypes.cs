@@ -16,16 +16,18 @@ public class BinaryCompareEnumTypes : EnumerationGraphType
 {
     public BinaryCompareEnumTypes()
     {
-        Add("equal" , (ConditionType condition,ParameterExpression arg)=> Binary(condition,arg,Expression.Equal));
-        Add("greater" , (ConditionType condition,ParameterExpression arg)=> Binary(condition,arg,Expression.GreaterThan) );
-        Add("greaterOrEqual" , (ConditionType condition,ParameterExpression arg)=> Binary(condition,arg,Expression.GreaterThanOrEqual) );
-        Add("less" , (ConditionType condition,ParameterExpression arg)=> Binary(condition,arg,Expression.LessThan) );
-        Add("lessOrEqual" , (ConditionType condition,ParameterExpression arg)=> Binary(condition,arg,Expression.LessThanOrEqual) );
+        Add("equal", (ConditionType condition, ParameterExpression arg) => Binary(condition, arg, Expression.Equal));
+        Add("greater", (ConditionType condition, ParameterExpression arg) => Binary(condition, arg, Expression.GreaterThan));
+        Add("greaterOrEqual", (ConditionType condition, ParameterExpression arg) => Binary(condition, arg, Expression.GreaterThanOrEqual));
+        Add("less", (ConditionType condition, ParameterExpression arg) => Binary(condition, arg, Expression.LessThan));
+        Add("lessOrEqual", (ConditionType condition, ParameterExpression arg) => Binary(condition, arg, Expression.LessThanOrEqual));
+        Add("notEqual",(ConditionType condition, ParameterExpression arg) => Binary(condition, arg, Expression.NotEqual) );
     }
 
-    static Expression Binary(ConditionType condition,ParameterExpression arg , Func<Expression,Expression,BinaryExpression> _factory) {
+    static Expression Binary(ConditionType condition, ParameterExpression arg, Func<Expression, Expression, BinaryExpression> _factory)
+    {
         var val = condition.Value;
         var eq = _factory.Invoke(condition.GetMemberExpression(arg) ?? throw new NullReferenceException(), val);
         return eq;
-        }
+    }
 }
