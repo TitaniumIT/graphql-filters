@@ -1,0 +1,28 @@
+name: GraphQLFilters
+
+trigger:
+  branches:
+    include:
+      - main
+
+stages:
+  - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+      - stage: Validation
+        displayName: Validate 'Build.Reason'
+        jobs:
+          - job: build_test
+            steps:
+              - task: DotNetCoreCLI@2
+                displayName: Build
+                inputs:
+                  command: build
+                  versioningScheme: byBuildNumber
+                  arguments: --configuration Release -p:Version=$(majorMinorVersion).$(semanticVersion)
+                  configuration: Release
+              - task: DotNetCoreCLI@2
+                displayName: UnitTest
+                inputs:
+                  command: test
+                  arguments: --configuration Release --no-build --no-restore
+                  
+

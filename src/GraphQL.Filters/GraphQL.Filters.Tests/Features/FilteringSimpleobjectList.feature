@@ -1,15 +1,13 @@
 ﻿Feature: Filtering Simpleobject lists
 
-
   Background:
     Given A Schema with QueryType as Query
     And Query has Field SimpleObjects as List of SimpleObjectType
     And Field SimpleObjects has filtering of SimpleObject
-
-
-  Scenario: inline filter on equals on strings
     And Field SimpleObjects uses SimpleObject filtered list stringlist
     When Create Schema
+
+  Scenario: inline filter on equals on strings
     Given SimpleObject stringlist list
       | StringMember | IntMember | DateTimeMember | DateOnlyMember | TimeOnlyMember | DecimalMember |
       | String 1     | 0         | 1/1/2001 00:00 | 1/1/2001       | 00:00          | 0.0           |
@@ -22,8 +20,6 @@
       | String 2     |
 
   Scenario: inline filter with and
-    And Field SimpleObjects uses SimpleObject filtered list stringlist
-    When Create Schema
     Given SimpleObject stringlist list
       | StringMember | IntMember | DateTimeMember | DateOnlyMember | TimeOnlyMember | DecimalMember |
       | String 1     | 0         | 1/1/2001 00:00 | 1/1/2001       | 00:00          | 0.0           |
@@ -37,8 +33,6 @@
       | String 2     | 10        |
 
 Scenario: inline filter with andor
-  And Field SimpleObjects uses SimpleObject filtered list stringlist
-  When Create Schema
   Given SimpleObject stringlist list
     | StringMember | IntMember | DateTimeMember | DateOnlyMember | TimeOnlyMember | DecimalMember |
     | String 1     | 0         | 1/1/2001 00:00 | 1/1/2001       | 00:00          | 0.0           |
@@ -54,8 +48,6 @@ Scenario: inline filter with andor
 
 
   Scenario: variable filter on equals on strings
-    And Field SimpleObjects uses SimpleObject filtered list stringlist
-    When Create Schema
     Given SimpleObject stringlist list
       | StringMember | IntMember | DateTimeMember | DateOnlyMember | TimeOnlyMember | DecimalMember |
       | String 1     | 0         | 1/1/2001 00:00 | 1/1/2001       | 00:00          | 0.0           |
@@ -77,8 +69,6 @@ Scenario: inline filter with andor
 
 
   Scenario: variable filter on equals on int
-    And Field SimpleObjects uses SimpleObject filtered list stringlist
-    When Create Schema
     Given SimpleObject stringlist list
       | StringMember | IntMember | DateTimeMember | DateOnlyMember | TimeOnlyMember | DecimalMember |
       | String 1     | 0         | 1/1/2001 00:00 | 1/1/2001       | 00:00          | 0.0           |
