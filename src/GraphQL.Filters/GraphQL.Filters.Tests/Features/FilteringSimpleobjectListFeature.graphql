@@ -10,6 +10,18 @@
 	}
 }
 
+query FilterSimpleObjectDirectIntEquals { 
+	simpleObjects(filter:{
+		condition:{
+			fieldName: IntMember
+			operator:  EQUAL
+			value: 10
+		}
+	}) {
+		 intMember
+	}
+}
+
 query FilterSimpleObjectVariableEquals($filter:FilterGraphTypeSimpleObject!) { 
 	simpleObjects(filter:$filter) {
 		 stringMember
