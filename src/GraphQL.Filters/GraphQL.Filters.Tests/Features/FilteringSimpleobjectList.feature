@@ -35,7 +35,7 @@ Given Variables:
 filter: 
    condition:
      fieldName: StringMember 
-     operator: EQUAL	
+     operator: equal	
      value: String 2
 """"
 When Executed
@@ -43,7 +43,6 @@ Then No errors
 Then Data contains simpleObjects
 | stringMember | 
 | String 2     |
-
 
 
 Scenario: variable filter on equals on int

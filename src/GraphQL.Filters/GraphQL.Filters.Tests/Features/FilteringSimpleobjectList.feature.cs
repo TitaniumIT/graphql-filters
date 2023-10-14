@@ -212,7 +212,7 @@ testRunner.Given("SimpleObject stringlist list", ((string)(null)), table3, "Give
 testRunner.Given("Query operation FilterSimpleObjectVariableEquals", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 33
-testRunner.Given("Variables:", "filter: \r\n   condition:\r\n     fieldName: StringMember \r\n     operator: EQUAL\t\r\n  " +
+testRunner.Given("Variables:", "filter: \r\n   condition:\r\n     fieldName: StringMember \r\n     operator: equal\t\r\n  " +
                         "   value: String 2", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 41

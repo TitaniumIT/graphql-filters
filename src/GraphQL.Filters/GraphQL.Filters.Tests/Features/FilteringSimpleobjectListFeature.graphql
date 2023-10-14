@@ -2,7 +2,7 @@
 	simpleObjects(filter:{
 		condition:{
 			fieldName: StringMember
-			operator:  EQUAL
+			operator:  equal
 			value: "String 2"
 		}
 	}) {
@@ -14,7 +14,7 @@ query FilterSimpleObjectDirectIntEquals {
 	simpleObjects(filter:{
 		condition:{
 			fieldName: IntMember
-			operator:  EQUAL
+			operator:  equal
 			value: 10
 		}
 	}) {

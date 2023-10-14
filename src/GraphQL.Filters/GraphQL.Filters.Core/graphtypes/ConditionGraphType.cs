@@ -2,6 +2,7 @@
 using nl.titaniumit.graphql.filters.models;
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace nl.titaniumit.graphql.filters.graphtypes
 {
@@ -11,7 +12,7 @@ namespace nl.titaniumit.graphql.filters.graphtypes
         {
             Name = $"ConditionGraphType{typeof(T).Name}";
             Field<FieldEnumerationGraphType<T>>("fieldName");
-            Field<BinaryCompareEnumTypes, BinaryCompareTypes>("operator");
+            Field<BinaryCompareEnumTypes, Func<MemberExpression?, object?, Expression>>("operator");
             Field<ValueScalar>("value");
             Field<FilterGraphType<T>>("filter");
         }

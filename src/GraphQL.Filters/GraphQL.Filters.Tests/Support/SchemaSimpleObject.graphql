@@ -1,5 +1,5 @@
-﻿schema{
-	query: QueryType
+﻿schema {
+  query: QueryType
 }
 
 type QueryType {
@@ -33,7 +33,7 @@ input FilterGraphTypeSimpleObject {
 
 input ConditionGraphTypeSimpleObject {
   fieldName: FieldEnumerationGraphTypeSimpleObject
-  operator: BinaryCompareTypes
+  operator: BinaryCompareEnumTypes
   value: ValueScalar
   filter: FilterGraphTypeSimpleObject
 }
@@ -47,9 +47,8 @@ enum FieldEnumerationGraphTypeSimpleObject {
   DecimalMember
 }
 
-enum BinaryCompareTypes {
-  EQUAL
-  NOT
+enum BinaryCompareEnumTypes {
+  equal
 }
 
 scalar ValueScalar
