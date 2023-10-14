@@ -16,7 +16,7 @@ stages:
                 displayName: Build
                 inputs:
                   command: build
-                  projects: /src/**/*.csproj
+                  projects: /src/**/*.sln
                   versioningScheme: byBuildNumber
                   arguments: --configuration Release -p:Version=$(majorMinorVersion).$(semanticVersion)
                   configuration: Release
