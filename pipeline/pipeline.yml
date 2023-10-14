@@ -16,6 +16,7 @@ stages:
                 displayName: Build
                 inputs:
                   command: build
+                  projects: /src/**/*.csproj
                   versioningScheme: byBuildNumber
                   arguments: --configuration Release -p:Version=$(majorMinorVersion).$(semanticVersion)
                   configuration: Release
@@ -24,5 +25,3 @@ stages:
                 inputs:
                   command: test
                   arguments: --configuration Release --no-build --no-restore
-                  
-
