@@ -29,6 +29,7 @@ scalar Decimal
 input FilterGraphTypeSimpleObject {
   condition: ConditionGraphTypeSimpleObject
   and: AndGraphTypeSimpleObject
+  or: OrGraphTypeSimpleObject
 }
 
 input ConditionGraphTypeSimpleObject {

@@ -21,6 +21,22 @@ Then Data contains simpleObjects
 | stringMember | 
 | String 2     |
 
+Scenario: inline filter with and
+And Field SimpleObjects uses SimpleObject filtered list stringlist
+When Create Schema
+Given SimpleObject stringlist list
+| StringMember | IntMember | DateTimeMember | DateOnlyMember | TimeOnlyMember | DecimalMember |
+| String 1     | 0         | 1/1/2001 00:00 | 1/1/2001       | 00:00          | 0.0           |
+| String 2     | 2         | 1/2/2001 00:00 | 1/2/2001       | 02:00          | 2.2           |
+Given Query operation FilterSimpleObjectDirectEquals
+When Executed
+Then No errors
+Then Data contains simpleObjects
+| stringMember | 
+| String 2     |
+
+
+
 
 Scenario: variable filter on equals on strings
 And Field SimpleObjects uses SimpleObject filtered list stringlist

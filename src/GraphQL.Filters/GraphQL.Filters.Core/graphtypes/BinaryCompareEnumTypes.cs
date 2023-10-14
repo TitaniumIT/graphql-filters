@@ -16,19 +16,16 @@ public class BinaryCompareEnumTypes : EnumerationGraphType
 {
     public BinaryCompareEnumTypes()
     {
-        Add("equal" , Equal );
-        Add("greater" , Greater );
+        Add("equal" , (ConditionType condition,ParameterExpression arg)=> Binary(condition,arg,Expression.Equal));
+        Add("greater" , (ConditionType condition,ParameterExpression arg)=> Binary(condition,arg,Expression.GreaterThan) );
+        Add("greaterOrEqual" , (ConditionType condition,ParameterExpression arg)=> Binary(condition,arg,Expression.GreaterThanOrEqual) );
+        Add("less" , (ConditionType condition,ParameterExpression arg)=> Binary(condition,arg,Expression.LessThan) );
+        Add("lessOrEqual" , (ConditionType condition,ParameterExpression arg)=> Binary(condition,arg,Expression.LessThanOrEqual) );
     }
 
-    Expression Equal(ConditionType condition,ParameterExpression arg) {
+    static Expression Binary(ConditionType condition,ParameterExpression arg , Func<Expression,Expression,BinaryExpression> _factory) {
         var val = condition.Value;
-        var eq = Expression.Equal(condition.GetMemberExpression(arg) ?? throw new NullReferenceException(), val);
-        return eq;
-        }
-
-       Expression Greater(ConditionType condition,ParameterExpression arg) {
-        var val = condition.Value;
-        var eq = Expression.GreaterThan(condition.GetMemberExpression(arg) ?? throw new NullReferenceException(), val);
+        var eq = _factory.Invoke(condition.GetMemberExpression(arg) ?? throw new NullReferenceException(), val);
         return eq;
         }
 }

@@ -1,29 +1,45 @@
-﻿query FilterSimpleObjectDirectEquals { 
-	simpleObjects(filter:{
-		condition:{
-			fieldName: StringMember
-			operator:  equal
-			value: "String 2"
-		}
-	}) {
-		 stringMember
-	}
+﻿query FilterSimpleObjectDirectEquals {
+  simpleObjects(
+    filter: {
+      condition: { fieldName: StringMember, operator: equal, value: "String 2" }
+    }
+  ) {
+    stringMember
+  }
 }
 
-query FilterSimpleObjectDirectIntEquals { 
-	simpleObjects(filter:{
-		condition:{
-			fieldName: IntMember
-			operator:  equal
-			value: 10
-		}
-	}) {
-		 intMember
-	}
+query FilterSimpleObjectDirectIntEquals {
+  simpleObjects(
+    filter: { condition: { fieldName: IntMember, operator: equal, value: 10 } }
+  ) {
+    intMember
+  }
 }
 
-query FilterSimpleObjectVariableEquals($filter:FilterGraphTypeSimpleObject!) { 
-	simpleObjects(filter:$filter) {
-		 stringMember
-	}
-} 
+query FilterSimpleObjectDirectAnd {
+  simpleObjects(
+    filter: {
+      and: {
+        left: {
+          condition: { fieldName: IntMember, operator: equal, value: 10 }
+        }
+        right: {
+          condition: {
+            fieldName: StringMember
+            operator: equal
+            value: "String 2"
+          }
+        }
+      }
+    }
+  ) {
+    intMember
+	stringMember
+  }
+}
+
+query FilterSimpleObjectVariableEquals($filter: FilterGraphTypeSimpleObject!) {
+  simpleObjects(filter: $filter) {
+    stringMember
+  }
+}
