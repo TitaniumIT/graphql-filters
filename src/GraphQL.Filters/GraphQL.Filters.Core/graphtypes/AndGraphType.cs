@@ -1,7 +1,5 @@
 ﻿using GraphQL.Types;
 using nl.titaniumit.graphql.filters.models;
-using System;
-using System.Linq;
 
 namespace nl.titaniumit.graphql.filters.graphtypes
 {

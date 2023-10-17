@@ -1,5 +1,6 @@
 ﻿using GraphQL.Filters.Tests.Support;
 using Microsoft.Extensions.DependencyInjection;
+using nl.titaniumit.graphql.filters;
 using System;
 using System.Linq;
 
@@ -13,6 +14,7 @@ namespace GraphQL.Filters.Tests.Drivers
         {
             Services = new ServiceCollection();
 
+            Services.AddGraphQLFilters();
             Services.AddGraphQL(builder =>
             {
                 builder.AddSystemTextJson();
