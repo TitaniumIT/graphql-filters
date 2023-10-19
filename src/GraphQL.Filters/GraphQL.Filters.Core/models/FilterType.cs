@@ -3,7 +3,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace nl.titaniumit.graphql.filters.models;
 
-internal record FilterType(ConditionType? condition, And? and, Or? or, Not not)
+internal record FilterType(ConditionType? condition=null, And? and=null, Or? or=null, Not? not=null)
 {
     internal Expression<Func<T, bool>> CreateFilter<T>()
     {
