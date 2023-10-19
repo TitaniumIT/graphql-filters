@@ -1,6 +1,7 @@
 using GraphQL.Filters.Tests.Drivers;
 using GraphQL.Filters.Tests.Support;
 using GraphQL.SystemTextJson;
+using GraphQL.Validation;
 using GraphQLParser;
 using GraphQLParser.AST;
 using Microsoft.Extensions.DependencyInjection;
@@ -92,6 +93,7 @@ namespace GraphQL.Filters.Tests.StepDefinitions
             var provider = _driver.Provider;
             var schema = provider.GetRequiredService<TestSchema>();
             var executer = provider.GetRequiredService<IDocumentExecuter>();
+            var rules = provider.GetService<IEnumerable<IValidationRule>>();
 
             _executionResult = await executer.ExecuteAsync(options =>
             {
@@ -99,6 +101,7 @@ namespace GraphQL.Filters.Tests.StepDefinitions
                 options.Document = new GraphQLDocument(new List<ASTNode>() { _queries[_currentQuery] });
                 options.OperationName = _currentQuery;
                 options.Variables = _variables != null ? _variables : null;
+                options.ValidationRules = Validation.DocumentValidator.CoreRules.Concat(rules??Array.Empty<IValidationRule>());
             });
 
             _output.WriteLine(new GraphQLSerializer().Serialize(_executionResult));

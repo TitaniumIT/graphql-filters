@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace nl.titaniumit.graphql.filters
+namespace nl.titaniumit.graphql.filters;
+
+public static class SchemaExtentions
 {
-    public static class SchemaExtentions
+    public static IServiceCollection AddGraphQLFilters(this IServiceCollection services)
     {
+        return services;
     }
 }

@@ -1,9 +1,5 @@
 ﻿using GraphQL;
-using GraphQL.Resolvers;
 using nl.titaniumit.graphql.filters.models;
-using System;
-using System.ComponentModel;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace nl.titaniumit.graphql.filters
