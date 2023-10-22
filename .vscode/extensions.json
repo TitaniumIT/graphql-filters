@@ -3,6 +3,10 @@
         "ms-dotnettools.csdevkit",
         "graphql.vscode-graphql",
         "graphql.vscode-graphql-syntax",
-        "ms-dotnettools.vscode-dotnet-runtime"
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ryanluker.vscode-coverage-gutters",
+        "alexkrechik.cucumberautocomplete",
+        "ms-vscode.azure-account",
+        "ms-azure-devops.azure-pipelines"
     ]
 }
