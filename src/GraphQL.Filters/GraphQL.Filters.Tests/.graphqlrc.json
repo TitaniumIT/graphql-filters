@@ -1,4 +1,0 @@
-{
-  "schema": "Support/*.graphql",
-  "documents": "Features/*.graphql"
-}

@@ -117,6 +117,16 @@ namespace GraphQL.Filters.Tests.StepDefinitions
             }
         }
 
+        [Then("Should have errors")]
+        public void HasEDrros()
+        {
+            _executionResult.Should().NotBeNull();
+            if (_executionResult != null)
+            {
+                _executionResult.Errors.Should().NotBeEmpty();
+            }
+        }
+
         [Then("Data contains (.*)")]
         public void DataContains(string nestedProperty, Table table)
         {

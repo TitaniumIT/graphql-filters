@@ -16,6 +16,22 @@ query FilterSimpleObjectDirectIntEquals {
   }
 }
 
+query FilterSimpleObjectInvalidCondition {
+  simpleObjects(
+    filter: { condition: { fieldName: IntMember, operator: equal, value: 10 } , and: { left: {condition:{fieldName:DateTimeMember} } right: {condition:{value:null}} }}
+  ) {
+    intMember
+  }
+}
+
+query FilterSimpleObjectInvalidFilter {
+  simpleObjects(
+    filter: { condition: { fieldName: IntMember, operator: equal, value: 10 } , not:{ filter: { condition: { fieldName: DateTimeMember, operator: equal, value: "10/10/2023 10:00" } }}}
+  ) {
+    intMember
+  }
+}
+
 query FilterSimpleObjectDirectAnd {
   simpleObjects(
     filter: {

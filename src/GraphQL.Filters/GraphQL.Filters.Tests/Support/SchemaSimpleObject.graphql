@@ -26,12 +26,15 @@ scalar TimeOnly
 
 scalar Decimal
 
+"only use one of the fields and leave the rest empty. Don't combine"
 input FilterGraphTypeSimpleObject {
   condition: ConditionGraphTypeSimpleObject
   and: AndGraphTypeSimpleObject
-  or: AndGraphTypeSimpleObject
+  or: OrGraphTypeSimpleObject
+  not: NotGraphTypeSimpleObject
 }
 
+"valid combinations are fieldname,operator,value  or filter, other combinations are invalid"
 input ConditionGraphTypeSimpleObject {
   fieldName: FieldEnumerationGraphTypeSimpleObject
   operator: BinaryCompareEnumTypes
@@ -54,6 +57,7 @@ enum BinaryCompareEnumTypes {
   greaterOrEqual
   less
   lessOrEqual
+  notEqual
 }
 
 scalar ValueScalar
@@ -61,4 +65,13 @@ scalar ValueScalar
 input AndGraphTypeSimpleObject {
   left: FilterGraphTypeSimpleObject!
   right: FilterGraphTypeSimpleObject!
+}
+
+input OrGraphTypeSimpleObject {
+  left: FilterGraphTypeSimpleObject!
+  right: FilterGraphTypeSimpleObject!
+}
+
+input NotGraphTypeSimpleObject {
+  filter: FilterGraphTypeSimpleObject!
 }

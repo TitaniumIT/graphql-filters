@@ -13,13 +13,7 @@ internal class FilterGraphType<T> : InputObjectGraphType<FilterType> where T : c
         Field<AndGraphType<T>>("and");
         Field<OrGraphType<T>>("or");
         Field<NotGraphType<T>>("not");
-
-        Description = "";
-    }
-
-    public override bool IsValidDefault(object value)
-    {
-        return base.IsValidDefault(value);
+        Description = "only use one of the fields and leave the rest empty. Don't combine";
     }
 
     public override object ParseDictionary(IDictionary<string, object?> value)
@@ -28,7 +22,10 @@ internal class FilterGraphType<T> : InputObjectGraphType<FilterType> where T : c
             if( filter.IsValid()){ 
                 return filter;
             }
+            else{
+               throw new ValidationException($"{filter} is invalid try: {Description}");
+            }
         }
-        throw new ValidationException("Filter is invalid");
+        throw new InvalidOperationException("Filter is not found");
     }
 }

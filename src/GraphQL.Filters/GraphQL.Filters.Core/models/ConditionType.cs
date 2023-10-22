@@ -3,9 +3,9 @@ using System.Reflection;
 
 namespace nl.titaniumit.graphql.filters.models;
 
-internal record ConditionType(MemberInfo? fieldName, Func<ConditionType, ParameterExpression, Expression> @operator, object? @value, FilterType? filter)
+internal record ConditionType(MemberInfo? fieldName=null, Func<ConditionType, ParameterExpression, Expression>? @operator= null, object? @value = null, FilterType? filter= null)
 {
-    public Expression CreateFilter<T>(ParameterExpression arg) => @operator.Invoke(this, arg);
+    public Expression CreateFilter<T>(ParameterExpression arg) => @operator?.Invoke(this, arg) ?? throw new InvalidOperationException();
     internal ConstantExpression Value => Expression.Constant(@value);
     internal MemberExpression? GetMemberExpression(ParameterExpression arg)
     {
@@ -23,4 +23,14 @@ internal record ConditionType(MemberInfo? fieldName, Func<ConditionType, Paramet
         }
         return memberExpression;
     }
+
+     internal bool IsValid()
+    {
+        return this switch {
+            {fieldName: not null, @operator: not null, @filter:null} => true,
+            {fieldName:  null, @operator: null, @filter:not null, value:null} => true,
+              _ => false
+        };
+    }
+
 }

@@ -8,4 +8,5 @@ internal record Or(FilterType left, FilterType right)
             left.CreateFilter<T>(arg),
             right.CreateFilter<T>(arg)
         );
+
 }

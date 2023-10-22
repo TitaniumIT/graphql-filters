@@ -1,5 +1,8 @@
 {
     "recommendations": [
-        "ms-dotnettools.csdevkit"
+        "ms-dotnettools.csdevkit",
+        "graphql.vscode-graphql",
+        "graphql.vscode-graphql-syntax",
+        "ms-dotnettools.vscode-dotnet-runtime"
     ]
 }

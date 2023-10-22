@@ -75,7 +75,7 @@ public class SchemaSteps
 
     [Given("Field (.*) uses SimpleObject list (.*)")]
     [Given("Field (.*) uses SimpleObject filtered list (.*)")]
-    public void SetupListResolversSimpleObject(string fieldname,string listname)
+    public void SetupListResolversSimpleObject(string fieldname, string listname)
     {
         if (_queryFields != null)
         {
@@ -86,18 +86,14 @@ public class SchemaSteps
             {
                 if (useFiltering)
                 {
-                    var filter = ctx.GetArgument<FilterType>("filter");
-                    if (ctx.FieldDefinition.Arguments != null)
+                    var filter = ctx.GetFilterExpression<SimpleObject>("filter");
+                    if (filter != null)
                     {
-                        var expression = filter.CreateFilter<SimpleObject>();
-                        _output.WriteLine(expression.ToString());
-                        return _data.SimpleObjectLists[listname].Where(expression.Compile());
+                        _output.WriteLine(filter.ToString());
+                        return _data.SimpleObjectLists[listname].Where(filter.Compile());
                     }
-                    else
-                    {
-                        Assert.Fail();
-                        return null;
-                    }
+                    return null;
+
                 }
                 else
                 {
@@ -141,13 +137,13 @@ public class SchemaSteps
     }
 
     [Then("Schema Enum (.*) contains (.*)")]
-    public void SchemaEnumContainsType(string enumname,string member)
+    public void SchemaEnumContainsType(string enumname, string member)
     {
         if (_schema != null)
         {
-           if(  _schema.AllTypes.Single(type => type.Name == enumname) is EnumerationGraphType enumtype)
+            if (_schema.AllTypes.Single(type => type.Name == enumname) is EnumerationGraphType enumtype)
             {
-                enumtype.Values.Should().Contain( e => e.Name == member);
+                enumtype.Values.Should().Contain(e => e.Name == member);
             }
         }
     }

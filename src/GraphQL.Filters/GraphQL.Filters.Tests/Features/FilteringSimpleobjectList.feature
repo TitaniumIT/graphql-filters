@@ -80,3 +80,14 @@ Scenario: inline filter with andor
     Then Data contains simpleObjects
       | intMember |
       | 10        |
+
+
+    Scenario: Invalid conditions 
+    Given Query operation FilterSimpleObjectInvalidCondition
+    When Executed
+    Then Should have errors
+
+    Scenario: Invalid filters 
+    Given Query operation FilterSimpleObjectInvalidFilter
+    When Executed
+    Then Should have errors

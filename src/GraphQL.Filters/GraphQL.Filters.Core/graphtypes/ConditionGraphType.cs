@@ -1,5 +1,6 @@
 ﻿using GraphQL.Types;
 using nl.titaniumit.graphql.filters.models;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 
 namespace nl.titaniumit.graphql.filters.graphtypes;
@@ -13,22 +14,21 @@ internal class ConditionGraphType<T> : InputObjectGraphType<ConditionType> where
         Field<BinaryCompareEnumTypes, Func<MemberExpression?, object?, Expression>>("operator");
         Field<ValueScalar>("value");
         Field<FilterGraphType<T>>("filter");
+        Description = "valid combinations are fieldname,operator,value  or filter, other combinations are invalid";
     }
 
     public override object ParseDictionary(IDictionary<string, object?> value)
     {
-        if (!value.ContainsKey("filter"))
+        if (base.ParseDictionary(value) is ConditionType condition)
         {
-            value["filter"] = null;
+            if (condition.IsValid())
+            {
+                return condition;
+            }
+            else{
+               throw new ValidationException($"{condition} is invalid, try {Description}");
+            }
         }
-        if (!value.ContainsKey("fieldName"))
-        {
-            value["fieldName"] = null;
-        }
-        if (!value.ContainsKey("value"))
-        {
-            value["value"] = null;
-        }
-        return base.ParseDictionary(value);
+        throw new InvalidOperationException($"Condition is not found");
     }
 }
