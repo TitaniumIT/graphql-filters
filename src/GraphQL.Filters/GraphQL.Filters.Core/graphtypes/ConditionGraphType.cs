@@ -13,8 +13,7 @@ internal class ConditionGraphType<T> : InputObjectGraphType<ConditionType> where
         Field<FieldEnumerationGraphType<T>>("fieldName");
         Field<BinaryCompareEnumTypes, Func<MemberExpression?, object?, Expression>>("operator");
         Field<ValueScalar>("value");
-        Field<FilterGraphType<T>>("filter");
-        Description = "valid combinations are fieldname,operator,value  or filter, other combinations are invalid";
+        Description = "valid combinations are fieldname,operator,value";
     }
 
     public override object ParseDictionary(IDictionary<string, object?> value)

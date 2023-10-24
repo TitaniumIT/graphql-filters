@@ -4,9 +4,9 @@ namespace nl.titaniumit.graphql.filters.models;
 
 internal record And(FilterType left, FilterType right)
 {
-    internal Expression CreateFilter<T>(ParameterExpression arg) => Expression.And(
-            left.CreateFilter<T>(arg),
-            right.CreateFilter<T>(arg)
+    internal Expression CreateFilter<T>(Expression arg) => Expression.And(
+            left.CreateExpression<T>(arg),
+            right.CreateExpression<T>(arg)
         );
 }
 

@@ -13,6 +13,9 @@ internal class FilterGraphType<T> : InputObjectGraphType<FilterType> where T : c
         Field<AndGraphType<T>>("and");
         Field<OrGraphType<T>>("or");
         Field<NotGraphType<T>>("not");
+        if( this.HasCollectionMembers<T>()){
+            Field<AnyGraphType<T>>("any");
+        }
         Description = "only use one of the fields and leave the rest empty. Don't combine";
     }
 

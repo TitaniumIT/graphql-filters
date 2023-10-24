@@ -73,9 +73,9 @@ public class SchemaSteps
         }
     }
 
-    [Given("Field (.*) uses SimpleObject list (.*)")]
-    [Given("Field (.*) uses SimpleObject filtered list (.*)")]
-    public void SetupListResolversSimpleObject(string fieldname, string listname)
+    [Given("Field (.*) uses (SimpleObject|NestedObject) list")]
+    [Given("Field (.*) uses (SimpleObject|NestedObject) filtered list")]
+    public void SetupListResolversSimpleObject(string fieldname, string type)
     {
         if (_queryFields != null)
         {
@@ -86,18 +86,29 @@ public class SchemaSteps
             {
                 if (useFiltering)
                 {
-                    var filter = ctx.GetFilterExpression<SimpleObject>("filter");
-                    if (filter != null)
+                    if (type == "SimpleObject")
                     {
-                        _output.WriteLine(filter.ToString());
-                        return _data.SimpleObjectLists[listname].Where(filter.Compile());
+                        var filter = ctx.GetFilterExpression<SimpleObject>("filter");
+                        if (filter != null)
+                        {
+                            _output.WriteLine(filter.ToString());
+                            return _data.SimpleObjectLists.Where(filter.Compile());
+                        }
+                    }
+                    if (type == "NestedObject")
+                    {
+                        var filter = ctx.GetFilterExpression<NestedObject>("filter");
+                        if (filter != null)
+                        {
+                            _output.WriteLine(filter.ToString());
+                            return _data.NestedObjects.Where(filter.Compile());
+                        }
                     }
                     return null;
-
                 }
                 else
                 {
-                    return _data.SimpleObjectLists[listname];
+                    return _data.SimpleObjectLists;
                 }
             });
         }
@@ -121,8 +132,6 @@ public class SchemaSteps
         {
             Assert.Fail();
         }
-
-
         _schema = _driver.Provider.GetRequiredService<TestSchema>();
         _output.WriteLine(_schema.Print());
     }

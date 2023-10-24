@@ -1,7 +1,5 @@
 using GraphQL.Filters.Tests.Drivers;
 using GraphQL.Filters.Tests.Support;
-using System.Collections;
-using System.Reflection;
 using TechTalk.SpecFlow.Assist;
 
 namespace GraphQL.Filters.Tests.StepDefinitions
@@ -15,10 +13,22 @@ namespace GraphQL.Filters.Tests.StepDefinitions
             _dataDriver = dataDriver;
         }
 
-        [Given("SimpleObject (.*) list")]
-        public void ListOfSimpleObject(string listname,Table table)
+        [Given("SimpleObject list")]
+        public void ListOfSimpleObject(Table table)
         {
-            _dataDriver.SimpleObjectLists[listname] = table.CreateSet<SimpleObject>();
+            _dataDriver.SimpleObjectLists = table.CreateSet<SimpleObject>();
+        }
+
+        [Given("NestedObject list")]
+        public void ListOfNestedObjects(Table table)
+        {
+            _dataDriver.NestedObjects = table.CreateSet<NestedObject>();
+        }
+
+        [Given("NestedObject (.*) has Simples")]
+        public void ListOfNestedObjectsSimpleObjeccts(string nestedtObject,Table table)
+        {
+            _dataDriver.NestedObjects.Single( x => x.StringMember == nestedtObject).Simples = table.CreateSet<SimpleObject>().ToList();
         }
     }
 }

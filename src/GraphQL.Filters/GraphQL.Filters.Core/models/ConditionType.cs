@@ -3,11 +3,11 @@ using System.Reflection;
 
 namespace nl.titaniumit.graphql.filters.models;
 
-internal record ConditionType(MemberInfo? fieldName=null, Func<ConditionType, ParameterExpression, Expression>? @operator= null, object? @value = null, FilterType? filter= null)
+internal record ConditionType(MemberInfo? fieldName=null, Func<ConditionType, Expression, Expression>? @operator= null, object? @value = null)
 {
-    public Expression CreateFilter<T>(ParameterExpression arg) => @operator?.Invoke(this, arg) ?? throw new InvalidOperationException();
+    public Expression CreateFilter<T>(Expression arg) => @operator?.Invoke(this, arg) ?? throw new InvalidOperationException();
     internal ConstantExpression Value => Expression.Constant(@value);
-    internal MemberExpression? GetMemberExpression(ParameterExpression arg)
+    internal MemberExpression? GetMemberExpression(Expression arg)
     {
         MemberExpression? memberExpression = null;
         if (fieldName != null)
@@ -18,7 +18,7 @@ internal record ConditionType(MemberInfo? fieldName=null, Func<ConditionType, Pa
             }
             if (fieldName is FieldInfo fieldInfo)
             {
-                memberExpression = MemberExpression.Field(arg, fieldInfo);
+                memberExpression = Expression.Field(arg, fieldInfo);
             }
         }
         return memberExpression;
@@ -27,8 +27,7 @@ internal record ConditionType(MemberInfo? fieldName=null, Func<ConditionType, Pa
      internal bool IsValid()
     {
         return this switch {
-            {fieldName: not null, @operator: not null, @filter:null} => true,
-            {fieldName:  null, @operator: null, @filter:not null, value:null} => true,
+            {fieldName: not null, @operator: not null} => true,
               _ => false
         };
     }

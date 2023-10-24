@@ -8,6 +8,16 @@
   }
 }
 
+query FilterSimpleObjectDirectFieldEquals {
+  simpleObjects(
+    filter: {
+      condition: { fieldName: StringField, operator: equal, value: "String 2" }
+    }
+  ) {
+    stringMember
+  }
+}
+
 query FilterSimpleObjectDirectIntEquals {
   simpleObjects(
     filter: { condition: { fieldName: IntMember, operator: equal, value: 10 } }
@@ -53,7 +63,6 @@ query FilterSimpleObjectDirectAnd {
     stringMember
   }
 }
-
 
 query FilterSimpleObjectDirectOr {
   simpleObjects(

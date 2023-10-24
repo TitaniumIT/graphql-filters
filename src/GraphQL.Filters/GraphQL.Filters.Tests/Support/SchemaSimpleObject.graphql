@@ -4,6 +4,12 @@
 
 type QueryType {
   simpleObjects(filter: FilterGraphTypeSimpleObject): [SimpleObject]
+  nestedObjects(filter: FilterGraphTypeNestedObject): [NestedObject]
+}
+
+type NestedObject {
+  stringMember: String!
+  simples: [SimpleObject!]!
 }
 
 type SimpleObject {
@@ -49,6 +55,7 @@ enum FieldEnumerationGraphTypeSimpleObject {
   DateOnlyMember
   TimeOnlyMember
   DecimalMember
+  StringField
 }
 
 enum BinaryCompareEnumTypes {
@@ -74,4 +81,42 @@ input OrGraphTypeSimpleObject {
 
 input NotGraphTypeSimpleObject {
   filter: FilterGraphTypeSimpleObject!
+}
+
+input FilterGraphTypeNestedObject {
+  condition: ConditionGraphTypeNestedObject
+  and: AndGraphTypeNestedObject
+  or: OrGraphTypeNestedObject
+  not: NotGraphTypeNestedObject
+  any: AnyGraphTypeNestedObject
+}
+
+"valid combinations are fieldname,operator,value"
+input ConditionGraphTypeNestedObject {
+  fieldName: FieldEnumerationGraphTypeNestedObject
+  operator: BinaryCompareEnumTypes
+  value: ValueScalar
+}
+
+enum FieldEnumerationGraphTypeNestedObject {
+  StringMember
+  Simples
+}
+
+input AndGraphTypeNestedObject {
+  left: FilterGraphTypeNestedObject!
+  right: FilterGraphTypeNestedObject!
+}
+
+input OrGraphTypeNestedObject {
+  left: FilterGraphTypeNestedObject!
+  right: FilterGraphTypeNestedObject!
+}
+
+input NotGraphTypeNestedObject {
+  filter: FilterGraphTypeNestedObject!
+}
+
+input AnyGraphTypeNestedObject {
+  simples: FilterGraphTypeSimpleObject
 }

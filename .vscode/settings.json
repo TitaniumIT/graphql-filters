@@ -3,5 +3,6 @@
         "/**/StepDefinitions/**/*.cs"
     ],
     "dotnet-test-explorer.testProjectPath": "/src/**/*.Tests.csproj",
-    "dotnet-test-explorer.testArguments": "--collect:\"XPlat Code Coverage;Format=json,lcov,cobertura\"  "
+    "dotnet-test-explorer.testArguments": "--collect:\"XPlat Code Coverage\" ",
+    
 }

@@ -6,6 +6,7 @@ namespace GraphQL.Filters.Tests.Drivers
 {
     public class DataDriver
     {
-        public Dictionary<string, IEnumerable<SimpleObject>> SimpleObjectLists = new Dictionary<string, IEnumerable<SimpleObject>>();
+        public IEnumerable<SimpleObject> SimpleObjectLists = new List<SimpleObject>();
+        public IEnumerable<NestedObject> NestedObjects = new List<NestedObject>();
     }
 }
