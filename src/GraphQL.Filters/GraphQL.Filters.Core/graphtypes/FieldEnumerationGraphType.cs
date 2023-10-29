@@ -6,7 +6,7 @@ namespace nl.titaniumit.graphql.filters.graphtypes;
 public class FieldEnumerationGraphType<T> : EnumerationGraphType where T : class
 { 
     static MemberTypes[] _visbleTypes = { MemberTypes.Property, MemberTypes.Field };
-    public FieldEnumerationGraphType(IServiceProvider serviceProvider)
+    public FieldEnumerationGraphType()
     {
         Name = $"FieldEnumerationGraphType{typeof(T).Name}";
         var type = typeof(T) ;

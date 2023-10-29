@@ -24,14 +24,14 @@ public static class ReflectionExtentions
             };
        }
 
-       public static bool IsCollectionType(this Type type)
+       public static bool IsEnumerable(this Type type)
        {
-         return type.IsAssignableTo( typeof(ICollection) ) && type.IsGenericType;
+         return type.IsAssignableTo( typeof(IEnumerable) ) && type.IsGenericType;
        }
 
        public static bool HasCollectionMembers<T>(this IInputObjectGraphType _) where T : class
        {
-           return _.FieldsAndProperties<T>().Any( mi => mi.MemberType().IsCollectionType() );
+           return _.FieldsAndProperties<T>().Any( mi => mi.MemberType().IsEnumerable() );
        }
 
 }

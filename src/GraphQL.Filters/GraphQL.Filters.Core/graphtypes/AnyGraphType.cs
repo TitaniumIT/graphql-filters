@@ -15,7 +15,7 @@ internal class AnyGraphType<T> : InputObjectGraphType<Any> where T : class
         foreach (var member in this.FieldsAndProperties<T>())
         {
             var memberType = member.MemberType();
-            if (memberType.IsCollectionType())
+            if (memberType.IsEnumerable())
             {
                 var ft = AddField(new FieldType()
                 {

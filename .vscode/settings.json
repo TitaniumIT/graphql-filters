@@ -3,6 +3,5 @@
         "/**/StepDefinitions/**/*.cs"
     ],
     "dotnet-test-explorer.testProjectPath": "/src/**/*.Tests.csproj",
-    "dotnet-test-explorer.testArguments": "--collect:\"XPlat Code Coverage\" ",
-    
+    "dotnet-test-explorer.testArguments": "--collect:\"XPlat Code Coverage\" "
 }

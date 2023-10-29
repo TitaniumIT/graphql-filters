@@ -1,15 +1,16 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection.Metadata.Ecma335;
+using GraphQL;
 
 namespace nl.titaniumit.graphql.filters.models;
 
 internal record FilterType(ConditionType? condition = null, And? and = null, Or? or = null, Not? not = null, Any? any = null)
 {
-    internal Expression<Func<T, bool>> CreateFilter<T>()
+    internal Expression<Func<T, bool>> CreateFilter<T>(IResolveFieldContext ctx)
     {
         var arg = Expression.Parameter(typeof(T), "_this");
         return Expression.Lambda<Func<T, bool>>(
-                 CreateExpression<T>(arg),
+                 CreateExpression<T>(arg,ctx),
                  arg
                  );
     }
@@ -27,15 +28,15 @@ internal record FilterType(ConditionType? condition = null, And? and = null, Or?
         };
     }
 
-    internal Expression CreateExpression<T>(Expression arg)
+    internal Expression CreateExpression<T>(Expression arg,IResolveFieldContext ctx)
     {
         return this switch
         {
-            { condition: not null } => condition.CreateFilter<T>(arg),
-            { and: not null } => and.CreateFilter<T>(arg),
-            { or: not null } => or.CreateFilter<T>(arg),
-            { @not: not null } => not.CreateFilter<T>(arg),
-            { any: not null } => any.CreateFilter<T>(arg),
+            { condition: not null } => condition.CreateFilter<T>(arg,ctx),
+            { and: not null } => and.CreateFilter<T>(arg,ctx),
+            { or: not null } => or.CreateFilter<T>(arg,ctx),
+            { @not: not null } => not.CreateFilter<T>(arg,ctx),
+            { any: not null } => any.CreateFilter<T>(arg,ctx),
             _ => throw new InvalidOperationException()
         };
     }

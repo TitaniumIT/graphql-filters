@@ -1,34 +1,34 @@
+using System.Net.Mail;
+using GraphQL.Filters.Examples;
 using GraphQL.Filters.Tests.Drivers;
-using GraphQL.Filters.Tests.Support;
 using TechTalk.SpecFlow.Assist;
+using TechTalk.SpecFlow.Assist.ValueRetrievers;
 
-namespace GraphQL.Filters.Tests.StepDefinitions
+namespace GraphQL.Filters.Tests.StepDefinitions;
+
+[Binding]
+public class DataSourceSteps
 {
-    [Binding]
-    public class DataSourceSteps
+    private readonly DataDriver _dataDriver;
+    public DataSourceSteps(DataDriver dataDriver)
     {
-        private readonly DataDriver _dataDriver;
-        public DataSourceSteps(DataDriver dataDriver) 
-        {
-            _dataDriver = dataDriver;
-        }
-
-        [Given("SimpleObject list")]
-        public void ListOfSimpleObject(Table table)
-        {
-            _dataDriver.SimpleObjectLists = table.CreateSet<SimpleObject>();
-        }
-
-        [Given("NestedObject list")]
-        public void ListOfNestedObjects(Table table)
-        {
-            _dataDriver.NestedObjects = table.CreateSet<NestedObject>();
-        }
-
-        [Given("NestedObject (.*) has Simples")]
-        public void ListOfNestedObjectsSimpleObjeccts(string nestedtObject,Table table)
-        {
-            _dataDriver.NestedObjects.Single( x => x.StringMember == nestedtObject).Simples = table.CreateSet<SimpleObject>().ToList();
-        }
+        _dataDriver = dataDriver;
     }
+
+
+    [Given("the following divers:")]
+    public void DiversSetup(Table table)
+    {
+        _dataDriver.Divers = table.CreateSet<Diver>().Concat(_dataDriver.Divers);
+    }
+
+
+    [Given("the following coarses for diver (.*)")]
+    public void DiversSetup(int id,Table table)
+    {
+        _dataDriver.Divers.Single( x => x.Id == id )
+            .Courses = table.CreateSet<Course>().ToList();
+    }
+
+
 }

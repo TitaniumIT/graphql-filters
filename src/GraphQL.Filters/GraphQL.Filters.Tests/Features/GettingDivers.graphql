@@ -1,0 +1,57 @@
+query GetDiverFixedFilter {
+    diver(filter:{
+        condition:{
+            fieldName:Id
+            operator: equal
+            value: 1
+        }
+    }){
+        name
+        email
+        id
+    }
+}
+
+query GetDiverByEmail {
+    diver(filter:{
+        condition:{
+            fieldName: Email
+            operator: equal
+            value: "john@divers.down"
+        }
+    }){
+        name
+        email
+        id
+    }
+}
+
+query GetDiversWithCoarseFilters {
+    divers(filter:{
+        any:{
+            courses:{
+                condition:{
+                    fieldName: Name
+                    operator:equal
+                    value: "OpenWater"
+                }
+            }
+        }
+    }){
+        name
+        email
+        id
+    }
+}
+
+query GetDiverFilterById($id: ValueScalar!) {
+    diver(filter:{
+        condition:{
+            fieldName:Id
+            operator: equal
+            value: $id
+        }
+    }){
+        id
+    }
+}

@@ -24,15 +24,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GraphQL.Filters.Core\GraphQL.Filters.Core.csproj" />
+    <ProjectReference Include="..\GraphQL.Filters.Examples\GraphQL.Filters.Examples.csproj" />
   </ItemGroup>
 
+  <Target Name="Remove TestResults" AfterTargets="AfterBuild">
+        <RemoveDir Directories="TestResults" />
+  </Target>
+
   <ItemGroup>
-    <None Update="Features\FilteringSimpleobjectListFeature.graphql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-     <None Update="Features\FilterNestedObjectsFeature.graphql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Content Include="Features\*.graphql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>  
   </ItemGroup>
 
   <Target Name="Remove TestResults" AfterTargets="AfterBuild" >

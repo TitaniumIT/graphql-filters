@@ -13,7 +13,7 @@ namespace nl.titaniumit.graphql.filters
             try
             {
                 var filter = fieldContext.GetArgument<FilterType>(argumentName);
-                return filter.CreateFilter<TFilterType>();
+                return filter.CreateFilter<TFilterType>(fieldContext);
             }
             catch (ValidationException ex)
             {

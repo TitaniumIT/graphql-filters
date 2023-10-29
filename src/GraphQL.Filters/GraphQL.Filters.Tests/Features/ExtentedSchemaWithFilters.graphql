@@ -1,0 +1,6 @@
+query FilterType($name: String!) {
+    __type(name: $name) {
+        name
+        description
+    }
+}

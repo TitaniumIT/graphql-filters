@@ -24,8 +24,9 @@ internal class ConditionGraphType<T> : InputObjectGraphType<ConditionType> where
             {
                 return condition;
             }
-            else{
-               throw new ValidationException($"{condition} is invalid, try {Description}");
+            else
+            {
+                throw new ValidationException($"{condition} is invalid, try {Description}");
             }
         }
         throw new InvalidOperationException($"Condition is not found");

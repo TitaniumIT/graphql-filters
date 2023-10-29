@@ -1,0 +1,126 @@
+schema {
+  query: DivingQuery
+}
+
+type DivingQuery {
+  diver(filter: FilterGraphTypeDiver): Diver
+  divers(filter: FilterGraphTypeDiver): [Diver]
+}
+
+type Diver {
+  name: String!
+  email: MailAddress!
+  id: Int!
+  courses: [Course!]
+  dives: [Dive]
+}
+
+scalar MailAddress
+
+type Course {
+  name: String!
+  started: DateOnly!
+  finished: DateOnly
+}
+
+"The `Date` scalar type represents a year, month and day in accordance with the [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard. Format is `yyyy-MM-dd`"
+scalar DateOnly
+
+type Dive {
+  location: String!
+  on: DateOnly!
+  start: TimeOnly!
+  end: TimeOnly!
+  averageDepth: Float!
+  diver: Diver!
+}
+
+"The `Time` scalar type represents a time in accordance with the [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard. Format is `HH:mm:ss.FFFFFFF`."
+scalar TimeOnly
+
+"only use one of the fields and leave the rest empty. Don't combine"
+input FilterGraphTypeDiver {
+  condition: ConditionGraphTypeDiver
+  and: AndGraphTypeDiver
+  or: OrGraphTypeDiver
+  not: NotGraphTypeDiver
+  any: AnyGraphTypeDiver
+}
+
+"valid combinations are fieldname,operator,value"
+input ConditionGraphTypeDiver {
+  fieldName: FieldEnumerationGraphTypeDiver
+  operator: BinaryCompareEnumTypes
+  value: ValueScalar
+}
+
+enum FieldEnumerationGraphTypeDiver {
+  Name
+  Email
+  Id
+  Courses
+}
+
+enum BinaryCompareEnumTypes {
+  equal
+  greater
+  greaterOrEqual
+  less
+  lessOrEqual
+  notEqual
+}
+
+scalar ValueScalar
+
+input AndGraphTypeDiver {
+  left: FilterGraphTypeDiver!
+  right: FilterGraphTypeDiver!
+}
+
+input OrGraphTypeDiver {
+  left: FilterGraphTypeDiver!
+  right: FilterGraphTypeDiver!
+}
+
+input NotGraphTypeDiver {
+  filter: FilterGraphTypeDiver!
+}
+
+input AnyGraphTypeDiver {
+  courses: FilterGraphTypeCourse
+}
+
+"only use one of the fields and leave the rest empty. Don't combine"
+input FilterGraphTypeCourse {
+  condition: ConditionGraphTypeCourse
+  and: AndGraphTypeCourse
+  or: OrGraphTypeCourse
+  not: NotGraphTypeCourse
+}
+
+"valid combinations are fieldname,operator,value"
+input ConditionGraphTypeCourse {
+  fieldName: FieldEnumerationGraphTypeCourse
+  operator: BinaryCompareEnumTypes
+  value: ValueScalar
+}
+
+enum FieldEnumerationGraphTypeCourse {
+  Name
+  Started
+  Finished
+}
+
+input AndGraphTypeCourse {
+  left: FilterGraphTypeCourse!
+  right: FilterGraphTypeCourse!
+}
+
+input OrGraphTypeCourse {
+  left: FilterGraphTypeCourse!
+  right: FilterGraphTypeCourse!
+}
+
+input NotGraphTypeCourse {
+  filter: FilterGraphTypeCourse!
+}

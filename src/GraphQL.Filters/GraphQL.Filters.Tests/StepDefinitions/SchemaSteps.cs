@@ -1,17 +1,8 @@
-using FluentAssertions.Equivalency;
-using GraphQL.Builders;
+using GraphQL.Filters.Examples;
 using GraphQL.Filters.Tests.Drivers;
-using GraphQL.Filters.Tests.Support;
-using GraphQL.Introspection;
 using GraphQL.MicrosoftDI;
-using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
-using nl.titaniumit.graphql.filters;
-using nl.titaniumit.graphql.filters.models;
-using NUnit.Framework;
 using TechTalk.SpecFlow.Infrastructure;
-using TechTalk.SpecFlow.Tracing;
 
 namespace GraphQL.Filters.Tests.StepDefinitions;
 
@@ -22,8 +13,6 @@ public class SchemaSteps
     private readonly DataDriver _data;
     private readonly ScenarioContext _context;
     private readonly ISpecFlowOutputHelper _output;
-    private Type? _queryType;
-    private Dictionary<string, FieldBuilder<object?, object>>? _queryFields;
 
     public SchemaSteps(GraphQlDriver driver, ScenarioContext context, ISpecFlowOutputHelper output, DataDriver data)
     {
@@ -33,139 +22,19 @@ public class SchemaSteps
         _data = data;
     }
 
-    [Given("A Schema with (.*) as Query")]
-    public void SetupSchemaTypes(string queryType)
+    [BeforeScenario]
+    public void LoadSchema()
     {
-        _queryType = Type.GetType($"GraphQL.Filters.Tests.Support.{queryType}") ?? throw new NullReferenceException();
-        _queryFields = new();
+          _driver.Services.AddSingleton(srv => new DivingSchema(new SelfActivatingServiceProvider(srv)));
+          _driver.Services.AddSingleton<IDivers>((srv) =>_data);
     }
 
-    [Given("Query has Field (.*) as List of (.*)")]
-    public void SetupListField(string _fieldname, string _listType)
+    [Then("Print schema")]
+    public void PrintSchema()
     {
-        Type _graphType = Type.GetType($"GraphQL.Filters.Tests.Support.{_listType}") ?? throw new NullReferenceException();
-        var list = typeof(ListGraphType<>).MakeGenericType(_graphType);
-        if (_queryFields != null)
-        {
-            _queryFields[_fieldname] = FieldBuilder<object?, object>.Create(list, _fieldname);
-        }
-        else
-        {
-            throw new InvalidOperationException();
-        }
-    }
+        var provider = _driver.Provider;
+        var schema = provider.GetRequiredService<Examples.DivingSchema>();
 
-    [Given("Field (.*) has filtering of (.*)")]
-    public void SetupFieldFilter(string _fieldname, string _filtertype)
-    {
-        if (_queryFields != null)
-        {
-            var type = typeof(FilterBuilder<object?, object>);
-            var filterType = Type.GetType($"GraphQL.Filters.Tests.Support.{_filtertype}") ?? throw new NullReferenceException();
-            var filterTypeMethod = type.GetMethod(nameof(FilterBuilder<object?, object>.FilterType))?.MakeGenericMethod(filterType) ?? throw new InvalidOperationException();
-            var b = _queryFields[_fieldname].AddFilter("filter");
-
-            filterTypeMethod.Invoke(b, new object[] { });
-        }
-        else
-        {
-            Assert.Fail();
-        }
-    }
-
-    [Given("Field (.*) uses (SimpleObject|NestedObject) list")]
-    [Given("Field (.*) uses (SimpleObject|NestedObject) filtered list")]
-    public void SetupListResolversSimpleObject(string fieldname, string type)
-    {
-        if (_queryFields != null)
-        {
-            bool useFiltering = _context.StepContext.StepInfo.Text.Contains("filtered list");
-            var field = _queryFields[fieldname];
-            field.Resolve()
-            .Resolve(ctx =>
-            {
-                if (useFiltering)
-                {
-                    if (type == "SimpleObject")
-                    {
-                        var filter = ctx.GetFilterExpression<SimpleObject>("filter");
-                        if (filter != null)
-                        {
-                            _output.WriteLine(filter.ToString());
-                            return _data.SimpleObjectLists.Where(filter.Compile());
-                        }
-                    }
-                    if (type == "NestedObject")
-                    {
-                        var filter = ctx.GetFilterExpression<NestedObject>("filter");
-                        if (filter != null)
-                        {
-                            _output.WriteLine(filter.ToString());
-                            return _data.NestedObjects.Where(filter.Compile());
-                        }
-                    }
-                    return null;
-                }
-                else
-                {
-                    return _data.SimpleObjectLists;
-                }
-            });
-        }
-        else
-        {
-            Assert.Fail();
-        }
-    }
-
-    ISchema? _schema;
-
-    [When("Create Schema")]
-    public void CreateSchema()
-    {
-        if (_queryFields != null && _queryFields.Any() && _queryType != null)
-        {
-            _driver.Services.AddSingleton(srv => new TestSchema(new SelfActivatingServiceProvider(srv), _queryType));
-            _driver.Services.AddSingleton(_queryType, srv => Activator.CreateInstance(_queryType, _queryFields.Values.ToList()) ?? throw new InvalidOperationException());
-        }
-        else
-        {
-            Assert.Fail();
-        }
-        _schema = _driver.Provider.GetRequiredService<TestSchema>();
-        _output.WriteLine(_schema.Print());
-    }
-
-    [Then("Schema contains type (.*)")]
-    public void SchemaContainsType(string typename)
-    {
-        if (_schema != null)
-        {
-            _schema.AllTypes.Should().Contain(type => type.Name == typename);
-        }
-    }
-
-    [Then("Schema Enum (.*) contains (.*)")]
-    public void SchemaEnumContainsType(string enumname, string member)
-    {
-        if (_schema != null)
-        {
-            if (_schema.AllTypes.Single(type => type.Name == enumname) is EnumerationGraphType enumtype)
-            {
-                enumtype.Values.Should().Contain(e => e.Name == member);
-            }
-        }
-    }
-
-    [Then("Schema Enum (.*) doesnot contain (.*)")]
-    public void SchemaEnumNotContainsType(string enumname, string member)
-    {
-        if (_schema != null)
-        {
-            if (_schema.AllTypes.Single(type => type.Name == enumname) is EnumerationGraphType enumtype)
-            {
-                enumtype.Values.Should().NotContain(e => e.Name == member);
-            }
-        }
+        _output.WriteLine(schema.Print());
     }
 }

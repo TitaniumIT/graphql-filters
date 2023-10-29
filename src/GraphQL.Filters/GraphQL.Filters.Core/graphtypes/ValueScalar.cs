@@ -1,4 +1,5 @@
 ﻿using GraphQL.Types;
+using GraphQLParser.AST;
 
 namespace nl.titaniumit.graphql.filters.graphtypes;
 

@@ -1,8 +1,5 @@
-﻿using GraphQL.Filters.Tests.Support;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using nl.titaniumit.graphql.filters;
-using System;
-using System.Linq;
 
 namespace GraphQL.Filters.Tests.Drivers
 {
