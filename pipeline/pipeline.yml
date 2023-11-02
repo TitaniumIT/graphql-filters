@@ -55,6 +55,7 @@ stages:
                   versioningScheme: byBuildNumber
                   configuration: Release
                   nobuild: true
+                  verbosityPack: Minimal
               - publish: '$(Build.ArtifactStagingDirectory)'
                 artifact: packages
           - job: publish
