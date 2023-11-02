@@ -61,7 +61,6 @@ stages:
           - job: publish
             displayName: publish to nuget
             dependsOn: build
-            condition: false
             steps:
               - checkout: none
               - download: current
