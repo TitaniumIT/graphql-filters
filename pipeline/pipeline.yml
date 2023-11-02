@@ -12,7 +12,6 @@ variables:
   
 name: $(majorMinorVersion).$(semanticVersion)
 
-
 stages:
   - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
       - stage: Validation
@@ -26,7 +25,7 @@ stages:
                   command: build
                   workingDirectory: src/GraphQL.Filters
                   versioningScheme: byBuildNumber
-                  arguments: --configuration Release -p:Version=$(majorMinorVersion).$(semanticVersion)
+                  arguments: --configuration Release 
                   configuration: Release
               - task: DotNetCoreCLI@2
                 displayName: UnitTest
@@ -34,3 +33,36 @@ stages:
                   command: test
                   workingDirectory: src/GraphQL.Filters
                   arguments: --configuration Release --no-build --no-restore
+  - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
+      - stage: BuildAndPublish
+        displayName: Build and publi
+        jobs: 
+          - job: build
+            steps:
+              - task: DotNetCoreCLI@2
+                displayName: Build
+                inputs:
+                  command: build
+                  workingDirectory: src/GraphQL.Filters
+                  versioningScheme: byBuildNumber
+                  arguments: --configuration Release -p:Version=$(majorMinorVersion).$(semanticVersion)
+                  configuration: Release
+              - task: DotNetCoreCLI@2
+                displayName: Pack
+                inputs:
+                  command: pack
+                  packagesToPack: '**/*.csproj;!**/*.Tests.csproj'
+                  versioningScheme: byBuildNumber
+                  configuration: Release
+                  nobuild: true
+              - publish: '$(Build.ArtifactStagingDirectory)'
+                artifact: packages
+          - job: publish
+            displayName: publish to nuget
+            dependsOn: build
+            steps:
+              - checkout: none
+              - download: current
+                artifact: packages
+              - script: |
+                  dotnet nuget push "$(Pipeline.Workspace)/packages/*.nupkg"  -k $(dotnettool) -s https://api.nuget.org/v3/index.json
