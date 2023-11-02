@@ -58,11 +58,11 @@ stages:
               - publish: '$(Build.ArtifactStagingDirectory)'
                 artifact: packages
           - job: publish
-                  displayName: publish to nuget
-                  dependsOn: build
-                  steps:
-                    - checkout: none
-                    - download: current
-                      artifact: packages
-                    - script: |
-                        dotnet nuget push "$(Pipeline.Workspace)/packages/*.nupkg"  -k $(dotnettool) -s https://api.nuget.org/v3/index.json
+            displayName: publish to nuget
+            dependsOn: build
+            steps:
+              - checkout: none
+              - download: current
+                artifact: packages
+              - script: |
+                  dotnet nuget push "$(Pipeline.Workspace)/packages/*.nupkg"  -k $(dotnettool) -s https://api.nuget.org/v3/index.json
