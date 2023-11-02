@@ -33,7 +33,7 @@ internal class FilterConfigVistor : BaseSchemaNodeVisitor
                 var clrType = schema.TypeMappings.Where(x => x.graphType == graphType.GetType()).Select(x => x.clrType).Single();
                 _converterService.Add(clrType, graphType as ScalarGraphType ?? throw new InvalidOperationException());
             }
-            if(  field.Type.IsAssignableTo(typeof(ListGraphType)) && graphType is IObjectGraphType objecType )
+            if(  (field.Type?.IsAssignableTo(typeof(ListGraphType))??false) && graphType is IObjectGraphType objecType )
             {
                 if( schema.IsFilterType( type.ClrType() ))
                 {

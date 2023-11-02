@@ -163,6 +163,8 @@ query GetDiversWithDivesAt($location:ValueScalar!){
     }
 }
 ```
+[example project](https://dev.azure.com/Titanium-IT/TitaniumIT.GraphQL.Tools/_git/TitaniumIT.GraphQL.Filters?path=/src/GraphQL.Filters/GraphQL.Filters.Examples)
+
 
 # Setup
 
@@ -174,3 +176,4 @@ query GetDiversWithDivesAt($location:ValueScalar!){
 * more test cases
 * custom filter functions
 * configuration options like, casing.
+

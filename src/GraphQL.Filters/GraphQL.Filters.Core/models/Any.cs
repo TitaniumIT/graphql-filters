@@ -7,7 +7,7 @@ using nl.titaniumit.graphql.filters.models;
 namespace nl.titaniumit.graphql.filters;
 
 
-internal record Any(MemberInfo? member, FilterType filter, Type collectionType ,string? destField)
+internal record Any(MemberInfo? member, FilterType filter, Type collectionType, string? destField)
 {
     static MethodInfo _createFilter = typeof(FilterType).GetMethod(nameof(FilterType.CreateFilter), BindingFlags.Instance | BindingFlags.NonPublic)
         ?? throw new NullReferenceException();
@@ -31,9 +31,16 @@ internal record Any(MemberInfo? member, FilterType filter, Type collectionType ,
         }
         else
         {
-            var expression = _createFilter.MakeGenericMethod(collectionType).Invoke(filter, new object[] { ctx }) as Expression;
-            ctx.UserContext[destField] = expression;
-            return Expression.Constant(true);
+            if (destField != null)
+            {
+                var expression = _createFilter.MakeGenericMethod(collectionType).Invoke(filter, new object[] { ctx }) as Expression;
+                ctx.UserContext[destField] = expression;
+                return Expression.Constant(true);
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
     }
 }
