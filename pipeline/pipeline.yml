@@ -10,7 +10,7 @@ variables:
     value: $[counter(variables['majorMinorVersion'], 0)]
   - group: ApiKeys
   
-name: $(majorMinorVersion).$(semanticVersion)
+name: $(majorMinorVersion).$(Build.Reason)
 
 stages:
   - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
