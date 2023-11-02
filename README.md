@@ -33,10 +33,21 @@ supported operators on scalartypes
     
 
 ## Booleans
+supported 
+* and
+* or 
+* not
 
 ## Collections
+to filter collection members the any field on the filtertype is present
+that contains per colletion field a member.
 
 ## Resolvers
 
 # Setup
 
+# Todo
+
+* documentation
+* more test cases
+* custom filter functions
