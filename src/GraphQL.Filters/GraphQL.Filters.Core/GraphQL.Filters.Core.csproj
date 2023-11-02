@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<RootNamespace>nl.titaniumit.graphql.filters</RootNamespace>
-
 	    <PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageTags>GraphQL; C#; Filtering; servers </PackageTags>
 		<Copyright>Titanium IT, 2023</Copyright>

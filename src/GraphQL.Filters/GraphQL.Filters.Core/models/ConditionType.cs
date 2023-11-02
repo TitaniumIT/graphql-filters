@@ -10,8 +10,12 @@ internal record ConditionType(MemberInfo? fieldName = null, Func<ConditionType, 
     public Expression CreateFilter<T>(Expression arg, IResolveFieldContext ctx) => @operator?.Invoke(this, arg, ctx) ?? throw new InvalidOperationException();
     internal ConstantExpression Value(IResolveFieldContext ctx)
     {
-        ScalarConverterService scalarConverterService = ctx.RequestServices.GetRequiredService<ScalarConverterService>();
-        return Expression.Constant( scalarConverterService.ConvertFromScalar(value, fieldName.MemberType()));
+        if (fieldName != null)
+        {
+            ScalarConverterService scalarConverterService = ctx.RequestServices!.GetRequiredService<ScalarConverterService>();
+            return Expression.Constant(scalarConverterService.ConvertFromScalar(value, fieldName.MemberType()));
+        }
+        throw new InvalidOperationException();
     }
 
     internal MemberExpression? GetMemberExpression(Expression arg, IResolveFieldContext ctx)
