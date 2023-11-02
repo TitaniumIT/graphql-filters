@@ -18,7 +18,7 @@
 		<RepositoryType>git</RepositoryType>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<FileVersion>1.$(Version)</FileVersion>
-		<PackageId>titaniumit.grapghgql.filtering</PackageId>
+		<PackageId>titaniumit.graphql.filtering</PackageId>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="GraphQL" Version="7.6.1" />

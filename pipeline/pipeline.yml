@@ -33,8 +33,8 @@ stages:
                   command: test
                   workingDirectory: src/GraphQL.Filters
                   arguments: --configuration Release --no-build --no-restore
-  - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-     - stage: BuildAndPublish
+  - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
+      - stage: BuildAndPublish
         displayName: Build and publi
         jobs: 
           - job: build
