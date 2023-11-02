@@ -6,6 +6,7 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>nl.titaniumit.graphql.filters</RootNamespace>
 
+		<Package>true</Package>
 	    <PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageTags>GraphQL; C#; Filtering; servers </PackageTags>
 		<Copyright>Titanium IT, 2023</Copyright>
@@ -27,5 +28,12 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="visitors\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 </Project>
