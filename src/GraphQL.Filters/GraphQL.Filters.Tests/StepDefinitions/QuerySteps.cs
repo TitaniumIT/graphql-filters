@@ -122,6 +122,16 @@ namespace GraphQL.Filters.Tests.StepDefinitions
             }
         }
 
+       [Then("Data is not empty")]
+        public void DataNotEmpty()
+        {
+            _executionResult.Should().NotBeNull();
+            if (_executionResult != null)
+            {
+                _executionResult.Data.Should().NotBeNull();
+            }
+        }
+
         [Then("Should have errors")]
         public void HasErros()
         {
@@ -170,7 +180,7 @@ namespace GraphQL.Filters.Tests.StepDefinitions
             if (dataNode.ValueKind == JsonValueKind.Object)
             {
                 var data = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(dataNode);
-
+                if (data == null) throw new InvalidOperationException();
                 var dictionaries = data.ToDictionary(k => k.Key, k =>
                 {
                     return ProcessElement(k);
@@ -190,7 +200,7 @@ namespace GraphQL.Filters.Tests.StepDefinitions
         {
             var data = JsonSerializer.Deserialize<IEnumerable<Dictionary<string, JsonElement>>>(dataNode);
 
-            var dictionaries = data.Select(x => x.ToDictionary(k => k.Key, k =>
+            var dictionaries = data!.Select(x => x.ToDictionary(k => k.Key, k =>
             {
                 return ProcessElement(k);
             }));
@@ -205,6 +215,7 @@ namespace GraphQL.Filters.Tests.StepDefinitions
                 JsonValueKind.Number => k.Value.GetInt32() as object,
                 JsonValueKind.Array => GetArray(k.Value) as object,
                 JsonValueKind.Null => null as object,
+                _ => throw new InvalidOperationException()
             };
         }
 

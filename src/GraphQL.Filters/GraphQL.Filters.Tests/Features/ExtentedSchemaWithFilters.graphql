@@ -4,3 +4,11 @@ query FilterType($name: String!) {
         description
     }
 }
+
+query FieldEnum($name: String!) {
+    __type(name: $name) {
+        enumValues   {
+            name
+        }
+    }
+}

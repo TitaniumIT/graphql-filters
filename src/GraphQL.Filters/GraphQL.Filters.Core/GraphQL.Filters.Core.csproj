@@ -11,4 +11,7 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
 		<InternalsVisibleTo Include="GraphQL.Filters.Tests" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="visitors\" />
+	</ItemGroup>
 </Project>

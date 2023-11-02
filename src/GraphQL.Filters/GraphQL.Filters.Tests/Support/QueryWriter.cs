@@ -16,8 +16,8 @@ public class OperationWriter : ASTVisitor<OperationWriterContext>
 
     protected override ValueTask VisitOperationDefinitionAsync(GraphQLOperationDefinition operationDefinition, OperationWriterContext context)
     {
-        stringBuilder.Append($"{operationDefinition.Operation} {operationDefinition.Name.Value} ");
-        return base.VisitOperationDefinitionAsync(operationDefinition, context);
+        stringBuilder.Append($"{operationDefinition.Operation} {operationDefinition?.Name?.Value} ");
+        return base.VisitOperationDefinitionAsync(operationDefinition!, context);
     }
     protected override ValueTask VisitFieldAsync(GraphQLField field, OperationWriterContext context)
     {

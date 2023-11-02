@@ -19,3 +19,17 @@ Scenario Outline: Filter input type should be present
             | OrGraphTypeDiver        | @null                                                              |
             | NotGraphTypeDiver       | @null                                                              |
             | AnyGraphTypeDiver       | @null                                                              |
+
+Scenario Outline: Filed enum should 
+    Given Query operation FieldEnum
+    Given Variables:
+            """
+            name: <name>
+            """
+    When Executed
+    Then No errors
+
+      Examples:
+            | name                    |
+            | FieldEnumerationGraphTypeDiver  |
+    

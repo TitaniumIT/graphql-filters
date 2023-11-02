@@ -4,5 +4,4 @@ namespace GraphQL.Filters.Examples;
 
 public class CourseGraphType : AutoRegisteringObjectGraphType<Course>
 {
-
 }

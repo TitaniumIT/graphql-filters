@@ -21,5 +21,18 @@ namespace nl.titaniumit.graphql.filters
                 return null;
             }
         }
+
+         public static Expression<Func<TFilterType, bool>>? GetSubFilterExpression<TFilterType>(this IResolveFieldContext fieldContext)
+         {
+            if ( fieldContext.UserContext.ContainsKey($"path:{fieldContext.ParentType.Name}.{fieldContext.FieldDefinition.Name}")){
+               return  fieldContext.UserContext[$"path:{fieldContext.ParentType.Name}.{fieldContext.FieldDefinition.Name}"] as  Expression<Func<TFilterType, bool>>;
+            }
+            return null;
+         }
+
+        static internal string StringPath(this IResolveFieldContext context)
+        {
+            return string.Join('.',context.Path.Select(p => $"{p}"));
+        }
     }
 }

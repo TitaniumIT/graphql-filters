@@ -48,3 +48,20 @@ Then No errors
 Then Data contains diver
 | name | email            | id |
 | John | john@divers.down | 1  |
+
+Scenario: Getting Divers at location
+Filtering based on resolve logic, 
+Given the following dives for diver 1
+| Location|  On|  Start|  End|  AverageDepth |
+| Twiske| 01-01-2023| 10:00|12:00| 8.5 |
+Given the following dives for diver 2
+| Location|  On|  Start|  End|  AverageDepth |
+| Vinkeveen| 01-01-2023| 10:00|12:00| 8.5 |
+Given Query operation GetDiversWithDivesAt
+Given Variables:
+"""
+location: Twiske
+"""
+When Executed
+Then No errors
+And Data is not empty

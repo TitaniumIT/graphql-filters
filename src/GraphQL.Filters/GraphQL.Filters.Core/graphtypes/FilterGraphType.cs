@@ -19,6 +19,11 @@ internal class FilterGraphType<T> : InputObjectGraphType<FilterType> where T : c
         Description = "only use one of the fields and leave the rest empty. Don't combine";
     }
 
+    public override void Initialize(ISchema schema)
+    {
+        schema.Metadata[$"filter:{Name}"]=typeof(T);
+        base.Initialize(schema);
+    }
     public override object ParseDictionary(IDictionary<string, object?> value)
     {
         if (  base.ParseDictionary(value) is FilterType filter){

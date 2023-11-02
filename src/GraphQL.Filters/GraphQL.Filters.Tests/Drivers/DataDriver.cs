@@ -6,9 +6,12 @@ using TechTalk.SpecFlow.Assist.ValueRetrievers;
 
 namespace GraphQL.Filters.Tests.Drivers;
 
-public class DataDriver : IDivers
+public class DataDriver : IDivers , IDives
 {
     public IEnumerable<Diver> Divers { get; set; } = new List<Diver>();
+
+    public IEnumerable<Dive> Dives {get;set;} = new List<Dive>();
+
 
     static DataDriver()
     {

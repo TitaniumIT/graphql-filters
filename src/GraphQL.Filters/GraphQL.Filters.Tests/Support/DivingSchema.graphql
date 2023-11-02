@@ -32,7 +32,7 @@ type Dive {
   start: TimeOnly!
   end: TimeOnly!
   averageDepth: Float!
-  diver: Diver!
+  diver: Diver
 }
 
 "The `Time` scalar type represents a time in accordance with the [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard. Format is `HH:mm:ss.FFFFFFF`."
@@ -55,10 +55,9 @@ input ConditionGraphTypeDiver {
 }
 
 enum FieldEnumerationGraphTypeDiver {
-  Name
-  Email
-  Id
-  Courses
+  name
+  email
+  id
 }
 
 enum BinaryCompareEnumTypes {
@@ -88,6 +87,7 @@ input NotGraphTypeDiver {
 
 input AnyGraphTypeDiver {
   courses: FilterGraphTypeCourse
+  dives: FilterGraphTypeDive
 }
 
 "only use one of the fields and leave the rest empty. Don't combine"
@@ -106,9 +106,9 @@ input ConditionGraphTypeCourse {
 }
 
 enum FieldEnumerationGraphTypeCourse {
-  Name
-  Started
-  Finished
+  name
+  started
+  finished
 }
 
 input AndGraphTypeCourse {
@@ -123,4 +123,42 @@ input OrGraphTypeCourse {
 
 input NotGraphTypeCourse {
   filter: FilterGraphTypeCourse!
+}
+
+"only use one of the fields and leave the rest empty. Don't combine"
+input FilterGraphTypeDive {
+  condition: ConditionGraphTypeDive
+  and: AndGraphTypeDive
+  or: OrGraphTypeDive
+  not: NotGraphTypeDive
+}
+
+"valid combinations are fieldname,operator,value"
+input ConditionGraphTypeDive {
+  fieldName: FieldEnumerationGraphTypeDive
+  operator: BinaryCompareEnumTypes
+  value: ValueScalar
+}
+
+enum FieldEnumerationGraphTypeDive {
+  location
+  on
+  start
+  end
+  averageDepth
+  diver
+}
+
+input AndGraphTypeDive {
+  left: FilterGraphTypeDive!
+  right: FilterGraphTypeDive!
+}
+
+input OrGraphTypeDive {
+  left: FilterGraphTypeDive!
+  right: FilterGraphTypeDive!
+}
+
+input NotGraphTypeDive {
+  filter: FilterGraphTypeDive!
 }

@@ -1,6 +1,7 @@
 using System.Net.Mail;
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
+using nl.titaniumit.graphql.filters;
 
 namespace GraphQL.Filters.Examples;
 
@@ -12,6 +13,8 @@ public class DivingSchema : Schema
 
         RegisterTypeMapping(typeof(MailAddress),typeof(MailAddressGraphType));
         RegisterTypeMapping(typeof(Course),typeof(CourseGraphType));
-         RegisterTypeMapping(typeof(Diver),typeof(DiverGraphType));
+        RegisterTypeMapping(typeof(Diver),typeof(DiverGraphType));
+
+        this.AddFilterTypes<Dive>();
     }
 }

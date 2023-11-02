@@ -27,6 +27,7 @@ public class SchemaSteps
     {
           _driver.Services.AddSingleton(srv => new DivingSchema(new SelfActivatingServiceProvider(srv)));
           _driver.Services.AddSingleton<IDivers>((srv) =>_data);
+          _driver.Services.AddSingleton<IDives>((srv) =>_data);
     }
 
     [Then("Print schema")]
@@ -34,7 +35,8 @@ public class SchemaSteps
     {
         var provider = _driver.Provider;
         var schema = provider.GetRequiredService<Examples.DivingSchema>();
-
-        _output.WriteLine(schema.Print());
+        var sdl = schema.Print();
+        File.WriteAllText("../../../Support/DivingSchema.graphql",sdl);
+        _output.WriteLine(sdl);
     }
 }

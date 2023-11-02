@@ -1,5 +1,6 @@
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
+using nl.titaniumit.graphql.filters;
 
 namespace GraphQL.Filters.Examples;
 
@@ -10,7 +11,13 @@ public class DiverGraphType : AutoRegisteringObjectGraphType<Diver>
         Field<ListGraphType<DiveGraphType>>("Dives")
             .Resolve( ctx => {
               var datasource = ctx.RequestServices!.GetRequiredService<IDives>();
-              return datasource.Dives.Where( d => d.Diver.Id == ctx.Source.Id);
+              var expression = ctx.GetSubFilterExpression<Dive>();
+              if( expression != null){
+                return datasource.Dives.Where( d => d.Diver?.Id == ctx.Source.Id).Where(expression.Compile());
+              } else{
+                return datasource.Dives.Where( d => d.Diver?.Id == ctx.Source.Id);
+              }
             });
     }
+
 }
