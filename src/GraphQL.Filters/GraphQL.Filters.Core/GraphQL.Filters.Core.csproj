@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<RootNamespace>nl.titaniumit.graphql.filters</RootNamespace>
-	    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageTags>GraphQL; C#; Filtering; servers </PackageTags>
 		<Copyright>Titanium IT, 2023</Copyright>
 		<Authors>ing. Marco Fuykschot</Authors>
@@ -13,26 +13,39 @@
 		<Description>Add filter options to C# based GraphQL.net servers</Description>
 		<PackageProjectUrl>https://dev.azure.com/Titanium-IT/TitaniumIT.GraphQL.Tools</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://dev.azure.com/Titanium-IT/TitaniumIT.GraphQL.Tools/_git/TitaniumIT.GraphQL.Filters</RepositoryUrl>
+		<RepositoryUrl>
+			https://dev.azure.com/Titanium-IT/TitaniumIT.GraphQL.Tools/_git/TitaniumIT.GraphQL.Filters</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<FileVersion>1.$(Version)</FileVersion>
 		<PackageId>titaniumit.graphql.filtering</PackageId>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="GraphQL" Version="7.6.1" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"
+			Version="7.0.0" />
 		<InternalsVisibleTo Include="GraphQL.Filters.Tests" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="visitors\" />
+		<Folder Include="visitors\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="../../../README.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
+		<None Include="../../../README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 </Project>
