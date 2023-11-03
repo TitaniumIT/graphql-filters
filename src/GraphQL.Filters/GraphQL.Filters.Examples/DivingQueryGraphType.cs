@@ -31,5 +31,29 @@ public class DivingQueryGraphType : ObjectGraphType
               else
                   return null;
           });
+
+        Field<NonNullGraphType<ListGraphType<NonNullGraphType<DiverGraphType>>>>("NonNullDivers")
+          .AddFilter("filter").FilterType<Diver>()
+          .Resolve(ctx =>
+          {
+              var filter = ctx.GetFilterExpression<Diver>("filter");
+              var datasource = ctx.RequestServices!.GetRequiredService<IDivers>();
+              if (filter != null)
+                  return datasource.Divers.Where(filter.Compile());
+              else
+                  return null;
+          });
+
+        Field<NonNullGraphType<ListGraphType<NonNullGraphType<DiverGraphType>>>,IReadOnlyList<Diver>>("NonNullDiversReadOnly")
+          .AddFilter("filter").FilterType<Diver>()
+          .Resolve(ctx =>
+          {
+              var filter = ctx.GetFilterExpression<Diver>("filter");
+              var datasource = ctx.RequestServices!.GetRequiredService<IDivers>();
+              if (filter != null)
+                  return datasource.Divers.Where(filter.Compile()).ToList();
+              else
+                  return null;
+          });
     }
 }
