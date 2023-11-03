@@ -44,6 +44,25 @@ query GetDiversWithCoarseFilters {
     }
 }
 
+
+query GetDiversWithCoarseFiltersEnum {
+    divers(filter:{
+        any:{
+            courses:{
+                condition:{
+                    fieldName: courseResult
+                    operator:equal
+                    value: "InProgress"
+                }
+            }
+        }
+    }){
+        name
+        email
+        id
+    }
+}
+
 query GetDiverFilterById($id: ValueScalar!) {
     diver(filter:{
         condition:{
