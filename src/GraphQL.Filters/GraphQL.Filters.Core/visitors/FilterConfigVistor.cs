@@ -35,10 +35,6 @@ internal class FilterConfigVistor : BaseSchemaNodeVisitor
                 {
                     _converterService.Add(clrType, graphType as ScalarGraphType ?? throw new InvalidOperationException());
                 }
-                else
-                {
-                    throw new InvalidOperationException($"clrType Mapping not found for {graphType.Name} of {type.Name}.{field.Name}");
-                }
             }
             if ((field.Type?.IsAssignableTo(typeof(ListGraphType)) ?? false) && graphType is IObjectGraphType objecType)
             {
