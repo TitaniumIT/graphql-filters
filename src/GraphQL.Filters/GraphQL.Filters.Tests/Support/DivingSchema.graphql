@@ -23,10 +23,17 @@ type Course {
   name: String!
   started: DateOnly!
   finished: DateOnly
+  courseResult: CourseResults!
 }
 
 "The `Date` scalar type represents a year, month and day in accordance with the [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard. Format is `yyyy-MM-dd`"
 scalar DateOnly
+
+enum CourseResults {
+  IN_PROGRESS
+  SUCCESS_FULL
+  FAILED
+}
 
 type Dive {
   location: String!
@@ -111,6 +118,7 @@ enum FieldEnumerationGraphTypeCourse {
   name
   started
   finished
+  courseResult
 }
 
 input AndGraphTypeCourse {

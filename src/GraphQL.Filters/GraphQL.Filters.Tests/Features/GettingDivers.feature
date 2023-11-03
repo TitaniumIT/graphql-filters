@@ -40,6 +40,14 @@ Given Query operation GetDiversWithCoarseFilters
 When Executed
 Then No errors
 
+Scenario: Getting Open water divers inprogress
+Given the following coarses for diver 1
+| Name      | Started  | Finished | CourseResult|
+| OpenWater | 1-1-2023 | @null    | InProgress|
+Given Query operation GetDiversWithCoarseFiltersEnum
+When Executed
+Then No errors
+
 Scenario: Getting single diver by email
 Filtering on custom scalars
 Given Query operation GetDiverByEmail
