@@ -30,16 +30,11 @@ internal class FilterConfigVistor : BaseSchemaNodeVisitor
             if (graphType.IsLeafType() &&
               !schema.BuiltInTypeMappings.Any(x => x.graphType == graphType.GetType()))
             {
-<<<<<<< Updated upstream
-                var clrType = schema.TypeMappings.Where(x => x.graphType == graphType.GetType()).Select(x => x.clrType).Single();
-                _converterService.Add(clrType, graphType as ScalarGraphType ?? throw new InvalidOperationException());
-=======
                 var clrType = schema.TypeMappings.Where(x => x.graphType == graphType.GetType()).Select(x => x.clrType).SingleOrDefault();
                 if (clrType != null)
                 {
                     _converterService.Add(clrType, graphType as ScalarGraphType ?? throw new InvalidOperationException());
                 }
->>>>>>> Stashed changes
             }
             if(  (field.Type?.IsAssignableTo(typeof(ListGraphType))??false) && graphType is IObjectGraphType objecType )
             {

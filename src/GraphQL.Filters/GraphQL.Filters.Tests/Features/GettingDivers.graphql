@@ -44,8 +44,6 @@ query GetDiversWithCoarseFilters {
     }
 }
 
-<<<<<<< Updated upstream
-=======
 query GetDiversWithCoarseFiltersEnum {
     divers(filter:{
         any:{
@@ -64,7 +62,6 @@ query GetDiversWithCoarseFiltersEnum {
     }
 }
 
->>>>>>> Stashed changes
 query GetDiverFilterById($id: ValueScalar!) {
     diver(filter:{
         condition:{
