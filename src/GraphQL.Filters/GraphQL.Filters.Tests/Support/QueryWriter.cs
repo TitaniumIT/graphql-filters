@@ -1,6 +1,4 @@
 ﻿using System.Text;
-using Dynamitey;
-using GraphQL.Validation;
 using GraphQLParser.AST;
 using GraphQLParser.Visitors;
 using TechTalk.SpecFlow.Infrastructure;
@@ -23,6 +21,12 @@ public class OperationWriter : ASTVisitor<OperationWriterContext>
     {
         stringBuilder.Append($"{_indent}{field.Name.Value}");
         return base.VisitFieldAsync(field, context);
+    }
+
+    protected override ValueTask VisitBooleanValueAsync(GraphQLBooleanValue booleanValue, OperationWriterContext context)
+    {
+        stringBuilder.AppendLine($"{booleanValue.Value}");
+        return base.VisitBooleanValueAsync(booleanValue, context);
     }
 
     protected override ValueTask VisitArgumentAsync(GraphQLArgument argument, OperationWriterContext context)

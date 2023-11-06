@@ -44,6 +44,27 @@ query GetDiversWithCoarseFilters {
     }
 }
 
+<<<<<<< Updated upstream
+=======
+query GetDiversWithCoarseFiltersEnum {
+    divers(filter:{
+        any:{
+            courses:{
+                condition:{
+                    fieldName: courseResult
+                    operator:equal
+                    value: "InProgress"
+                }
+            }
+        }
+    }){
+        name
+        email
+        id
+    }
+}
+
+>>>>>>> Stashed changes
 query GetDiverFilterById($id: ValueScalar!) {
     diver(filter:{
         condition:{
@@ -69,9 +90,25 @@ query GetDiversWithDivesAt($location:ValueScalar!){
         }
     }){
         name
-        dives{
+        dives {
             start
             end
         }
+    }
+}
+
+query GetDiversWithDivesAtNoSubFields($location:ValueScalar!){
+    divers(filter: {
+        any:{
+            dives:{
+                condition:{
+                    fieldName:location
+                    operator:equal
+                    value: $location
+                }
+            }
+        }
+    }){
+        name
     }
 }
