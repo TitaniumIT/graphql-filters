@@ -13,7 +13,17 @@ internal class ScalarConverterService
         {
             return value;
         }
-        return _customScalars[expectedType].ParseValue(value);
+        if ( _customScalars.ContainsKey(expectedType))
+        {
+                return _customScalars[expectedType].ParseValue(value);
+        }
+        else {
+            if ( expectedType.IsEnum )
+            {
+                return Enum.Parse(expectedType,value.ToString());
+            }
+        }
+        throw new InvalidCastException($"No conversion found for {value.GetType().Name} to {expectedType.Name}");
     }
 }
 
