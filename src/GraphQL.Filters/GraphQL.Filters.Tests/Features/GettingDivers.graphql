@@ -44,7 +44,6 @@ query GetDiversWithCoarseFilters {
     }
 }
 
-
 query GetDiversWithCoarseFiltersEnum {
     divers(filter:{
         any:{
@@ -88,9 +87,25 @@ query GetDiversWithDivesAt($location:ValueScalar!){
         }
     }){
         name
-        dives{
+        dives {
             start
             end
         }
+    }
+}
+
+query GetDiversWithDivesAtNoSubFields($location:ValueScalar!){
+    divers(filter: {
+        any:{
+            dives:{
+                condition:{
+                    fieldName:location
+                    operator:equal
+                    value: $location
+                }
+            }
+        }
+    }){
+        name
     }
 }

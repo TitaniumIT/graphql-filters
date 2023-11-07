@@ -29,3 +29,4 @@ public static partial class SchemaExtentions
         schema.RegisterType<FilterGraphType<TType>>();
     }
 }
+

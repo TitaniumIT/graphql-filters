@@ -38,8 +38,4 @@
     </Content>  
   </ItemGroup>
 
-  <Target Name="Remove TestResults" AfterTargets="AfterBuild" >
-        <RemoveDir Directories="TestResults" />
-    </Target>
-
 </Project>

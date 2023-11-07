@@ -35,10 +35,6 @@ internal class FilterConfigVistor : BaseSchemaNodeVisitor
                 {
                     _converterService.Add(clrType, graphType as ScalarGraphType ?? throw new InvalidOperationException());
                 }
-                else
-                {
-                    int i=0;
-                }
             }
             if ((field.Type?.IsAssignableTo(typeof(ListGraphType)) ?? false) && graphType is IObjectGraphType objecType)
             {
