@@ -5,7 +5,11 @@ namespace nl.titaniumit.graphql.filters;
 internal class ScalarConverterService
 {
     Dictionary<Type, ScalarGraphType> _customScalars = new();
-    internal void Add(Type type, ScalarGraphType scalarGraphType) => _customScalars.Add(type, scalarGraphType);
+    internal void Add(Type type, ScalarGraphType scalarGraphType) 
+     { 
+         if ( ! _customScalars.ContainsKey(type))
+             _customScalars.Add(type, scalarGraphType);
+     }
     internal object? ConvertFromScalar(object? value, Type expectedType)
     {
         if (value == null) return null;
