@@ -61,8 +61,8 @@ internal record FilterType(ConditionType? condition = null,
         return this switch
         {
             { condition: not null } => condition.CreateFilter<T>(arg, ctx),
-            { and: not null } => and.CreateFilter<T>(arg, ctx),
-            { or: not null } => or.CreateFilter<T>(arg, ctx),
+            { and: not null, ands: null } => and.CreateFilter<T>(arg, ctx),
+            { or: not null , ors: null} => or.CreateFilter<T>(arg, ctx),
             { @not: not null } => not.CreateFilter<T>(arg, ctx),
             { any: not null } => any.CreateFilter<T>(arg, ctx),
             { ands: not null, and: null } => CreateAnds<T>(ands,arg,ctx),
