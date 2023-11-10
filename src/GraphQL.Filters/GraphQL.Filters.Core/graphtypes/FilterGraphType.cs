@@ -13,6 +13,8 @@ internal class FilterGraphType<T> : InputObjectGraphType<FilterType> where T : c
         Field<AndGraphType<T>>("and");
         Field<OrGraphType<T>>("or");
         Field<NotGraphType<T>>("not");
+        Field<ListGraphType<NonNullGraphType<ConditionGraphType<T>>>>("ands");
+        Field<ListGraphType<NonNullGraphType<ConditionGraphType<T>>>>("ors");
         if( this.HasCollectionMembers<T>()){
             Field<AnyGraphType<T>>("any");
         }
