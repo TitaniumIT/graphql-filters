@@ -53,6 +53,8 @@ input FilterGraphTypeDiver {
   and: AndGraphTypeDiver
   or: OrGraphTypeDiver
   not: NotGraphTypeDiver
+  ands: [ConditionGraphTypeDiver!]
+  ors: [ConditionGraphTypeDiver!]
   any: AnyGraphTypeDiver
 }
 
@@ -105,6 +107,8 @@ input FilterGraphTypeCourse {
   and: AndGraphTypeCourse
   or: OrGraphTypeCourse
   not: NotGraphTypeCourse
+  ands: [ConditionGraphTypeCourse!]
+  ors: [ConditionGraphTypeCourse!]
 }
 
 "valid combinations are fieldname,operator,value"
@@ -141,6 +145,8 @@ input FilterGraphTypeDive {
   and: AndGraphTypeDive
   or: OrGraphTypeDive
   not: NotGraphTypeDive
+  ands: [ConditionGraphTypeDive!]
+  ors: [ConditionGraphTypeDive!]
 }
 
 "valid combinations are fieldname,operator,value"

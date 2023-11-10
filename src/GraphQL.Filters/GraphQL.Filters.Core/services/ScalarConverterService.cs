@@ -20,7 +20,7 @@ internal class ScalarConverterService
         else {
             if ( expectedType.IsEnum )
             {
-                return Enum.Parse(expectedType,value.ToString());
+                return Enum.Parse(expectedType,value?.ToString()??throw new NullReferenceException());
             }
         }
         throw new InvalidCastException($"No conversion found for {value.GetType().Name} to {expectedType.Name}");
