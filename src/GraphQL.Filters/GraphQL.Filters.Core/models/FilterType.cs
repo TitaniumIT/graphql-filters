@@ -28,10 +28,10 @@ internal record FilterType(ConditionType? condition = null,
             { condition: null, and: null, or: not null, @not: null, any: null, ands: null, ors: null } => true,
             { condition: null, and: null, or: null, @not: not null, any: null, ands: null, ors: null } => true,
             { condition: null, and: null, or: null, @not: null, any: not null, ands: null, ors: null } => true,
-            { condition: null, and: null, or: null, @not: null, any: not null, ands: not null, ors: null } => true,
-            { condition: null, and: null, or: null, @not: null, any: not null, ands: null, ors: not null } => true,
-            { condition: null, and: not null, or: null, @not: null, any: not null, ands: not null, ors: null } => true,
-            { condition: null, and: null, or: not null, @not: null, any: not null, ands: null, ors: not null } => true,
+            { condition: null, and: null, or: null, @not: null, any: null, ands: not null, ors: null } => true,
+            { condition: null, and: null, or: null, @not: null, any: null, ands: null, ors: not null } => true,
+            { condition: null, and: not null, or: null, @not: null, any: null, ands: not null, ors: null } => true,
+            { condition: null, and: null, or: not null, @not: null, any: null, ands: null, ors: not null } => true,
             _ => false
         };
     }
