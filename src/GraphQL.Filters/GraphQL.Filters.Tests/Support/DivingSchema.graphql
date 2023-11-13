@@ -140,6 +140,43 @@ input NotGraphTypeCourse {
 }
 
 "only use one of the fields and leave the rest empty. Don't combine"
+input FilterGraphTypeIDive {
+  condition: ConditionGraphTypeIDive
+  and: AndGraphTypeIDive
+  or: OrGraphTypeIDive
+  not: NotGraphTypeIDive
+  ands: [ConditionGraphTypeIDive!]
+  ors: [ConditionGraphTypeIDive!]
+}
+
+"valid combinations are fieldname,operator,value"
+input ConditionGraphTypeIDive {
+  fieldName: FieldEnumerationGraphTypeIDive
+  operator: BinaryCompareEnumTypes
+  value: ValueScalar
+}
+
+enum FieldEnumerationGraphTypeIDive {
+  location
+  on
+  averageDepth
+}
+
+input AndGraphTypeIDive {
+  left: FilterGraphTypeIDive!
+  right: FilterGraphTypeIDive!
+}
+
+input OrGraphTypeIDive {
+  left: FilterGraphTypeIDive!
+  right: FilterGraphTypeIDive!
+}
+
+input NotGraphTypeIDive {
+  filter: FilterGraphTypeIDive!
+}
+
+"only use one of the fields and leave the rest empty. Don't combine"
 input FilterGraphTypeDive {
   condition: ConditionGraphTypeDive
   and: AndGraphTypeDive

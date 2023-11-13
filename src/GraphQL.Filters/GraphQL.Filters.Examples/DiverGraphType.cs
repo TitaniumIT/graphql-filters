@@ -11,7 +11,7 @@ public class DiverGraphType : AutoRegisteringObjectGraphType<Diver>
         Field<ListGraphType<DiveGraphType>>("Dives")
             .Resolve( ctx => {
               var datasource = ctx.RequestServices!.GetRequiredService<IDives>();
-              var expression = ctx.GetSubFilterExpression<Dive>();
+              var expression = ctx.GetSubFilterExpression<IDive>();
               if( expression != null){
                 return datasource.Dives.Where( d => d.Diver?.Id == ctx.Source.Id).Where(expression.Compile());
               } else{

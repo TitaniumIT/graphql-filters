@@ -39,4 +39,5 @@ public class SchemaSteps
         File.WriteAllText("../../../Support/DivingSchema.graphql",sdl);
         _output.WriteLine(sdl);
     }
+
 }

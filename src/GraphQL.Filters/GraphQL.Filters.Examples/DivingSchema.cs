@@ -15,6 +15,7 @@ public class DivingSchema : Schema
         RegisterTypeMapping(typeof(Course),typeof(CourseGraphType));
         RegisterTypeMapping(typeof(Diver),typeof(DiverGraphType));
 
+        this.AddFilterTypes<IDive>();
         this.AddFilterTypes<Dive>();
     }
 }

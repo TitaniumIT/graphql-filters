@@ -6,7 +6,7 @@ namespace nl.titaniumit.graphql.filters.graphtypes;
 
 internal class FilterGraphType<T> : InputObjectGraphType<FilterType> where T : class
 {
-    public FilterGraphType()
+    public FilterGraphType(FilterSettings filterSettings)
     {
         Name = $"FilterGraphType{typeof(T).Name}";
         Field<ConditionGraphType<T>>("condition");
@@ -15,7 +15,7 @@ internal class FilterGraphType<T> : InputObjectGraphType<FilterType> where T : c
         Field<NotGraphType<T>>("not");
         Field<ListGraphType<NonNullGraphType<ConditionGraphType<T>>>>("ands");
         Field<ListGraphType<NonNullGraphType<ConditionGraphType<T>>>>("ors");
-        if( this.HasCollectionMembers<T>()){
+        if( this.HasCollectionMembers<T>() || filterSettings.AlwaysIncludeAny){
             Field<AnyGraphType<T>>("any");
         }
         Description = "only use one of the fields and leave the rest empty. Don't combine";
