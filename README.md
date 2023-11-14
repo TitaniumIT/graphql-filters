@@ -1,6 +1,6 @@
 # Introduction
 
-An extention on GraphQL.net to add filtering on clr types
+An extention on [GraphQL.net](https://github.com/graphql-dotnet/graphql-dotnet) to add filtering on clr types
 
 # Example graphql filters
 
@@ -163,7 +163,7 @@ query GetDiversWithDivesAt($location:ValueScalar!){
     }
 }
 ```
-[example project](https://dev.azure.com/Titanium-IT/TitaniumIT.GraphQL.Tools/_git/TitaniumIT.GraphQL.Filters?path=/src/GraphQL.Filters/GraphQL.Filters.Examples)
+[example project](https://github.com/TitaniumIT/graphql-filters/tree/main/src/GraphQL.Filters/GraphQL.Filters.Examples)
 
 
 # Setup
