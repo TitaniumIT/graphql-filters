@@ -4,8 +4,6 @@
 name: Build Graphql Filters
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -24,7 +22,7 @@ jobs:
       run: dotnet restore
       working-directory: ./src/GraphQL.Filters
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore 
       working-directory: ./src/GraphQL.Filters
     - name: Test
       run: dotnet test --no-build --verbosity normal
