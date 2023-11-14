@@ -34,5 +34,4 @@ jobs:
           path: |
             ./src/GraphQL.Filters/packages
     - name: Publish Nuget packages to GitHub registry
-      working-directory: ./src/GraphQL.Filters/
-      run: dotnet nuget push "packages/*" -k ${{secrets.GITHUB_TOKEN}}
+      run: dotnet nuget push "./src/GraphQL.Filters/packages/*" -k ${{secrets.GITHUB_TOKEN}}
