@@ -11,10 +11,9 @@
 		<Authors>ing. Marco Fuykschot</Authors>
 		<Company>Titanium IT</Company>
 		<Description>Add filter options to C# based GraphQL.net servers</Description>
-		<PackageProjectUrl>https://dev.azure.com/Titanium-IT/TitaniumIT.GraphQL.Tools</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/TitaniumIT/graphql-filters/</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>
-			https://dev.azure.com/Titanium-IT/TitaniumIT.GraphQL.Tools/_git/TitaniumIT.GraphQL.Filters</RepositoryUrl>
+		<RepositoryUrl>https://github.com/TitaniumIT/graphql-filters.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<FileVersion>1.$(Version)</FileVersion>
