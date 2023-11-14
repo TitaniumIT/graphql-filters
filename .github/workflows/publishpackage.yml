@@ -39,3 +39,5 @@ jobs:
             ./src/GraphQL.Filters/packages
     - name: Publish Nuget packages to GitHub registry
       run: dotnet nuget push "./src/GraphQL.Filters/packages/*" -k ${{secrets.GITHUB_TOKEN}}
+    - name: Publish to nuget registry
+      run:  dotnet nuget push "./src/GraphQL.Filters/packages/*"  -k ${{secrets.NUGET_APIKEY}} -s https://api.nuget.org/v3/index.json
