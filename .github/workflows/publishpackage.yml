@@ -19,6 +19,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
         source-url: https://nuget.pkg.github.com/graphql-dotnet/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Restore dependencies
       run: dotnet restore
       working-directory: ./src/GraphQL.Filters
