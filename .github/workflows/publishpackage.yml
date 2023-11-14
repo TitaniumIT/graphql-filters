@@ -1,7 +1,7 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: Build Graphql Filters
+name: publish Graphql Filters
 
 on:
   push:
@@ -34,5 +34,4 @@ jobs:
           path: |
             ./src/GraphQL.Filters/packages
     - name: Publish Nuget packages to GitHub registry
-      working-directory: ./src/GraphQL.Filters/
-      run: dotnet nuget push "packages/*" -k ${{secrets.GITHUB_TOKEN}}
+      run: dotnet nuget push "./src/GraphQL.Filters/packages/*" -k ${{secrets.GITHUB_TOKEN}}
