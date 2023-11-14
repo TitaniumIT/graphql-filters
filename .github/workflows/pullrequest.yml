@@ -4,8 +4,6 @@
 name: Build Graphql Filters
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -28,7 +26,4 @@ jobs:
       working-directory: ./src/GraphQL.Filters
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: ./src/GraphQL.Filters
-    - name: Pack
-      run: dotnet pack --no-build -p:Version=0.1.$GITHUB_RUN_NUMBER
       working-directory: ./src/GraphQL.Filters
