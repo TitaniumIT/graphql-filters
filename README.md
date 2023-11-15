@@ -168,7 +168,16 @@ query GetDiversWithDivesAt($location:ValueScalar!){
 
 # Setup
 
+Adding to the dependency injection
 
+```C#
+Services = new ServiceCollection();
+Services.AddGraphQLFilters();
+Services.AddGraphQL(builder =>
+{
+    //  The setup for GraphQL.NET
+});
+```
 
 # Todo
 
