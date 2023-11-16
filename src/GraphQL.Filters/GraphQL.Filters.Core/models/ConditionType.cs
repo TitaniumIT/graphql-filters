@@ -13,7 +13,7 @@ internal record ConditionType(MemberInfo? fieldName = null, Func<ConditionType, 
         if (fieldName != null)
         {
             ScalarConverterService scalarConverterService = ctx.RequestServices!.GetRequiredService<ScalarConverterService>();
-            return Expression.Constant(scalarConverterService.ConvertFromScalar(value, fieldName.MemberType()));
+            return Expression.Constant(scalarConverterService.ConvertFromScalar(value, fieldName.MemberType()),fieldName.MemberType());
         }
         throw new InvalidOperationException();
     }

@@ -11,13 +11,18 @@ type DivingQuery {
 
 type Diver {
   name: String!
-  email: MailAddress!
+  email: MailAddress
   id: Int!
+  bio: String
+  birthDate: DateOnly
   courses: [Course!]
   dives: [Dive]
 }
 
 scalar MailAddress
+
+"The `Date` scalar type represents a year, month and day in accordance with the [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard. Format is `yyyy-MM-dd`"
+scalar DateOnly
 
 type Course {
   name: String!
@@ -25,9 +30,6 @@ type Course {
   finished: DateOnly
   courseResult: CourseResults!
 }
-
-"The `Date` scalar type represents a year, month and day in accordance with the [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard. Format is `yyyy-MM-dd`"
-scalar DateOnly
 
 enum CourseResults {
   IN_PROGRESS
@@ -69,6 +71,8 @@ enum FieldEnumerationGraphTypeDiver {
   name
   email
   id
+  bio
+  birthDate
 }
 
 enum BinaryCompareEnumTypes {
