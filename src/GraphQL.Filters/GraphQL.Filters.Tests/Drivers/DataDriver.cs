@@ -6,11 +6,11 @@ using TechTalk.SpecFlow.Assist.ValueRetrievers;
 
 namespace GraphQL.Filters.Tests.Drivers;
 
-public class DataDriver : IDivers , IDives
+public class DataDriver : IDivers, IDives
 {
     public IEnumerable<Diver> Divers { get; set; } = new List<Diver>();
 
-    public IEnumerable<Dive> Dives {get;set;} = new List<Dive>();
+    public IEnumerable<Dive> Dives { get; set; } = new List<Dive>();
 
 
     static DataDriver()
@@ -18,6 +18,8 @@ public class DataDriver : IDivers , IDives
         Service.Instance.ValueRetrievers.Register(new MailAddressValueConvertor());
         Service.Instance.ValueRetrievers.Register(new NullValueRetriever("@null"));
         Service.Instance.ValueRetrievers.Register(new ObjectNullRetriever("@null"));
+        Service.Instance.ValueRetrievers.Register(new DateOnlyValueRetriever());
+
     }
     private class MailAddressValueConvertor : IValueRetriever
     {
@@ -29,6 +31,20 @@ public class DataDriver : IDivers , IDives
         public object Retrieve(KeyValuePair<string, string> keyValuePair, Type targetType, Type propertyType)
         {
             return new MailAddress(keyValuePair.Value);
+        }
+    }
+
+    private class DateOnlyValueRetriever : IValueRetriever
+    {
+        public bool CanRetrieve(KeyValuePair<string, string> keyValuePair, Type targetType, Type propertyType)
+        {
+            return propertyType == typeof(DateOnly?) || propertyType == typeof(DateOnly);
+        }
+
+        public object Retrieve(KeyValuePair<string, string> keyValuePair, Type targetType, Type propertyType)
+        {
+            if (keyValuePair.Value == "@null") return default(DateOnly);
+            return DateOnly.Parse(keyValuePair.Value);
         }
     }
 
@@ -47,8 +63,8 @@ public class DataDriver : IDivers , IDives
 
         public object Retrieve(KeyValuePair<string, string> keyValuePair, Type targetType, Type propertyType)
         {
-            if ( keyValuePair.Value == _nullvalue)
-            return null!;
+            if (keyValuePair.Value == _nullvalue)
+                return null!;
             else return keyValuePair.Value;
         }
     }

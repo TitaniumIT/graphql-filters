@@ -10,11 +10,11 @@ namespace GraphQL.Filters.Tests.StepDefinitions;
 public class DataSourceSteps
 {
     private readonly DataDriver _dataDriver;
+
     public DataSourceSteps(DataDriver dataDriver)
     {
         _dataDriver = dataDriver;
     }
-
 
     [Given("the following divers:")]
     public void DiversSetup(Table table)
@@ -24,7 +24,7 @@ public class DataSourceSteps
 
 
     [Given("the following coarses for diver (.*)")]
-    public void DiversSetup(int id,Table table)
+    public void CoarsesSetup(int id,Table table)
     {
         _dataDriver.Divers.Single( x => x.Id == id )
             .Courses = table.CreateSet<Course>().ToList();
