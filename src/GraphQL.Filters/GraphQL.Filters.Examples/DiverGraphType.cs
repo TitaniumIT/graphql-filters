@@ -37,6 +37,20 @@ public class DiverGraphType : AutoRegisteringObjectGraphType<Diver>
           }
           return ctx.Source.Buddies;
         });
+
+       Field<ListGraphType<DiverGraphType>>("BuddiesNoSubfilter")
+        .Description("Using filters without ActAsSubFilter keeps parents if child resolves to null")
+        .AddFilter("filter")
+          .FilterType<Diver>()
+        .Resolve(ctx =>
+        {
+          var filter = ctx.GetFilterExpression<Diver>("filter");
+          if (filter != null)
+          {
+            return ctx.Source.Buddies.Where(filter.Compile()).ToList();
+          }
+          return ctx.Source.Buddies;
+        });
   }
 
 }

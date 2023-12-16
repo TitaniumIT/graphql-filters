@@ -159,7 +159,22 @@ query GetOnlyDiverWithBuddies {
       condition: {
         fieldName: name
         operator:equal
-        value: "buddie1"
+        value: "Eli"
+      }
+    }){
+      name
+    }
+  }
+}
+
+query GetAllDiversWithOrWithoutBuddies {
+  divers {
+    name
+    buddies: buddiesNoSubfilter(filter:{
+      condition: {
+        fieldName: name
+        operator:equal
+        value: "Eli"
       }
     }){
       name

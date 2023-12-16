@@ -11,7 +11,7 @@ Scenario: Getting single diver by Id fixed
     Given Query operation GetDiverFixedFilter
     When Executed
     Then No errors
-    Then Data contains diver
+    Then Data contains diver all
     | name | email            | id |
     | John | john@divers.down | 1  |
 
@@ -24,7 +24,7 @@ id: <id>
 """
     When Executed
     Then No errors
-    Then Data contains diver
+    Then Data contains diver all
     | id   |
     | <id> |
 
@@ -41,7 +41,7 @@ id: 1
 """
     When Executed
     Then No errors
-    Then Data contains diver
+    Then Data contains diver all
     | id | name |
     | 1  | John |
 
@@ -66,7 +66,7 @@ Scenario: Getting single diver by email
     Given Query operation GetDiverByEmail
     When Executed
     Then No errors
-    Then Data contains diver
+    Then Data contains diver all
     | name | email            | id |
     | John | john@divers.down | 1  |
 
@@ -75,7 +75,7 @@ Scenario: Getting  divers withou bio
     Given Query operation GetDiverByWithoutBio
     When Executed
     Then No errors
-    Then Data contains diver
+    Then Data contains diver all
     | name | email           | id |
     | Eli  | eli@divers.down | 2  |
 
@@ -84,7 +84,7 @@ Scenario: Getting  divers without birthdate
     Given Query operation GetDiverByWithoutBirthDate
     When Executed
     Then No errors
-    Then Data contains diver
+    Then Data contains diver all
     | name  | id |
     | Harry | 3  |
 
@@ -93,7 +93,7 @@ Scenario: Getting  diver with birthdate 1970
     Given Query operation GetDiverByWithBirthDate
     When Executed
     Then No errors
-    Then Data contains diver
+    Then Data contains diver all
     | name | id |
     | Eli  | 2  |
 
@@ -103,7 +103,7 @@ Scenario: Getting  divers without birthdate and bio
     Given Query operation GetDiverByWithoutBioAndBirtyDate
     When Executed
     Then No errors
-    Then Data contains diver
+    Then Data contains diver all
     | name  | id |
     | Harry | 3  |
 
@@ -150,3 +150,21 @@ Scenario: Getting Divers with buddie excluding divers without buddies
     When Executed
     Then No errors
     And Data is not empty
+    And Data contains divers exclude buddies
+    | name  | 
+    | John  |
+
+Scenario: Getting Divers with buddie including divers without buddies
+    Given the following buddies for diver 1
+    | Diver |
+    | 2     |
+    Given Query operation GetAllDiversWithOrWithoutBuddies
+    When Executed
+    Then No errors
+    And Data is not empty
+    And Data contains divers exclude buddies
+    | name  | 
+    | John  |
+    | Eli   | 
+    | Harry |
+    

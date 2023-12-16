@@ -22,7 +22,6 @@ internal class FilterExecutionStrategy : ParallelExecutionStrategy
 
     protected override Task CompleteNodeAsync(GraphQL.Execution.ExecutionContext context, ExecutionNode node)
     {
-        var path = $"path:{node.Parent.GraphType.Name}.{node.FieldDefinition.Name}";
         var options = node.FieldDefinition.GetMetadata<FieldFilterOptions>("Options");
         if ((options?.AckAsSubfilter ??false))
         {

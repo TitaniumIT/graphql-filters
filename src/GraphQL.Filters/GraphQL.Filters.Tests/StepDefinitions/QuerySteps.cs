@@ -122,7 +122,7 @@ namespace GraphQL.Filters.Tests.StepDefinitions
             }
         }
 
-       [Then("Data is not empty")]
+        [Then("Data is not empty")]
         public void DataNotEmpty()
         {
             _executionResult.Should().NotBeNull();
@@ -142,9 +142,20 @@ namespace GraphQL.Filters.Tests.StepDefinitions
             }
         }
 
-        [Then("Data contains (.*)")]
+        [Then("Data contains (.*) all")]
         public void DataContains(string nestedProperty, Table table)
         {
+            DataContains(nestedProperty, null, table);
+        }
+
+        [Then("Data contains (.*) exclude (.*)")]
+        public void DataContains(string nestedProperty, string? excludes, Table table)
+        {
+            List<string> keysToRemove = new();
+            if (excludes != null)
+            {
+                keysToRemove.AddRange(excludes.Split(';'));
+            }
             var expected = table.Rows.Select(row =>
             {
                 var instance = new ExpandoObject();
@@ -173,8 +184,14 @@ namespace GraphQL.Filters.Tests.StepDefinitions
 
             if (dataNode.ValueKind == JsonValueKind.Array)
             {
-                IEnumerable<Dictionary<string, object?>> dictionaries = GetArray(dataNode);
-
+                List<Dictionary<string, object?>> dictionaries = GetArray(dataNode).ToList();
+                foreach (var key in keysToRemove)
+                {
+                    foreach (var obj in dictionaries)
+                    {
+                        obj.Remove(key);
+                    }
+                }
                 expected.Should().BeEquivalentTo(dictionaries);
             }
             if (dataNode.ValueKind == JsonValueKind.Object)
@@ -187,6 +204,10 @@ namespace GraphQL.Filters.Tests.StepDefinitions
                 });
 
                 Dictionary<string, object?> exp = new(expected.First());
+                foreach (var key in keysToRemove)
+                {
+                    exp.Remove(key);
+                }
                 dictionaries.Should().BeEquivalentTo(exp, config =>
                 {
                     config.WithAutoConversion();

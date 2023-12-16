@@ -19,6 +19,8 @@ type Diver {
   dives: [Dive]
   "Using filters with ActAsSubFilter removes parents if child resolves to null"
   buddies(filter: FilterGraphTypeDiver): [Diver]
+  "Using filters without ActAsSubFilter keeps parents if child resolves to null"
+  buddiesNoSubfilter(filter: FilterGraphTypeDiver): [Diver]
 }
 
 scalar MailAddress
@@ -51,7 +53,6 @@ type Dive {
 "The `Time` scalar type represents a time in accordance with the [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard. Format is `HH:mm:ss.FFFFFFF`."
 scalar TimeOnly
 
-"only use one of the fields and leave the rest empty. Don't combine"
 input FilterGraphTypeDiver {
   condition: ConditionGraphTypeDiver
   and: AndGraphTypeDiver
@@ -62,7 +63,6 @@ input FilterGraphTypeDiver {
   any: AnyGraphTypeDiver
 }
 
-"valid combinations are fieldname,operator,value"
 input ConditionGraphTypeDiver {
   fieldName: FieldEnumerationGraphTypeDiver
   operator: BinaryCompareEnumTypes
@@ -106,9 +106,9 @@ input AnyGraphTypeDiver {
   courses: FilterGraphTypeCourse
   buddies: FilterGraphTypeDiver
   dives: FilterGraphTypeDive
+  buddiesNoSubfilter: FilterGraphTypeDiver
 }
 
-"only use one of the fields and leave the rest empty. Don't combine"
 input FilterGraphTypeCourse {
   condition: ConditionGraphTypeCourse
   and: AndGraphTypeCourse
@@ -118,7 +118,6 @@ input FilterGraphTypeCourse {
   ors: [ConditionGraphTypeCourse!]
 }
 
-"valid combinations are fieldname,operator,value"
 input ConditionGraphTypeCourse {
   fieldName: FieldEnumerationGraphTypeCourse
   operator: BinaryCompareEnumTypes
@@ -146,7 +145,6 @@ input NotGraphTypeCourse {
   filter: FilterGraphTypeCourse!
 }
 
-"only use one of the fields and leave the rest empty. Don't combine"
 input FilterGraphTypeIDive {
   condition: ConditionGraphTypeIDive
   and: AndGraphTypeIDive
@@ -156,7 +154,6 @@ input FilterGraphTypeIDive {
   ors: [ConditionGraphTypeIDive!]
 }
 
-"valid combinations are fieldname,operator,value"
 input ConditionGraphTypeIDive {
   fieldName: FieldEnumerationGraphTypeIDive
   operator: BinaryCompareEnumTypes
@@ -183,7 +180,6 @@ input NotGraphTypeIDive {
   filter: FilterGraphTypeIDive!
 }
 
-"only use one of the fields and leave the rest empty. Don't combine"
 input FilterGraphTypeDive {
   condition: ConditionGraphTypeDive
   and: AndGraphTypeDive
@@ -193,7 +189,6 @@ input FilterGraphTypeDive {
   ors: [ConditionGraphTypeDive!]
 }
 
-"valid combinations are fieldname,operator,value"
 input ConditionGraphTypeDive {
   fieldName: FieldEnumerationGraphTypeDive
   operator: BinaryCompareEnumTypes
