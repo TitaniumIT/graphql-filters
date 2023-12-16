@@ -17,6 +17,8 @@ type Diver {
   birthDate: DateOnly
   courses: [Course!]
   dives: [Dive]
+  "Using filters with ActAsSubFilter removes parents if child resolves to null"
+  buddies(filter: FilterGraphTypeDiver): [Diver]
 }
 
 scalar MailAddress
@@ -102,6 +104,7 @@ input NotGraphTypeDiver {
 
 input AnyGraphTypeDiver {
   courses: FilterGraphTypeCourse
+  buddies: FilterGraphTypeDiver
   dives: FilterGraphTypeDive
 }
 

@@ -142,3 +142,11 @@ location: Twiske
     Then No errors
     And Data is not empty
 
+Scenario: Getting Divers with buddie excluding divers without buddies
+    Given the following buddies for diver 1
+    | Diver |
+    | 2     |
+    Given Query operation GetOnlyDiverWithBuddies
+    When Executed
+    Then No errors
+    And Data is not empty

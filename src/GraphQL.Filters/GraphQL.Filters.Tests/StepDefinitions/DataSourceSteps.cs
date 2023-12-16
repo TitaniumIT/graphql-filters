@@ -38,5 +38,12 @@ public class DataSourceSteps
        _dataDriver.Dives = table.CreateSet<Dive>().Select( d=>{ d.Diver=diver; return d; }).ToList().Concat(_dataDriver.Dives);
     }
 
+    [Given("the following buddies for diver (.*)")]
+    public void BuddiesSetup(int id,Table table)
+    {
+        var diver = _dataDriver.Divers.Single( x => x.Id == id );
+      
+       diver.Buddies = table.Rows.Select( r => _dataDriver.Divers.Single( x => x.Id == r.GetInt32("Diver"))).ToList();
+    }
 
 }
