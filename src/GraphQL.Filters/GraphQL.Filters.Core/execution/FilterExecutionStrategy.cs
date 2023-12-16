@@ -1,6 +1,7 @@
 ﻿using GraphQL.Execution;
 using GraphQL.Types;
 using GraphQLParser.AST;
+using nl.titaniumit.graphql.filters.models;
 
 namespace nl.titaniumit.graphql.filters.execution;
 
@@ -21,8 +22,8 @@ internal class FilterExecutionStrategy : ParallelExecutionStrategy
 
     protected override Task CompleteNodeAsync(GraphQL.Execution.ExecutionContext context, ExecutionNode node)
     {
-        var path = $"path:{node.Parent.GraphType.Name}.{node.FieldDefinition.Name}";
-        if (context.UserContext.ContainsKey(path))
+        var options = node.FieldDefinition.GetMetadata<FieldFilterOptions>("Options");
+        if ((options?.AckAsSubfilter ??false))
         {
            if ( node is FilteringArrayExecutionNode arrayNode)
            {
@@ -33,6 +34,7 @@ internal class FilterExecutionStrategy : ParallelExecutionStrategy
                 }
            }
         }
+        
         return base.CompleteNodeAsync(context, node);
     }
 }

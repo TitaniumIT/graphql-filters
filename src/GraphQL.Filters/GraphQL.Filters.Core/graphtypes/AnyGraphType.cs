@@ -24,8 +24,9 @@ internal class AnyGraphType<T> : InputObjectGraphType<Any> where T : class
 
     internal void AddAnyField(MemberInfo member, Type memberType)
     {
-        var ft = base.AddField(FieldBuilderExtentions.CreateAnyField(member.Name,memberType.GenericTypeArguments.First()));
+        var ft = base.AddField(FieldBuilderExtentions.CreateAnyField(member.Name, memberType.GenericTypeArguments.First()));
         ft.Metadata["collectionType"] = memberType.GenericTypeArguments.First();
+        ft.Metadata["Options"] = new FieldFilterOptions(true);
         Metadata[member.Name.ToCamelCase()] = member;
     }
 
@@ -36,22 +37,23 @@ internal class AnyGraphType<T> : InputObjectGraphType<Any> where T : class
             throw new ValidationException("Only one subfield is allowed");
         }
         var memberName = value.First().Key;
-        if( Metadata[memberName]?.ToString()?.StartsWith("path:") ?? false)
+        if (Metadata[memberName]?.ToString()?.StartsWith("path:") ?? false)
         {
             return new Any(
                 null,
                 value.First().Value as FilterType ?? throw new NullReferenceException(),
-                Fields.Single(f => f.Name == value.First().Key).Metadata["collectionType"] as Type  ?? throw new NullReferenceException(),
+                Fields.Single(f => f.Name == value.First().Key).Metadata["collectionType"] as Type ?? throw new NullReferenceException(),
                 Metadata[memberName]?.ToString()
             );
         }
-        else{
-        return new Any(
-          Metadata[memberName] as MemberInfo ?? throw new NullReferenceException(),
-          value.First().Value as FilterType ?? throw new NullReferenceException(),
-          Fields.Single(f => f.Name == memberName).Metadata["collectionType"] as Type  ?? throw new NullReferenceException(),
-          null
-          );
+        else
+        {
+            return new Any(
+              Metadata[memberName] as MemberInfo ?? throw new NullReferenceException(),
+              value.First().Value as FilterType ?? throw new NullReferenceException(),
+              Fields.Single(f => f.Name == memberName).Metadata["collectionType"] as Type ?? throw new NullReferenceException(),
+              null
+              );
         }
     }
 }

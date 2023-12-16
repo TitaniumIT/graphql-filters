@@ -31,7 +31,6 @@ query GetDiverByWithoutBirthDate {
   }
 }
 
-
 query GetDiverByWithBirthDate {
   diver(
     filter: { condition: { fieldName: birthDate, operator: equal, value: "1970-01-01" } }
@@ -152,3 +151,34 @@ query GetDiversWithDivesAtNoSubFields($location: ValueScalar!) {
     name
   }
 }
+
+query GetOnlyDiverWithBuddies {
+  divers {
+    name
+    buddies(filter:{
+      condition: {
+        fieldName: name
+        operator:equal
+        value: "Eli"
+      }
+    }){
+      name
+    }
+  }
+}
+
+query GetAllDiversWithOrWithoutBuddies {
+  divers {
+    name
+    buddies: buddiesNoSubfilter(filter:{
+      condition: {
+        fieldName: name
+        operator:equal
+        value: "Eli"
+      }
+    }){
+      name
+    }
+  }
+}
+

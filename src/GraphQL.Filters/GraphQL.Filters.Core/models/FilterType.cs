@@ -1,9 +1,7 @@
 ﻿using System.Linq.Expressions;
-using System.Reflection.Metadata.Ecma335;
 using GraphQL;
 
 namespace nl.titaniumit.graphql.filters.models;
-
 internal record FilterType(ConditionType? condition = null,
                         And? and = null, Or? or = null,
                         Not? not = null, Any? any = null,
@@ -73,3 +71,5 @@ internal record FilterType(ConditionType? condition = null,
         };
     }
 }
+
+internal record FieldFilterOptions(bool AckAsSubfilter=false);
