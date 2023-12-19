@@ -26,7 +26,6 @@ internal class AnyGraphType<T> : InputObjectGraphType<Any> where T : class
     {
         var ft = base.AddField(FieldBuilderExtentions.CreateAnyField(member.Name, memberType.GenericTypeArguments.First()));
         ft.Metadata["collectionType"] = memberType.GenericTypeArguments.First();
-        ft.Metadata["Options"] = new FieldFilterOptions(true);
         Metadata[member.Name.ToCamelCase()] = member;
     }
 

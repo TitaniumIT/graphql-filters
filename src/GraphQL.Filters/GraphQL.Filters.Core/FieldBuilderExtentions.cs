@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
-using GraphQL;
+﻿using GraphQL;
 using GraphQL.Builders;
 using GraphQL.Types;
 using nl.titaniumit.graphql.filters.graphtypes;
+using nl.titaniumit.graphql.filters.models;
 
 namespace nl.titaniumit.graphql.filters;
 
@@ -19,5 +19,11 @@ public static class FieldBuilderExtentions
             Name = name.ToCamelCase(),
             Type = typeof(FilterGraphType<>).MakeGenericType(memberType), 
         };
+    }
+
+    internal static void UpdateFieldOptions(this IProvideMetadata provideMetadata,Action<FieldFilterOptions> configure ){
+        var options = provideMetadata.GetMetadata("Options" , new FieldFilterOptions());
+        configure(options);
+        provideMetadata.WithMetadata("Options" ,options);
     }
 }

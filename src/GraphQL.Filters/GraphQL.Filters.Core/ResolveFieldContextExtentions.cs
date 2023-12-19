@@ -33,7 +33,12 @@ namespace nl.titaniumit.graphql.filters
         {
             if (fieldContext.UserContext.ContainsKey($"path:{fieldContext.ParentType.Name}.{fieldContext.FieldDefinition.Name}"))
             {
-                return fieldContext.UserContext[$"path:{fieldContext.ParentType.Name}.{fieldContext.FieldDefinition.Name}"] as Expression<Func<TFilterType, bool>>;
+                var expression = fieldContext.UserContext[$"path:{fieldContext.ParentType.Name}.{fieldContext.FieldDefinition.Name}"] as LambdaExpression;
+                if ( expression != null && expression.Parameters.First().Type == typeof(TFilterType))
+                    return expression as Expression<Func<TFilterType,bool>>;
+                else{
+                    throw new NotSupportedException("yet");
+                }
             }
             return null;
         }

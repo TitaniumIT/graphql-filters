@@ -28,5 +28,11 @@ public static partial class SchemaExtentions
     {
         schema.RegisterType<FilterGraphType<TType>>();
     }
+
+    internal static bool? HasFilterArguments(this FieldType field)
+    {
+        return field.Arguments?.Any(a => a.Type?.GetGenericTypeDefinition() == typeof(FilterGraphType<>));
+    }
+
 }
 

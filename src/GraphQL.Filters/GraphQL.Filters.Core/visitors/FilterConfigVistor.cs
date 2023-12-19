@@ -1,6 +1,6 @@
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using GraphQL;
-using GraphQL.Resolvers;
 using GraphQL.Types;
 using GraphQL.Utilities;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,16 +40,23 @@ internal class FilterConfigVistor : BaseSchemaNodeVisitor
             {
                 if (schema.IsFilterType(type.ClrType()))
                 {
-                    if (!type.ClrType().GetMembers(BindingFlags.Public | BindingFlags.Instance).Any(m => m.Name.ToCamelCase() == field.Name))
+                    var any = schema.AllTypes.SingleOrDefault(t => t.Name == $"AnyGraphType{type.ClrType().Name}") as IInputObjectGraphType;
+                    if (any != null)
                     {
-                        var any = schema.AllTypes.SingleOrDefault(t => t.Name == $"AnyGraphType{type.ClrType().Name}") as IInputObjectGraphType;
-                        if (any != null)
+                        if (!type.ClrType().GetMembers(BindingFlags.Public | BindingFlags.Instance).Any(m => m.Name.ToCamelCase() == field.Name))
                         {
-                            var ft = FieldBuilderExtentions.CreateAnyField(field.Name, objecType.ClrType());
-                            ft.ResolvedType = schema.AllTypes.SingleOrDefault(t => t.Name == $"FilterGraphType{objecType.ClrType().Name}");
-                            ft.Metadata["collectionType"] = objecType.ClrType();
-                            any.AddField(ft);
-                            any.Metadata[field.Name] = $"path:{type.Name}.{field.Name}";
+                            if ( !field.HasFilterArguments() ?? true)
+                            {
+                                CreateDynamicAnyField(field, type, schema, objecType, any);
+                                field.UpdateFieldOptions((config) => { config.ActAsSubFilter = true; });
+                            }
+                        }
+                        else
+                        {
+                            if ( !field.HasFilterArguments() ?? true)
+                            {
+                                field.UpdateFieldOptions((config) => { config.ActAsSubFilter = true; });
+                            }
                         }
                     }
                 }
@@ -58,5 +65,14 @@ internal class FilterConfigVistor : BaseSchemaNodeVisitor
         base.VisitObjectFieldDefinition(field, type, schema);
     }
 
+  
+    private static void CreateDynamicAnyField(FieldType field, IObjectGraphType type, ISchema schema, IObjectGraphType objecType, IInputObjectGraphType any)
+    {
+        var ft = FieldBuilderExtentions.CreateAnyField(field.Name, objecType.ClrType());
+        ft.ResolvedType = schema.AllTypes.SingleOrDefault(t => t.Name == $"FilterGraphType{objecType.ClrType().Name}");
+        ft.Metadata["collectionType"] = objecType.ClrType();
+        any.AddField(ft);
+        any.Metadata[field.Name] = $"path:{type.Name}.{field.Name}";
+    }
 }
 

@@ -1,8 +1,6 @@
-using GraphQL;
 using GraphQL.Builders;
 using GraphQL.Types;
 using nl.titaniumit.graphql.filters.graphtypes;
-using nl.titaniumit.graphql.filters.models;
 
 namespace nl.titaniumit.graphql.filters;
 
@@ -22,7 +20,7 @@ public class FilterBuilder<TSourceType, TReturnType>
     public FilterBuilder<TSourceType,TReturnType> ActAsSubFilter()
     {
         _parentBuilder.Configure( field =>{
-            field.Metadata["Options"]=new FieldFilterOptions(true);
+            field.UpdateFieldOptions((config) => { config.ActAsSubFilter = true; });
         });
         return this;
     }

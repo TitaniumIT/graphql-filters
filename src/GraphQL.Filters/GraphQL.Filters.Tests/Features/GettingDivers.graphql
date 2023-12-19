@@ -138,6 +138,24 @@ query GetDiversWithDivesAt($location: ValueScalar!) {
   }
 }
 
+query GetDiversWithDivesDataLoaderAt($location: ValueScalar!) {
+  divers(
+    filter: {
+      any: {
+        divesWithDataLoader: {
+          condition: { fieldName: location, operator: equal, value: $location }
+        }
+      }
+    }
+  ) {
+    name
+    divesWithDataLoader {
+      start
+      end
+    }
+  }
+}
+
 query GetDiversWithDivesAtNoSubFields($location: ValueScalar!) {
   divers(
     filter: {

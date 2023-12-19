@@ -71,5 +71,3 @@ internal record FilterType(ConditionType? condition = null,
         };
     }
 }
-
-internal record FieldFilterOptions(bool AckAsSubfilter=false);
