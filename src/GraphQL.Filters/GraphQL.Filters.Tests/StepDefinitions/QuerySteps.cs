@@ -1,12 +1,9 @@
-using GraphQL.Execution;
 using GraphQL.Filters.Tests.Drivers;
 using GraphQL.SystemTextJson;
 using GraphQL.Validation;
 using GraphQLParser;
 using GraphQLParser.AST;
-using GraphQLParser.Visitors;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using System.Dynamic;
 using System.Text.Json;
 using TechTalk.SpecFlow.Assist;
@@ -192,7 +189,7 @@ namespace GraphQL.Filters.Tests.StepDefinitions
                         obj.Remove(key);
                     }
                 }
-                expected.Should().BeEquivalentTo(dictionaries);
+                dictionaries.Should().BeEquivalentTo(expected);
             }
             if (dataNode.ValueKind == JsonValueKind.Object)
             {

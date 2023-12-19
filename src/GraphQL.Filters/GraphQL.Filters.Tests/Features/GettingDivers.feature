@@ -124,9 +124,33 @@ location: Twiske
     When Executed
     Then No errors
     And Data is not empty
+    And Data contains divers exclude dives
+    | name |
+    | John |
+
+Scenario: Getting Divers thru dataloader at location with subfields
+    Filtering based on resolve logic,
+    Given the following dives for diver 1
+    | Location | On         | Start | End   | AverageDepth |
+    | Twiske   | 01-01-2023 | 10:00 | 12:00 | 8.5          |
+    Given the following dives for diver 2
+    | Location  | On         | Start | End   | AverageDepth |
+    | Vinkeveen | 01-01-2023 | 10:00 | 12:00 | 8.5          |
+    Given Query operation GetDiversWithDivesDataLoaderAt
+    Given Variables:
+"""
+location: Twiske
+"""
+    When Executed
+    Then No errors
+    And Data is not empty
+    And Data contains divers exclude divesWithDataLoader
+    | name |
+    | John |
 
 Scenario: Getting Divers at location without subfields
-    Filtering based on resolve logic,
+    Filtering based on resolve logic, filterin on fields without requesting them 
+    will not use the filter.
     Given the following dives for diver 1
     | Location | On         | Start | End   | AverageDepth |
     | Twiske   | 01-01-2023 | 10:00 | 12:00 | 8.5          |
@@ -141,6 +165,12 @@ location: Twiske
     When Executed
     Then No errors
     And Data is not empty
+    And Data contains divers exclude dives
+    | name |
+    | John |
+    | Eli   | 
+    | Harry |
+    
 
 Scenario: Getting Divers with buddie excluding divers without buddies
     Given the following buddies for diver 1

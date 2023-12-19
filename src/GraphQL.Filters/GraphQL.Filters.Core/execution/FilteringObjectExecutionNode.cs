@@ -16,7 +16,7 @@ internal class FilteringObjectExecutionNode : ObjectExecutionNode
         {
             foreach ( FilteringArrayExecutionNode subnode in SubFields.Where( d => d is FilteringArrayExecutionNode) )
             {
-               if ( subnode != null && subnode.Items != null && ! subnode.Items.Any() && subnode.HasSubFilter )
+               if ( subnode != null && (subnode.Items == null || !subnode.Items.Any()) && subnode.HasSubFilter )
                {
                   SubFields = null;
                   Result = null;

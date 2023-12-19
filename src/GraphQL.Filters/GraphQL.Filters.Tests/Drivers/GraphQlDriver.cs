@@ -15,6 +15,7 @@ namespace GraphQL.Filters.Tests.Drivers
             Services.AddGraphQL(builder =>
             {
                 builder.AddSystemTextJson();
+                builder.AddDataLoader();
                 builder.AddErrorInfoProvider(a =>
                 {
                     a.ExposeData = true;
