@@ -129,6 +129,19 @@ namespace GraphQL.Filters.Tests.StepDefinitions
             }
         }
 
+        [Then("Errors are:")]
+        public void ErrorsAre(Table table)
+        {
+            _executionResult.Should().NotBeNull();
+            if (_executionResult != null)
+            {
+                _executionResult.Errors.Should().NotBeEmpty();
+                foreach( var row in table.Rows){
+                    _executionResult?.Errors?.Any( e => e.Message == row["Message"]).Should().BeTrue(row["Message"]);
+                }
+            }
+        }
+
         [Then("Should have errors")]
         public void HasErros()
         {

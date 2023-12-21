@@ -22,6 +22,38 @@ query GetDiverByEmail {
   }
 }
 
+query GetDiverByEmailWithRequirement {
+  diver: diversFilterWithEmailRequired(
+    filter: {
+      condition: {
+        fieldName: email
+        operator: equal
+        value: "john@divers.down"
+      }
+    }
+  ) {
+    name
+    email
+    id
+  }
+}
+
+query GetDiverNotByEmailButRequired {
+  divers: diversFilterWithEmailRequired(
+    filter: {
+      condition: {
+        fieldName: bio
+        operator: equal
+        value: "someCheck"
+      }
+    }
+  ) {
+    name
+    email
+    id
+  }
+}
+
 query GetDiverByWithoutBirthDate {
   diver(
     filter: { condition: { fieldName: birthDate, operator: equal, value: null } }
