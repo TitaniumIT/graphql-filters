@@ -5,8 +5,8 @@
 
 version: 2
 updates:
-  - package-ecosystem: "nuget" # See documentation for possible values
-    directory: "/src/GRaphQL.Filters/*/" # Location of package manifests
+  - package-ecosystem: "dotnet:nuget" # See documentation for possible values
+    directory: "/src/GraphQL.Filters/" # Location of package manifests
     schedule:
       interval: "weekly"
   - package-ecosystem: "github-actions"
