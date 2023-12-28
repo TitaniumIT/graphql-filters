@@ -1,4 +1,5 @@
 # Introduction
+[!Publish](https://github.com/TitaniumIT/graphql-filters/actions/workflows/publishpackage/badge.svg)
 
 An extention on GraphQL.net to add filtering on clr types
 
