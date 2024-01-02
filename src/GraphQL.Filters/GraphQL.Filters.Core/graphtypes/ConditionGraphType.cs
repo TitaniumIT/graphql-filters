@@ -11,7 +11,7 @@ internal class ConditionGraphType<T> : InputObjectGraphType<ConditionType> where
     {
         Name = $"ConditionGraphType{typeof(T).Name}";
         Field<FieldEnumerationGraphType<T>>("fieldName");
-        Field<BinaryCompareEnumTypes, Func<MemberExpression?, object?, Expression>>("operator");
+        Field<BinaryCompareEnumTypes,BinaryCompareType>("operator");
         Field<ValueScalar>("value");
     }
 

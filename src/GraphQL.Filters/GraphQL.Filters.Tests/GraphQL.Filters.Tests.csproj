@@ -20,12 +20,13 @@
     <PackageReference Include="nunit" Version="4.0.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
-	 <PackageReference Include="GraphQL.Server.All" Version="7.6.0" />
+	  <PackageReference Include="GraphQL.Server.All" Version="7.6.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GraphQL.Filters.Core\GraphQL.Filters.Core.csproj" />
     <ProjectReference Include="..\GraphQL.Filters.Examples\GraphQL.Filters.Examples.csproj" />
+    <ProjectReference Include="..\GraphQL.Filters.Extentions\GraphQL.Filters.Extentions.csproj" />
   </ItemGroup>
 
   <Target Name="Remove TestResults" AfterTargets="AfterBuild">

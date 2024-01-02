@@ -28,6 +28,7 @@ internal abstract class FilterVisitorBase
             { ors: not null, or: null } => Visit(filter.ors),
             { ands: not null, and: not null } => Visit(filter.ands) || Visit(filter.and),
             { ors: not null, or: not null } =>  Visit(filter.ors) || Visit(filter.or),
+            _ => throw new InvalidOperationException()
         };
     }
 
@@ -49,20 +50,5 @@ internal abstract class FilterVisitorBase
     public bool Visit(Any any)
     { 
         return Visit(any.filter);
-    }
-}
-
-
-internal class FieldConditions : FilterVisitorBase
-{
-    Func<IFieldConditionDefinition, bool> _callback;
-    public FieldConditions(Func<IFieldConditionDefinition, bool> callBack)
-    {
-        _callback = callBack;
-    }
-
-    public override bool Visit(ConditionType condition)
-    {
-       return _callback(condition);
     }
 }

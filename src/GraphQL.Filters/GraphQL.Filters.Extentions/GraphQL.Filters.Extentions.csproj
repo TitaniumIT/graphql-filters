@@ -1,0 +1,39 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>nl.titaniumit.graphql.filters.extentions</RootNamespace>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>GraphQL; C#; Filtering; servers; SQL ; Cosmos </PackageTags>
+		<Copyright>Titanium IT, 2023</Copyright>
+		<Authors>ing. Marco Fuykschot</Authors>
+		<Company>Titanium IT</Company>
+		<Description>Add filter options to C# based GraphQL.net servers</Description>
+		<PackageProjectUrl>https://github.com/TitaniumIT/graphql-filters/</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/TitaniumIT/graphql-filters.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<FileVersion>1.$(Version)</FileVersion>
+		<PackageId>titaniumit.graphql.filtering.extentions</PackageId>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GraphQL.Filters.Core\GraphQL.Filters.Core.csproj" />
+  </ItemGroup>
+
+</Project>

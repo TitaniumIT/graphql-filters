@@ -4,6 +4,7 @@ schema {
 
 type DivingQuery {
   diver(filter: FilterGraphTypeDiver): Diver
+  diver2Sql(filter: FilterGraphTypeDiver): String
   divers(filter: FilterGraphTypeDiver): [Diver]
   "Force filters to contain at least an email condition "
   diversFilterWithEmailRequired(filter: FilterGraphTypeDiver): [Diver]

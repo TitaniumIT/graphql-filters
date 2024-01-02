@@ -5,11 +5,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace nl.titaniumit.graphql.filters.models;
 
-internal record ConditionType(MemberInfo? fieldName = null, Func<ConditionType, Expression, IResolveFieldContext, Expression>? @operator = null, object? @value = null) : IFieldConditionDefinition
+internal record ConditionType(MemberInfo? fieldName = null,
+                              BinaryCompareType? @operator = null,
+                              object? @value = null) : IFieldConditionDefinition
 {
     string IFieldConditionDefinition.FieldName => fieldName?.Name ?? throw new InvalidOperationException($"{this} is invalid");
-
-    public Expression CreateFilter<T>(Expression arg, IResolveFieldContext ctx) => @operator?.Invoke(this, arg, ctx) ?? throw new InvalidOperationException();
+    public Expression CreateFilter<T>(Expression arg, IResolveFieldContext ctx) => @operator?.expression?.Invoke(this, arg, ctx) ?? throw new InvalidOperationException();
     internal ConstantExpression Value(IResolveFieldContext ctx)
     {
         if (fieldName != null)

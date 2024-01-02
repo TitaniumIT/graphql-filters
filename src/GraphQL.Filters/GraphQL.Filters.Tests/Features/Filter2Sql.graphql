@@ -1,0 +1,3 @@
+query GetDiver2SqlSimple {
+  diver2Sql(filter: { condition: { fieldName: id, operator: equal, value: 1 } }) 
+}
