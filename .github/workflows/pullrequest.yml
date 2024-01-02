@@ -31,4 +31,4 @@ jobs:
         test-assembly-path: ./src/GraphQL.Filters/GraphQL.Filters.Tests/bin/Release/net8.0/
         test-assembly-dll: GraphQL.Filter.Tests.dll
         no-build: true
-        output-html: ${{ matrix.os }}.html
+        output-html: TestOutput.html
