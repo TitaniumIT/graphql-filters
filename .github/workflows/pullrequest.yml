@@ -28,6 +28,6 @@ jobs:
     - name: Make SpecFlow Documentation
       uses: cryptic-wizard/run-specflow-tests@v1.3.2
       with:
-        test-assembly-path: src/GraphQL.Filters/GraphQL.Filter.Tests/bin/Release/net8.0
+        test-assembly-path: ./src/GraphQL.Filters/GraphQL.Filters.Tests/bin/Release/net8.0/
         test-assembly-dll: GraphQL.Filter.Tests.dll
         output-html: ${{ matrix.os }}.html
