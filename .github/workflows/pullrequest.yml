@@ -25,3 +25,8 @@ jobs:
     - name: Test
       run: dotnet test --no-build -c Release --verbosity normal --collect "XPlat Code Coverage" --results-directory .coverage
       working-directory: ./src/GraphQL.Filters
+    - uses: actions/cryptic-wizard/run-specflow-tests@v1.3.1
+      with:
+        test-assembly-path: src/GraphQL.Filters/GraphQL.Filter.Tests/bin/Release/net8.0
+        test-assembly-dll: GraphQL.Filter.Tests.dll
+        output-html: ${{ matrix.os }}.html
