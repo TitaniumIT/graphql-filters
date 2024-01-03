@@ -15,6 +15,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
+      with: 
+        persist-credentials: false
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
     - name: Restore dependencies
@@ -41,6 +43,9 @@ jobs:
     - uses: gr2m/create-or-update-pull-request-action@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        path: "./docs/"
+        update-pull-request-title-and-body: false
     # - name: push docs
     #   run: |
     #     ls -l ./docs/*
