@@ -44,6 +44,7 @@ jobs:
         git config --global user.email "pr@titaniumt.nl"
         git config --global user.name "AutomatedAction"
         git add -A ./docs/*
+        git pull origin HEAD:$GITHUB_HEAD_REF
         git commit -m documentation
         git push origin HEAD:$GITHUB_HEAD_REF
     
