@@ -38,14 +38,17 @@ jobs:
         reports: ./src/GraphQL.Filters/coverage/**/coverage.cobertura.xml
         targetdir: ./docs
         reporttypes: MarkdownSummaryGithub
-    - name: push docs
-      run: |
-        ls -l ./docs/*
-        git config --global user.email "pr@titaniumt.nl"
-        git config --global user.name "AutomatedAction"
-        git add -A ./docs/*
-        git pull origin HEAD:$GITHUB_HEAD_REF
-        git commit -m documentation
-        git push origin HEAD:$GITHUB_HEAD_REF
+    - uses: gr2m/create-or-update-pull-request-action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name: push docs
+    #   run: |
+    #     ls -l ./docs/*
+    #     git config --global user.email "pr@titaniumt.nl"
+    #     git config --global user.name "AutomatedAction"
+    #     git add -A ./docs/*
+    #     git pull origin HEAD:$GITHUB_HEAD_REF
+    #     git commit -m documentation
+    #     git push origin HEAD:$GITHUB_HEAD_REF
     
      
