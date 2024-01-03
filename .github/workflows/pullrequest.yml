@@ -28,7 +28,7 @@ jobs:
       run: |
         dotnet new tool-manifest
         dotnet tool install SpecFlow.Plus.LivingDoc.CLI
-        livingdoc --version
+        dotnet livingdoc --version
     - name: Code Coverage Report
       uses: irongut/CodeCoverageSummary@v1.3.0
       with:
