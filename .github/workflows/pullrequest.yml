@@ -44,7 +44,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        path: "./docs/"
         update-pull-request-title-and-body: false
     # - name: push docs
     #   run: |
