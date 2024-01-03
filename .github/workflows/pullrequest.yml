@@ -39,7 +39,7 @@ jobs:
       with:
         reports: ./src/GraphQL.Filters/coverage/**/coverage.cobertura.xml
         targetdir: ./docs
-        reporttypes: MarkdownSummaryGithub
+        reporttypes: MarkdownSummary
     - uses: stefanzweifel/git-auto-commit-action@v5
       with:
         # Optional. Commit message for the created commit.
