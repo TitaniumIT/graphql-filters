@@ -32,7 +32,8 @@ jobs:
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@5.2.0
       with:
-        reports: /src/GraphQL.Filters/coverage/**/coverage.cobertura.xml
+        reports: ./src/GraphQL.Filters/coverage/**/coverage.cobertura.xml
         targetdir: coveragereport
+        reporttypes: MarkdownSummaryGithub
     
      
