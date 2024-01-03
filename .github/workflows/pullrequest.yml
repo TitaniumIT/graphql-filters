@@ -42,9 +42,8 @@ jobs:
         ls -l ./docs/*
         git config --global user.email "pr@titaniumt.nl"
         git config --global user.name "AutomatedAction"
-        git checkout $GITHUB_REF
         git add -A ./docs/*
         git commit -m documentation
-        git push
+        git push origin HEAD:$GITHUB_REF
     
      
