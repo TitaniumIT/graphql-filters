@@ -26,6 +26,7 @@ jobs:
     - name: Make SpecFlow Documentation
       working-directory: ./src/GraphQL.Filters/GraphQL.Filters.Tests
       run: |
+        dotnet new tool-manifest
         dotnet tool install SpecFlow.Plus.LivingDoc.CLI
         livingdoc --version
      
