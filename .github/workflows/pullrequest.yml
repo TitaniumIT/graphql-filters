@@ -22,6 +22,13 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       working-directory: ./src/GraphQL.Filters
+    - name: Generate test badge
+      uses: jaywcjlove/generated-badges@main
+      with:
+        label: Test
+        status: notrun
+        color: red
+        output: docs/testoutcome.svg
     - name: Build
       run: dotnet build --no-restore -c Release
       working-directory: ./src/GraphQL.Filters
@@ -40,6 +47,13 @@ jobs:
         reports: ./src/GraphQL.Filters/coverage/**/coverage.cobertura.xml
         targetdir: ./docs/coverage
         reporttypes: HtmlInline;Badges;
+    - name: Generate test badge
+      uses: jaywcjlove/generated-badges@main
+      with:
+        label: Test
+        status: succesfull
+        color: green
+        output: docs/testoutcome.svg
     - uses: stefanzweifel/git-auto-commit-action@v5
       with:
         # Optional. Commit message for the created commit.
