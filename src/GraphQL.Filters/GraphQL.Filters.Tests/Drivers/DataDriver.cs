@@ -12,7 +12,6 @@ public class DataDriver : IDivers, IDives
 
     public IEnumerable<Dive> Dives { get; set; } = new List<Dive>();
 
-
     static DataDriver()
     {
         Service.Instance.ValueRetrievers.Register(new MailAddressValueConvertor());
@@ -43,13 +42,12 @@ public class DataDriver : IDivers, IDives
 
         public object Retrieve(KeyValuePair<string, string> keyValuePair, Type targetType, Type propertyType)
         {
-            if (keyValuePair.Value == "@null") return default(DateOnly);
+            if (keyValuePair.Value == "@null") return null!;
             return DateOnly.Parse(keyValuePair.Value);
         }
     }
 
     private class ObjectNullRetriever : IValueRetriever
-
     {
         string _nullvalue;
         public ObjectNullRetriever(string nullValue)
