@@ -1,7 +1,7 @@
 # Introduction
 
 [![publish Graphql Filters](https://github.com/TitaniumIT/graphql-filters/actions/workflows/publishpackage.yml/badge.svg)](https://github.com/TitaniumIT/graphql-filters/actions/workflows/publishpackage.yml)
-[![coverage](docs/badge_combined.svg)](docs/SummaryGithub.md)
+[![coverage](docs/coverage/badge_combined.svg)](docs/SummaryGithub.md)
 
 An extention on GraphQL.net to add filtering on clr types
 
