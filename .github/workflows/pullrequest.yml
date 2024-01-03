@@ -37,6 +37,6 @@ jobs:
         reporttypes: MarkdownSummaryGithub
     - name: push docs
       run: |
-        git add -A
+        git add -A .
     
      
