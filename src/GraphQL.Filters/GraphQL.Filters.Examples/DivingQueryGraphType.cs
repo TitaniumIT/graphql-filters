@@ -1,6 +1,7 @@
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
 using nl.titaniumit.graphql.filters;
+using nl.titaniumit.graphql.filters.extentions.sql;
 
 namespace GraphQL.Filters.Examples;
 
@@ -18,6 +19,13 @@ public class DivingQueryGraphType : ObjectGraphType
                   return datasource.Divers.SingleOrDefault(filter.Compile());
               else
                   return null;
+          });
+
+           Field<StringGraphType>("Diver2Sql")
+          .AddFilter("filter").FilterType<Diver>()
+          .Resolve(ctx =>
+          {
+              return ctx.GetWhere("filter");
           });
 
         Field<ListGraphType<DiverGraphType>>("Divers")

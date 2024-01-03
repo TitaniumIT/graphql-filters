@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQL.Filters.Tests", "Gr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Filters.Examples", "GraphQL.Filters.Examples\GraphQL.Filters.Examples.csproj", "{9E5BC19E-D313-4B8A-882F-A2BBE286E5D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQL.Filters.Extentions", "GraphQL.Filters.Extentions\GraphQL.Filters.Extentions.csproj", "{2D17B4A4-D534-45B3-B2D9-A295BFECA9E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9E5BC19E-D313-4B8A-882F-A2BBE286E5D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E5BC19E-D313-4B8A-882F-A2BBE286E5D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E5BC19E-D313-4B8A-882F-A2BBE286E5D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D17B4A4-D534-45B3-B2D9-A295BFECA9E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D17B4A4-D534-45B3-B2D9-A295BFECA9E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D17B4A4-D534-45B3-B2D9-A295BFECA9E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D17B4A4-D534-45B3-B2D9-A295BFECA9E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

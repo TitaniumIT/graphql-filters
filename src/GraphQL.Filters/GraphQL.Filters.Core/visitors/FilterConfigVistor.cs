@@ -1,10 +1,8 @@
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 using GraphQL;
 using GraphQL.Types;
 using GraphQL.Utilities;
 using Microsoft.Extensions.DependencyInjection;
-using nl.titaniumit.graphql.filters.graphtypes;
 
 namespace nl.titaniumit.graphql.filters.visitors;
 
