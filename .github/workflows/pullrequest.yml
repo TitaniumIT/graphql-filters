@@ -39,12 +39,24 @@ jobs:
       with:
         reports: ./src/GraphQL.Filters/coverage/**/coverage.cobertura.xml
         targetdir: ./docs
-        reporttypes: MarkdownSummary
+        reporttypes: HTML
+    - name: Code Coverage Report
+      uses: irongut/CodeCoverageSummary@v1.3.0
+      with:
+        filename: ./src/GraphQL.Filters/coverage/**/coverage.cobertura.xml
+        badge: true
+        fail_below_min: true
+        format: markdown
+        hide_branch_rate: false
+        hide_complexity: true
+        indicators: true
+        output: file
+        thresholds: '60 80'
     - uses: stefanzweifel/git-auto-commit-action@v5
       with:
         # Optional. Commit message for the created commit.
         # Defaults to "Apply automatic changes"
-        commit_message: Automated Change
+        commit_message: Automated documents
     
         # # Optional. Local and remote branch name where commit is going to be pushed
         # #  to. Defaults to the current branch.
