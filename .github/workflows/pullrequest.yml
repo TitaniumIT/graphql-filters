@@ -40,6 +40,12 @@ jobs:
         reports: ./src/GraphQL.Filters/coverage/**/coverage.cobertura.xml
         targetdir: ./docs/coverage
         reporttypes: HtmlInline;Badges;
+    - name: Generate test badge
+      uses: jaywcjlove/generated-badges@main
+      with:
+        label: Test
+        status: green
+        output: docs/testoutcome.svg
     - uses: stefanzweifel/git-auto-commit-action@v5
       with:
         # Optional. Commit message for the created commit.
