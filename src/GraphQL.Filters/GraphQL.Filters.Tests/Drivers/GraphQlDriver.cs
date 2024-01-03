@@ -1,5 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using GraphQL.Filters.Examples;
+using Microsoft.Extensions.DependencyInjection;
 using nl.titaniumit.graphql.filters;
+using nl.titaniumit.graphql.filters.extentions;
+
 
 namespace GraphQL.Filters.Tests.Drivers
 {
@@ -10,6 +13,13 @@ namespace GraphQL.Filters.Tests.Drivers
         public GraphQlDriver()
         {
             Services = new ServiceCollection();
+
+            Services.AddSqlMap((config) =>{
+                
+                config.AddTableFor<Diver>("D");
+                config.AddFieldFor<Diver>( x => x.Id , "ID");
+
+            });
 
             Services.AddGraphQLFilters();
             Services.AddGraphQL(builder =>
