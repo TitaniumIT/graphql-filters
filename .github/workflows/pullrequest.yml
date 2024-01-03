@@ -9,7 +9,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
@@ -21,18 +21,18 @@ jobs:
       run: dotnet build --no-restore -c Release
       working-directory: ./src/GraphQL.Filters
     - name: Test
-      run: dotnet test --no-build -c Release --verbosity normal --collect "XPlat Code Coverage" --results-directory .coverage
+      run: dotnet test --no-build -c Release --verbosity normal --collect "XPlat Code Coverage" --results-directory coverage
       working-directory: ./src/GraphQL.Filters
     - name: Make SpecFlow Documentation
       working-directory: ./src/GraphQL.Filters/GraphQL.Filters.Tests
       run: |
         dotnet new tool-manifest
         dotnet tool install SpecFlow.Plus.LivingDoc.CLI
-        dotnet livingdoc --version
+        dotnet livingdoc livingdoc test-assembly ./bin/Release/net8.0/GraphQL.Filters.Tests.dll -t ./bin/Release/net8.0/TestExecution.json -output GraphQL.Filters.Specflow.html
     - name: Code Coverage Report
       uses: irongut/CodeCoverageSummary@v1.3.0
       with:
-        filename: coverage/**/coverage.cobertura.xml
+        filename: ./src/GraphQL.Filters/coverage/**/coverage.cobertura.xml
         badge: true
         fail_below_min: true
         format: markdown
