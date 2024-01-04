@@ -21,6 +21,7 @@ internal record Expressions(AstNode left, AstNode right,ExpressionType operation
         ExpressionType.Equal => "=",
         ExpressionType.AndAlso => "and",
         ExpressionType.And => "and",
+        ExpressionType.Or => "or",
         _ => throw new NotImplementedException()
     };
     

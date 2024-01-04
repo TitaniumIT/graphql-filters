@@ -12,3 +12,30 @@ query GetDiver2SqlAnd {
     }
   )
 }
+
+query GetDiver2SqlOr {
+  diver2Sql(
+    filter: {
+      or: {
+        left: { condition: { fieldName: id, operator: equal, value: 1 } }
+        right: { condition: { fieldName: id, operator: equal, value: 1 } }
+      }
+    }
+  )
+}
+
+query GetDiver2SqlOrAnd {
+  diver2Sql(
+    filter: {
+      or: {
+        left: {
+          and: {
+            left: { condition: { fieldName: id, operator: equal, value: 1 } }
+            right: { condition: { fieldName: id, operator: equal, value: 1 } }
+          }
+        }
+        right: { condition: { fieldName: id, operator: equal, value: 1 } }
+      }
+    }
+  )
+}

@@ -48,4 +48,17 @@ internal class FilterVisitorSql : FilterVisitorBase
         ));
         return r;
     }
+
+    public override bool Visit(Or and)
+    {
+        var r= base.Visit(and);
+        _context.Push( new Expressions(
+            _context.Pop(),
+            _context.Pop(),
+            System.Linq.Expressions.ExpressionType.Or
+        ));
+        return r;
+    }
 }
+
+
