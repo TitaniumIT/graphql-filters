@@ -2,10 +2,10 @@ Feature: Getting divers using filters
 
 Background: Divers
     Given the following divers:
-    | Name   | Email            | Id | Bio      | BirthDate  |
-    | John   | john@divers.down | 1  | My       | 1980-01-01 |
-    | Eli    | eli@divers.down  | 2  | @null    | 1970-01-01 |
-    | Harry  | @null            | 3  | Some bio | @null      |
+    | Name  | Email            | Id | Bio      | BirthDate  |
+    | John  | john@divers.down | 1  | My       | 1980-01-01 |
+    | Eli   | eli@divers.down  | 2  | @null    | 1970-01-01 |
+    | Harry | @null            | 3  | Some bio | @null      |
 
 Scenario: Getting single diver by Id fixed
     Given Query operation GetDiverFixedFilter
@@ -89,7 +89,7 @@ Scenario: Getting single diver with email as required field
     | Needs at least an email in the filter |
 
 
-Scenario: Getting divers withou bio
+Scenario: Getting divers without bio
     Filtering on null values
     Given Query operation GetDiverByWithoutBio
     When Executed
@@ -97,6 +97,16 @@ Scenario: Getting divers withou bio
     Then Data contains diver all
     | name | email           | id |
     | Eli  | eli@divers.down | 2  |
+
+Scenario: Getting divers with bio
+    Filtering using a not
+    Given Query operation GetDiversByWithBio
+    When Executed
+    Then No errors
+    Then Data contains divers all
+    | name  | email            | id |
+    | John  | john@divers.down | 1  |
+    | Harry | @null            | 3  |
 
 Scenario: Getting divers without birthdate
     Filtering on null values
@@ -121,12 +131,12 @@ Scenario: Getting divers without birthdate and bio
     Filtering on null values
     Given Query operation GetDiverByWithoutBioAndBirtyDate
     And the following divers:
-    | Name   | Email            | Id | Bio      | BirthDate  |
-    | Floris | @null            | 4  | @null    | @null      |
+    | Name   | Email | Id | Bio   | BirthDate |
+    | Floris | @null | 4  | @null | @null     |
     When Executed
     Then No errors
     Then Data contains diver all
-    | name  | id |
+    | name   | id |
     | Floris | 4  |
 
 

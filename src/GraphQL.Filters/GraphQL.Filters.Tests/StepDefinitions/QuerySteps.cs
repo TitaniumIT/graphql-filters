@@ -203,7 +203,11 @@ namespace GraphQL.Filters.Tests.StepDefinitions
                         obj.Remove(key);
                     }
                 }
-                dictionaries.Should().BeEquivalentTo(expected);
+                dictionaries.Should().BeEquivalentTo(expected,config =>
+                {
+                    config.WithAutoConversion();
+                    return config;
+                });
                 return;
             }
             if (dataNode.ValueKind == JsonValueKind.Object)

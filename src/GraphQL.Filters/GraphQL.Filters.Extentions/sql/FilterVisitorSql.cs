@@ -49,6 +49,13 @@ internal class FilterVisitorSql : FilterVisitorBase
         return r;
     }
 
+    public override bool Visit(Not not)
+    {
+        var result= base.Visit(not);
+        _context.Push(new Unary(_context.Pop()));
+        return result;
+    }
+
     public override bool Visit(Or and)
     {
         var r= base.Visit(and);
