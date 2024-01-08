@@ -52,7 +52,7 @@ internal class FilterVisitorSql : FilterVisitorBase
     public override bool Visit(Not not)
     {
         var result= base.Visit(not);
-        _context.Push(new Unary(_context.Pop()));
+        _context.Push(new Unary(UnaryTypes.not,_context.Pop()));
         return result;
     }
 
@@ -65,6 +65,11 @@ internal class FilterVisitorSql : FilterVisitorBase
             System.Linq.Expressions.ExpressionType.Or
         ));
         return r;
+    }
+
+    public override bool Visit(IReadOnlyList<ConditionType> ands)
+    {
+        return base.Visit(ands);
     }
 }
 
