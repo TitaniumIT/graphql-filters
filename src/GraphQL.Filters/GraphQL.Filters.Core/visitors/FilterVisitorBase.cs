@@ -6,7 +6,7 @@ internal abstract class FilterVisitorBase
 {
     virtual public bool Visit(And and)
     {
-        return Visit(and.left) || Visit(and.right);
+        return Visit(and.left) && Visit(and.right);
     }
 
     virtual public bool Visit(IReadOnlyList<ConditionType> ands)
@@ -39,7 +39,7 @@ internal abstract class FilterVisitorBase
 
     virtual public bool Visit(Or or)
     {
-        return Visit(or.left) ||  Visit(or.right);
+        return Visit(or.left) && Visit(or.right);
     }
 
     virtual public bool Visit(Not @not)

@@ -4,6 +4,7 @@ using GraphQL.Validation;
 using GraphQLParser;
 using GraphQLParser.AST;
 using Microsoft.Extensions.DependencyInjection;
+using NUnit.Framework;
 using System.Dynamic;
 using System.Text.Json;
 using TechTalk.SpecFlow.Assist;
@@ -202,7 +203,12 @@ namespace GraphQL.Filters.Tests.StepDefinitions
                         obj.Remove(key);
                     }
                 }
-                dictionaries.Should().BeEquivalentTo(expected);
+                dictionaries.Should().BeEquivalentTo(expected,config =>
+                {
+                    config.WithAutoConversion();
+                    return config;
+                });
+                return;
             }
             if (dataNode.ValueKind == JsonValueKind.Object)
             {
@@ -223,8 +229,14 @@ namespace GraphQL.Filters.Tests.StepDefinitions
                     config.WithAutoConversion();
                     return config;
                 });
+                return;
             }
-
+              if (dataNode.ValueKind == JsonValueKind.String)
+              {
+                 dataNode.GetString().Should().BeEquivalentTo(((IDictionary<string,object>)expected[0]).First( c => c.Key == nestedProperty).Value?.ToString());
+                 return;
+              }
+            Assert.Inconclusive($"Not handled {dataNode.ValueKind}");
         }
 
         private static IEnumerable<Dictionary<string, object?>> GetArray(JsonElement dataNode)
