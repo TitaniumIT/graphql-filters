@@ -6,12 +6,20 @@ internal abstract class FilterVisitorBase
 {
     virtual public bool Visit(And and)
     {
-        return Visit(and.left) && Visit(and.right);
+     Visit(and.left);
+      Visit(and.right);
+      return true;
     }
 
-    virtual public bool Visit(IReadOnlyList<ConditionType> ands)
+    virtual public bool VisitAnds(IReadOnlyList<ConditionType> ands)
     {
         foreach (var conditionType in ands) Visit(conditionType);
+        return true;
+    }
+
+    virtual public bool VisitOrs(IReadOnlyList<ConditionType> ors)
+    {
+        foreach (var conditionType in ors) Visit(conditionType);
         return true;
     }
 
@@ -24,10 +32,10 @@ internal abstract class FilterVisitorBase
             { or: not null, ors: null } => Visit(filter.or),
             { @not: not null } => Visit(filter.not),
             { any: not null } => Visit(filter.any),
-            { ands: not null, and: null } => Visit(filter.ands),
-            { ors: not null, or: null } => Visit(filter.ors),
-            { ands: not null, and: not null } => Visit(filter.ands) || Visit(filter.and),
-            { ors: not null, or: not null } =>  Visit(filter.ors) || Visit(filter.or),
+            { ands: not null, and: null } => VisitAnds(filter.ands),
+            { ors: not null, or: null } => VisitOrs(filter.ors),
+            { ands: not null, and: not null } => VisitAnds(filter.ands) && Visit(filter.and),
+            { ors: not null, or: not null } =>  VisitOrs(filter.ors) && Visit(filter.or),
             _ => throw new InvalidOperationException()
         };
     }
@@ -47,7 +55,7 @@ internal abstract class FilterVisitorBase
       return  Visit(@not.filter);
     }
 
-    public bool Visit(Any any)
+    virtual public bool Visit(Any any)
     { 
         return Visit(any.filter);
     }

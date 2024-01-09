@@ -24,7 +24,6 @@ Scenario: Or condition
     | diver2Sql                    |
     | (D.[ID] = 1) or (D.[ID] = 1) |
 
-
 Scenario: OrAnd condition
     Given Query operation GetDiver2SqlOrAnd
     When Executed
@@ -33,7 +32,6 @@ Scenario: OrAnd condition
     | diver2Sql                                       |
     | (D.[ID] = 1) or ((D.[ID] = 1) and (D.[ID] = 1)) |
 
-
 Scenario: not condition
     Given Query operation GetDiver2SqlWithNot
     When Executed
@@ -41,4 +39,20 @@ Scenario: not condition
     And Data contains diver2Sql all
     | diver2Sql      |
     | NOT D.[ID] = 1 |
+
+Scenario: Any construct
+    Given Query operation GetDivers2SqlWithCoarseFilters
+    When Executed
+    Then No errors
+    And Data contains diver2Sql all
+    | diver2Sql              |
+    | C.[Name] = 'OpenWater' |
+
+Scenario: Any construct with And on Parent
+    Given Query operation GetDivers2SqlWithCoarseFiltersAndDiver
+    When Executed
+    Then No errors
+    And Data contains diver2Sql all
+    | diver2Sql                                 |
+    | (D.[ID] = 1) and (C.[Name] = 'OpenWater') |
 

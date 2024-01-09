@@ -34,6 +34,39 @@ query GetDiver2SqlOr {
   )
 }
 
+query GetDivers2SqlWithCoarseFilters {
+  diver2Sql(
+    filter: {
+      any: {
+        courses: {
+          condition: { fieldName: name, operator: equal, value: "OpenWater" }
+        }
+      }
+    }
+  )
+}
+
+query GetDivers2SqlWithCoarseFiltersAndDiver {
+  diver2Sql(
+    filter: {
+      and: {
+        left: {
+          any: {
+            courses: {
+              condition: {
+                fieldName: name
+                operator: equal
+                value: "OpenWater"
+              }
+            }
+          }
+        }
+        right: { condition: { fieldName: id, operator: equal, value: 1 } }
+      }
+    }
+  )
+}
+
 query GetDiver2SqlOrAnd {
   diver2Sql(
     filter: {
