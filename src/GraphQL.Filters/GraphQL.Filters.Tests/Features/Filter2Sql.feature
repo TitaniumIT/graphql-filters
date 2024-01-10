@@ -56,3 +56,16 @@ Scenario: Any construct with And on Parent
     | diver2Sql                                 |
     | (D.[ID] = 1) and (C.[Name] = 'OpenWater') |
 
+
+Scenario: Any construct on autogerated mapping
+    Given Query operation GetDivers2SqlWithDivesAt
+    And Variables:
+"""
+        location: Twiske
+"""
+    When Executed
+    Then No errors
+    And Data contains diver2Sql all
+    | diver2Sql                  |
+    | (DIVE.[timestamp] = 1/1/2023) and (DIVE.[Location] = 'Twiske') |
+

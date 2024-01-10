@@ -6,17 +6,24 @@ namespace nl.titaniumit.graphql.filters.extentions;
 public static class SqlMapConfigExtentions
 {
 
-   public static ISqlMapConfig AddTableFor<T>(this ISqlMapConfig config, string? alias = null)
+   public static ISqlMapConfig AddTableFor<T>(this ISqlMapConfig config, string? alias = null , bool? autoRegister=false)
    {
       if (config is SqlMapConfig mapConfig)
       {
-         Type t = typeof(T);
-         alias ??= t.Name;
+         Type type = typeof(T);
+         alias ??= type.Name;
          if (mapConfig.Tables.Values.Any(x => x == alias))
          {
             throw new InvalidOperationException($"Alias with name {alias} already exists");
          }
-         mapConfig.Tables.Add(t,alias);
+         mapConfig.Tables.Add(type,alias);
+         if ( autoRegister??false)
+         {
+            foreach ( var fieldOrProperty in type.GetFields().Cast<MemberInfo>().Concat(type.GetProperties()))
+            {
+               config.AddFieldFor<T>(fieldOrProperty);
+            }
+         }
       }
       return config;
    }
@@ -27,7 +34,7 @@ public static class SqlMapConfigExtentions
       {
          Type t = typeof(T);
          alias ??= memberInfo.Name;
-         mapConfig.Fields.Add(memberInfo,alias);
+         mapConfig.Fields[memberInfo] = alias;
       }
       return config;
    }
