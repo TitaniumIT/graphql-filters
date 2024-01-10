@@ -31,7 +31,7 @@ internal class FilterVisitorSql : FilterVisitorBase
     {
         _context.Push( new Expressions( 
                _sqlMapConfig.GetSqlName(condition.fieldName),
-             new Value(condition.Value(_resolveFieldContext)),
+             new Value(condition.Value(_resolveFieldContext).Value),
              condition.@operator?.expressionType ?? throw new NullReferenceException("condition")
              ));
 
@@ -48,4 +48,39 @@ internal class FilterVisitorSql : FilterVisitorBase
         ));
         return r;
     }
+
+    public override bool Visit(Not not)
+    {
+        var result= base.Visit(not);
+        _context.Push(new Unary(UnaryTypes.not,_context.Pop()));
+        return result;
+    }
+
+    public override bool Visit(Or and)
+    {
+        var r= base.Visit(and);
+        _context.Push( new Expressions(
+            _context.Pop(),
+            _context.Pop(),
+            System.Linq.Expressions.ExpressionType.Or
+        ));
+        return r;
+    }
+
+    public override bool VisitAnds(IReadOnlyList<ConditionType> ands)
+    {
+        return base.VisitAnds(ands);
+    }
+
+    public override bool VisitOrs(IReadOnlyList<ConditionType> ands)
+    {
+        return base.VisitAnds(ands);
+    }
+
+    public override bool Visit(Any any)
+    {
+        return base.Visit(any);
+    }
 }
+
+

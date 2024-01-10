@@ -18,7 +18,10 @@ namespace GraphQL.Filters.Tests.Drivers
                 
                 config.AddTableFor<Diver>("D");
                 config.AddFieldFor<Diver>( x => x.Id , "ID");
-
+                config.AddTableFor<Course>("C");
+                config.AddFieldFor<Course>( x => x.Name , "Name");
+                config.AddTableFor<Dive>("DIVE",true);
+                config.AddFieldFor<Dive>( x => x.On , "timestamp");
             });
 
             Services.AddGraphQLFilters();

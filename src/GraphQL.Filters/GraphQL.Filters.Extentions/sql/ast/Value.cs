@@ -1,7 +1,14 @@
-﻿namespace nl.titaniumit.graphql.filters.extentions.sql.ast;
+﻿using GraphQL.Introspection;
+
+namespace nl.titaniumit.graphql.filters.extentions.sql.ast;
 
 internal record Value(object? value) : AstNode
 {
-    internal override string ToSql() => $"{value??"NULL"}";
+    internal override string ToSql() => 
+        value switch {
+            string => $"'{value}'",
+            _ => $"{value??"NULL"}"
+        };
+    
 }
 

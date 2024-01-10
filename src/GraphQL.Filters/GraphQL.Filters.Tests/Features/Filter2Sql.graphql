@@ -1,3 +1,111 @@
 query GetDiver2SqlSimple {
-  diver2Sql(filter: { condition: { fieldName: id, operator: equal, value: 1 } }) 
+  diver2Sql(filter: { condition: { fieldName: id, operator: equal, value: 1 } })
+}
+
+query GetDiver2SqlWithNot {
+  diver2Sql(
+    filter: {
+      not: {
+        filter: { condition: { fieldName: id, operator: equal, value: 1 } }
+      }
+    }
+  )
+}
+
+query GetDiver2SqlAnd {
+  diver2Sql(
+    filter: {
+      and: {
+        left: { condition: { fieldName: id, operator: equal, value: 1 } }
+        right: { condition: { fieldName: id, operator: equal, value: 1 } }
+      }
+    }
+  )
+}
+
+query GetDiver2SqlOr {
+  diver2Sql(
+    filter: {
+      or: {
+        left: { condition: { fieldName: id, operator: equal, value: 1 } }
+        right: { condition: { fieldName: id, operator: equal, value: 1 } }
+      }
+    }
+  )
+}
+
+query GetDivers2SqlWithCoarseFilters {
+  diver2Sql(
+    filter: {
+      any: {
+        courses: {
+          condition: { fieldName: name, operator: equal, value: "OpenWater" }
+        }
+      }
+    }
+  )
+}
+
+query GetDivers2SqlWithDivesAt($location: ValueScalar!) {
+  diver2Sql(
+    filter: {
+      any: {
+        dives: {
+          and: {
+            left: {
+              condition: {
+                fieldName: location
+                operator: equal
+                value: $location
+              }
+            }
+            right: {
+              condition: {
+                fieldName: on
+                operator: equal
+                value: "2023-01-01"
+              }
+            }
+          }
+        }
+      }
+    }
+  )
+}
+
+query GetDivers2SqlWithCoarseFiltersAndDiver {
+  diver2Sql(
+    filter: {
+      and: {
+        left: {
+          any: {
+            courses: {
+              condition: {
+                fieldName: name
+                operator: equal
+                value: "OpenWater"
+              }
+            }
+          }
+        }
+        right: { condition: { fieldName: id, operator: equal, value: 1 } }
+      }
+    }
+  )
+}
+
+query GetDiver2SqlOrAnd {
+  diver2Sql(
+    filter: {
+      or: {
+        left: {
+          and: {
+            left: { condition: { fieldName: id, operator: equal, value: 1 } }
+            right: { condition: { fieldName: id, operator: equal, value: 1 } }
+          }
+        }
+        right: { condition: { fieldName: id, operator: equal, value: 1 } }
+      }
+    }
+  )
 }

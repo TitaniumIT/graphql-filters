@@ -30,8 +30,9 @@ public class DiverGraphType : AutoRegisteringObjectGraphType<Diver>
         {
           var datasource = ctx.RequestServices!.GetRequiredService<IDives>();
           var expression = ctx.GetSubFilterExpression<Dive>();
-
+          await Task.Delay(0);
           var loader = accessor!.Context!.GetOrAddBatchLoader<int,List<Dive>>("dives", async (IEnumerable<int> ids , CancellationToken token)=>{
+              await Task.Delay(0);
               if (expression != null)
               {
                 return datasource.Dives
