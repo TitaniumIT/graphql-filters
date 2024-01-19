@@ -120,11 +120,78 @@ Scenario: Getting divers without birthdate
 Scenario: Getting diver with birthdate 1970
     Filtering on null values
     Given Query operation GetDiverByWithBirthDate
+    And Variables:
+    """
+     condition:  equal
+     value: 01-01-1970
+    """
     When Executed
     Then No errors
-    Then Data contains diver all
+    Then Data contains divers all
     | name | id |
     | Eli  | 2  |
+
+
+Scenario: Getting diver greater then birthdate 1970
+    Filtering on null values
+    Given Query operation GetDiverByWithBirthDate
+    And Variables:
+    """
+     condition:  greater
+     value: 01-01-1970
+    """
+    When Executed
+    Then No errors
+    Then Data contains divers all
+    | name | id |
+    | John  | 1  |
+
+
+Scenario: Getting diver greater and equal then birthdate 1970
+    Filtering on null values
+    Given Query operation GetDiverByWithBirthDate
+    And Variables:
+    """
+     condition:  greaterOrEqual
+     value: 01-01-1970
+    """
+    When Executed
+    Then No errors
+    Then Data contains divers all
+    | name | id |
+    | Eli  | 2  |
+    | John  | 1  |
+
+
+Scenario: Getting diver less then birthdate 1980
+    Filtering on null values
+    Given Query operation GetDiverByWithBirthDate
+    And Variables:
+    """
+     condition:  less
+     value: 01-01-1980
+    """
+    When Executed
+    Then No errors
+    Then Data contains divers all
+    | name | id |
+    | Eli  | 2  |
+
+
+Scenario: Getting diver less or equal then birthdate 1980
+    Filtering on null values
+    Given Query operation GetDiverByWithBirthDate
+    And Variables:
+    """
+     condition: lessOrEqual
+     value: 01-01-1980
+    """
+    When Executed
+    Then No errors
+    Then Data contains divers all
+    | name | id |
+    | Eli  | 2  |
+    | John  | 1  |
 
 
 Scenario: Getting divers without birthdate and bio
