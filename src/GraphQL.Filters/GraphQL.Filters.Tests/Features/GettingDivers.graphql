@@ -61,7 +61,10 @@ query GetDiverByWithoutBirthDate {
   }
 }
 
-query GetDiverByWithBirthDate($condition:BinaryCompareEnumTypes! $value:ValueScalar) {
+query GetDiverByWithBirthDate(
+  $condition: BinaryCompareEnumTypes!
+  $value: ValueScalar
+) {
   divers(
     filter: {
       condition: { fieldName: birthDate, operator: $condition, value: $value }
@@ -100,6 +103,22 @@ query GetDiverByWithoutBioAndBirtyDate {
   diver(
     filter: {
       and: {
+        left: { condition: { fieldName: bio, operator: equal, value: null } }
+        right: {
+          condition: { fieldName: birthDate, operator: equal, value: null }
+        }
+      }
+    }
+  ) {
+    name
+    id
+  }
+}
+
+query GetDiverByWithoutBioOrBirtyDate {
+  divers(
+    filter: {
+      or: {
         left: { condition: { fieldName: bio, operator: equal, value: null } }
         right: {
           condition: { fieldName: birthDate, operator: equal, value: null }
