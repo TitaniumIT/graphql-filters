@@ -87,10 +87,16 @@ div.currenthistory { margin: -2px -5px 0 -5px; padding: 2px 5px 2px 5px; height:
 .coverage td { padding: 0; border: none; }
 .stripped tr:nth-child(2n+1) { background-color: #F3F3F3; }
 
-.customizebox { font-size: 0.75em; margin-bottom: 7px; }
-.customizebox>div { width: 25%; display: inline-block; }
-.customizebox div.right input { width: 150px; }
-#namespaceslider { width: 200px; display: inline-block; margin-left: 8px; }
+.customizebox { font-size: 0.75em; margin-bottom: 7px; display: grid; grid-template-columns: 1fr; grid-template-rows: auto auto auto auto; grid-column-gap: 10px; grid-row-gap: 10px; }
+.customizebox>div { align-self: end; }
+.customizebox div.col-right input { width: 150px; }
+
+@media screen and (min-width: 1000px) {
+  .customizebox { grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr; }
+  .customizebox div.col-center { justify-self: center; }
+  .customizebox div.col-right { justify-self: end; }
+}
+.slider-label { position: relative; left: 85px; }
 
 .percentagebar {
     padding-left: 3px;
@@ -809,7 +815,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 </tr>
 <tr>
 <th>Tag:</th>
-<td class="limit-width " title="93_7584572572">93_7584572572</td>
+<td class="limit-width " title="102_8057052673">102_8057052673</td>
 </tr>
 </table>
 </div>
@@ -850,20 +856,20 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 <div class="card">
 <div class="card-header">Branch coverage</div>
 <div class="card-body">
-<div class="large cardpercentagebar cardpercentagebar8">92%</div>
+<div class="large cardpercentagebar cardpercentagebar9">91%</div>
 <div class="table">
 <table>
 <tr>
 <th>Covered branches:</th>
-<td class="limit-width right" title="35">35</td>
+<td class="limit-width right" title="31">31</td>
 </tr>
 <tr>
 <th>Total branches:</th>
-<td class="limit-width right" title="38">38</td>
+<td class="limit-width right" title="34">34</td>
 </tr>
 <tr>
 <th>Branch coverage:</th>
-<td class="limit-width right" title="35 of 38">92.1%</td>
+<td class="limit-width right" title="31 of 34">91.1%</td>
 </tr>
 </table>
 </div>
@@ -882,12 +888,19 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 <h1>Metrics</h1>
 <div class="table-responsive">
 <table class="overview table-fixed">
-<thead><tr><th>Method</th><th>Branch coverage <a href="https://en.wikipedia.org/wiki/Code_coverage" target="_blank"><i class="icon-info-circled"></i></a></th><th>Cyclomatic complexity <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity" target="_blank"><i class="icon-info-circled"></i></a></th><th>Line coverage <a href="https://en.wikipedia.org/wiki/Code_coverage" target="_blank"><i class="icon-info-circled"></i></a></th></tr></thead>
+<colgroup>
+<col class="column-min-200" />
+<col class="column105" />
+<col class="column105" />
+<col class="column105" />
+<col class="column105" />
+</colgroup>
+<thead><tr><th>Method</th><th>Branch coverage <a href="https://en.wikipedia.org/wiki/Code_coverage" target="_blank"><i class="icon-info-circled"></i></a></th><th>Crap Score <a href="https://googletesting.blogspot.de/2011/02/this-code-is-crap.html" target="_blank"><i class="icon-info-circled"></i></a></th><th>Cyclomatic complexity <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity" target="_blank"><i class="icon-info-circled"></i></a></th><th>Line coverage <a href="https://en.wikipedia.org/wiki/Code_coverage" target="_blank"><i class="icon-info-circled"></i></a></th></tr></thead>
 <tbody>
-<tr><td title=".ctor(System.IServiceProvider)"><a href="#file0_line13" class="navigatetohash">.ctor(...)</a></td><td>100%</td><td>1</td><td>100%</td></tr>
-<tr><td title="VisitObject(GraphQL.Types.IObjectGraphType,GraphQL.Types.ISchema)"><a href="#file0_line20" class="navigatetohash">VisitObject(...)</a></td><td>100%</td><td>1</td><td>100%</td></tr>
-<tr><td title="VisitObjectFieldDefinition(GraphQL.Types.FieldType,GraphQL.Types.IObjectGraphType,GraphQL.Types.ISchema)"><a href="#file0_line25" class="navigatetohash">VisitObjectFieldDefinition(...)</a></td><td>92.1%</td><td>38</td><td>100%</td></tr>
-<tr><td title="CreateDynamicAnyField(GraphQL.Types.FieldType,GraphQL.Types.IObjectGraphType,GraphQL.Types.ISchema,GraphQL.Types.IObjectGraphType,GraphQL.Types.IInputObjectGraphType)"><a href="#file0_line69" class="navigatetohash">CreateDynamicAnyField(...)</a></td><td>100%</td><td>1</td><td>100%</td></tr>
+<tr><td title=".ctor(System.IServiceProvider)"><a href="#file0_line13" class="navigatetohash">.ctor(...)</a></td><td>100%</td><td>1</td><td>1</td><td>100%</td></tr>
+<tr><td title="VisitObject(GraphQL.Types.IObjectGraphType,GraphQL.Types.ISchema)"><a href="#file0_line20" class="navigatetohash">VisitObject(...)</a></td><td>100%</td><td>1</td><td>1</td><td>100%</td></tr>
+<tr><td title="VisitObjectFieldDefinition(GraphQL.Types.FieldType,GraphQL.Types.IObjectGraphType,GraphQL.Types.ISchema)"><a href="#file0_line25" class="navigatetohash">VisitObjectFieldDefinition(...)</a></td><td>91.17%</td><td>34</td><td>34</td><td>100%</td></tr>
+<tr><td title="CreateDynamicAnyField(GraphQL.Types.FieldType,GraphQL.Types.IObjectGraphType,GraphQL.Types.ISchema,GraphQL.Types.IObjectGraphType,GraphQL.Types.IInputObjectGraphType)"><a href="#file0_line69" class="navigatetohash">CreateDynamicAnyField(...)</a></td><td>100%</td><td>1</td><td>1</td><td>100%</td></tr>
 </tbody>
 </table>
 </div>
@@ -942,7 +955,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line43"></a><code>43</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
 <tr class="coverableline" title="Covered (18327 visits, 2 of 2 branches are covered)" data-coverage="{'AllTestMethods': {'VC': '18327', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">18327</td><td class="rightmargin right"><a id="file0_line44"></a><code>44</code></td><td class="percentagebar percentagebar100"><i class="icon-fork"></i></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!type.ClrType().GetMembers(BindingFlags.Public&nbsp;|&nbsp;BindingFlags.Instance).Any(m&nbsp;=&gt;&nbsp;m.Name.ToCa</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line45"></a><code>45</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
-<tr class="coverableline" title="Covered (369 visits, 6 of 6 branches are covered)" data-coverage="{'AllTestMethods': {'VC': '369', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">369</td><td class="rightmargin right"><a id="file0_line46"></a><code>46</code></td><td class="percentagebar percentagebar100"><i class="icon-fork"></i></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;!field.HasFilterArguments()&nbsp;??&nbsp;true)</code></td></tr>
+<tr class="coverableline" title="Covered (369 visits, 4 of 4 branches are covered)" data-coverage="{'AllTestMethods': {'VC': '369', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">369</td><td class="rightmargin right"><a id="file0_line46"></a><code>46</code></td><td class="percentagebar percentagebar100"><i class="icon-fork"></i></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;!field.HasFilterArguments()&nbsp;??&nbsp;true)</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line47"></a><code>47</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
 <tr class="coverableline" title="Covered (246 visits)" data-coverage="{'AllTestMethods': {'VC': '246', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">246</td><td class="rightmargin right"><a id="file0_line48"></a><code>48</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CreateDynamicAnyField(field,&nbsp;type,&nbsp;schema,&nbsp;objecType,&nbsp;any);</code></td></tr>
 <tr class="coverableline" title="Covered (738 visits)" data-coverage="{'AllTestMethods': {'VC': '738', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">738</td><td class="rightmargin right"><a id="file0_line49"></a><code>49</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;field.UpdateFieldOptions((config)&nbsp;=&gt;&nbsp;{&nbsp;config.ActAsSubFilter&nbsp;=&nbsp;true;&nbsp;});</code></td></tr>
@@ -950,7 +963,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line51"></a><code>51</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line52"></a><code>52</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line53"></a><code>53</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
-<tr class="coverableline" title="Covered (246 visits, 6 of 6 branches are covered)" data-coverage="{'AllTestMethods': {'VC': '246', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">246</td><td class="rightmargin right"><a id="file0_line54"></a><code>54</code></td><td class="percentagebar percentagebar100"><i class="icon-fork"></i></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;!field.HasFilterArguments()&nbsp;??&nbsp;true)</code></td></tr>
+<tr class="coverableline" title="Covered (246 visits, 4 of 4 branches are covered)" data-coverage="{'AllTestMethods': {'VC': '246', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">246</td><td class="rightmargin right"><a id="file0_line54"></a><code>54</code></td><td class="percentagebar percentagebar100"><i class="icon-fork"></i></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&nbsp;!field.HasFilterArguments()&nbsp;??&nbsp;true)</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line55"></a><code>55</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
 <tr class="coverableline" title="Covered (369 visits)" data-coverage="{'AllTestMethods': {'VC': '369', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">369</td><td class="rightmargin right"><a id="file0_line56"></a><code>56</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;field.UpdateFieldOptions((config)&nbsp;=&gt;&nbsp;{&nbsp;config.ActAsSubFilter&nbsp;=&nbsp;true;&nbsp;});</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line57"></a><code>57</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
@@ -976,7 +989,7 @@ code { font-family: Consolas, monospace; font-size: 0.9em; }
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.2.0.0<br />01/19/2024 - 13:43:04<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.2.2.0<br />02/26/2024 - 23:29:18<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="https://reportgenerator.io">reportgenerator.io</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
