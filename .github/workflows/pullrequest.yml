@@ -42,7 +42,7 @@ jobs:
         dotnet tool install SpecFlow.Plus.LivingDoc.CLI
         dotnet livingdoc livingdoc test-assembly ./bin/Release/net6.0/GraphQL.Filters.Tests.dll -t ./bin/Release/net6.0/TestExecution.json --output ../../../docs/tests/GraphQL.Filters.Specflow.html
     - name: ReportGenerator
-      uses: danielpalme/ReportGenerator-GitHub-Action@5.2.0
+      uses: danielpalme/ReportGenerator-GitHub-Action@5.2.2
       with:
         reports: ./src/GraphQL.Filters/coverage/**/coverage.cobertura.xml
         targetdir: ./docs/coverage
