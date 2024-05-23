@@ -22,13 +22,13 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       working-directory: ./src/GraphQL.Filters
-    - name: Generate test badge
-      uses: jaywcjlove/generated-badges@main
-      with:
-        label: Test
-        status: notrun
-        color: red
-        output: docs/testoutcome.svg
+    # - name: Generate test badge
+    #   uses: jaywcjlove/generated-badges@main
+    #   with:
+    #     label: Test
+    #     status: notrun
+    #     color: red
+    #     output: docs/testoutcome.svg
     - name: Build
       run: dotnet build --no-restore -c Release
       working-directory: ./src/GraphQL.Filters
